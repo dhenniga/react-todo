@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "task": "Grab Lunch",
+    "group": "Today's Shopping List",
+    "isChecked": true
+  },
+  {
+    "id": 2,
+    "task": "Goto Gym",
+    "group": "Today's Shopping List",
+    "isChecked": false
+  },
+  {
+    "id": 3,
+    "task": "Walk the Dog",
+    "group": "Must get done today",
+    "isChecked": true
+  },
+  {
+    "id": 4,
+    "task": "Get Milk",
+    "group": "Must get done today",
+    "isChecked": true
+  }
+]
