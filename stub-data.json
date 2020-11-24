@@ -1,27 +1,39 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "task": "Grab Lunch",
-      "group": "Today's Shopping List",
-      "isChecked": true
-    },
-    {
-      "id": 2,
-      "task": "Goto Gym",
+      "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
+      "text": "Cornflakes",
       "group": "Today's Shopping List",
       "isChecked": false
     },
     {
-      "id": 3,
-      "task": "Walk the Dog",
+      "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
+      "text": "Bread",
+      "group": "Today's Shopping List",
+      "isChecked": false
+    },
+    {
+      "id": "f8193032-837c-471e-a470-bdd08bcc7fb5",
+      "text": "Walk the Dog",
       "group": "Must get done today",
       "isChecked": true
     },
     {
-      "id": 4,
-      "task": "Get Milk",
+      "id": "4657f654-6344-424a-901f-6a31038ec913",
+      "text": "Wash the Car",
       "group": "Must get done today",
+      "isChecked": false
+    },
+    {
+      "id": "12ae2d8c-179f-4104-8246-7ce2935a0a54",
+      "text": "Cheese",
+      "group": "Today's Shopping List",
+      "isChecked": true
+    },
+    {
+      "id": "351de362-da9d-427d-8f14-fdcb17e7ed4b",
+      "text": "Butter",
+      "group": "Today's Shopping List",
       "isChecked": true
     }
   ]

@@ -1,98 +1,81 @@
-import React from "react";
-import { map, keys, values, addIndex, prop, pipe, flatten, reduce, view, pluck, compose, mapObjIndexed } from "ramda";
-import data from "./stub-data.json";
-import Expression from "./expression";
-import Group from "./group";
-import converter from "./converter";
-import styled from "styled-components";
+import React, { useEffect } from "react";
+import "./App.css";
+import { prop } from "ramda";
+import Task from "./task/task";
+import TaskGroup from "./task-group/task-group";
+import { mapObjectToValues } from "./app.service";
+import { AddTask, DeleteButton } from "./app.styled";
+import useTask from "./useTask";
 
-const AddTask = styled.div`
-  background-color: #aab2bd;
-  border-radius: 3px;
-  margin: 5px;
-  width: 20px;
-  height: 20px;
-  color: white;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
-  font-size: 20pt;
-  cursor: pointer;
-`;
-
-const AddTaskGroup = styled.div`
-  width: 20px;
-  height: 40px;
-  color: black;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
-  font-size: 20pt;
-  cursor: pointer;
-`;
-
-const ItemTotal = styled.div`
-  height: 40px;
-  line-height: 40px;
-  font-size: 10pt;
-  color: #aab2bd;
-`;
-
-const mapObjectToValues = mapper => compose(values, mapObjIndexed(mapper));
-
+///////////////////////
 
 const App = () => {
 
-  const convertedData = converter(data);
+  const {
+    getTasks,
+    createTask,
+    createTaskGroup,
+    deleteTask,
+    taskData
+  } = useTask();
+
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   return (
 
     <div className="App">
 
       {
-        mapObjectToValues((node, rootKey) =>
+        mapObjectToValues((node, rootKey) => {
 
-          <Group
-            key={rootKey}
-            title={rootKey}>
+          return (
+            <TaskGroup
+              key={rootKey}
+              title={rootKey}>
 
-            {
-              mapObjectToValues((item, key) =>
+              {
+                mapObjectToValues((item, key) => {
 
-                <Expression
-                  key={key}
-                  text={prop("task", item)}
-                  isChecked={prop("isChecked", item)}
-                />
+                  return (
 
-              )(node)
-            }
+                    <div style={{ position: "relative" }}>
 
-            <AddTaskGroup
-              onClick={() => console.log("Add Task")}>
-              +
-              </AddTaskGroup>
+                      <Task
+                        key={key}
+                        id={prop("id", item)}
+                        text={prop("text")(item)}
+                        isChecked={prop("isChecked", item)}
+                      />
 
-          </Group>
+                      <DeleteButton
+                        onClick={() => deleteTask(prop("id", item))}>
+                        x
+                          </DeleteButton>
 
-        )(convertedData)
+                    </div>
 
+                  )
+                })(node)
+              }
+
+              <AddTask
+                onClick={() => createTask(rootKey)}>
+                +
+            </AddTask>
+
+            </TaskGroup>
+
+          )
+        })(taskData)
       }
 
-      {/* <AddTask
-        onClick={() => console.log("Add Task")}>
-        +
-      </AddTask> */}
+      <button onClick={() => createTaskGroup()}>Add Task Group</button>
 
     </div>
 
-  )
-
-}
+  );
+};
 
 export default App;
-
-
-
