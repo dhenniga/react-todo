@@ -9,7 +9,7 @@ In the project directory, you can run:
 ### `yarn dev`
 
 Runs both the app in development mode and the required json server for the backend.\
-The app is on port 3000 [http://localhost:3000](http://localhost:3000) and the Json Server is on port 5000 [http://localhost:5000/tasks/] (http://localhost:5000/tasks/).
+The app is on port 3000 [http://localhost:3000](http://localhost:3000) and the Json Server is on port 5000 [http://localhost:5000/tasks/](http://localhost:5000/tasks/).
 
 If you are unsure if the json server is running, check the port above.
 
