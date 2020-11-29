@@ -40,3 +40,9 @@ export const Header = styled.div`
   grid-template-columns: 40px 1fr 40px;
   align-items: center;
 `;
+
+export const ToggleSelectAll = styled.input`
+  position: absolute;
+  right: 18px;
+  top: 30px;
+`;

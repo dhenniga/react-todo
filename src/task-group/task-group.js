@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Container,
   Chevron,
   Input,
-  Header
+  Header,
+  ToggleSelectAll
 } from "./task-group.styled";
 import useTask from "../useTask";
 
-const Group = ({ children, title, node }) => {
+const Group = ({
+  children,
+  title,
+  node,
+  onSelectAll,
+  onSelectNone
+}) => {
 
-  const {
-    selectAll,
-    selectNone,
-    allSelected
-  } = useTask();
+  const { allSelected } = useTask();
 
-  const [toggleAll, setToggleAll] = useState(false);
-  const [isAllSelected, setIsAllSelected] = useState(allSelected(node))
-
+  const isChecked = allSelected(node);
 
   return (
 
@@ -32,19 +33,13 @@ const Group = ({ children, title, node }) => {
           placeholder="Enter Group Name..."
         />
 
-        <input
+        <ToggleSelectAll
           type="checkbox"
-          checked={isAllSelected}
-          style={{
-            position: "absolute",
-            right: 18,
-            top: 30
-          }}
+          checked={isChecked}
           onChange={() => {
-            setToggleAll(!toggleAll);
-            toggleAll && setIsAllSelected(node)
-              ? selectNone(node)
-              : selectAll(node)
+            isChecked
+              ? onSelectNone(node)
+              : onSelectAll(node)
           }} />
 
       </Header>

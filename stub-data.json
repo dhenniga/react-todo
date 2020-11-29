@@ -4,35 +4,29 @@
       "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
       "text": "Enter Race",
       "group": "Today's Shopping List",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
       "text": "This is is the",
       "group": "Today's Shopping List",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "f8193032-837c-471e-a470-bdd08bcc7fb5",
       "text": "Walk the Dog",
       "group": "Must get done today",
-      "isChecked": true
+      "isChecked": false
     },
     {
       "id": "4657f654-6344-424a-901f-6a31038ec913",
       "text": "Get Milk",
       "group": "Must get done today",
-      "isChecked": true
+      "isChecked": false
     },
     {
-      "id": "27c52dbd-05e4-474a-a2a0-88580b5501ff",
-      "text": "New Task Name",
-      "group": "Must get done today",
-      "isChecked": true
-    },
-    {
-      "id": "cf09118f-3764-42f4-a7b5-45a8fe7cf145",
-      "text": "fghdfgh",
+      "id": "93032e80-72c2-4f3f-bbbb-a464e8b2ea27",
+      "text": "a",
       "group": "Today's Shopping List",
       "isChecked": false
     }

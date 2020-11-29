@@ -5,21 +5,17 @@ import {
   Input,
   DeleteButton
 } from "./task.styled";
-import useTask from "../useTask";
 
 const Expression = ({
   id,
   text,
   isChecked,
   onToggleChange,
-  onDeleteTask
+  onDeleteTask,
+  onRenameTask
 }) => {
 
   const [isActive, setIsActive] = useState(isChecked);
-
-  const {
-    renameTask
-  } = useTask();
 
   return (
 
@@ -35,9 +31,10 @@ const Expression = ({
       />
 
       <Input
+        id={id}
         type="text"
         isChecked={isActive}
-        onChange={event => renameTask(id, event.target.value)}
+        onChange={event => onRenameTask(id, event.target.value)}
         defaultValue={text}
         placeholder="Enter task name"
       />

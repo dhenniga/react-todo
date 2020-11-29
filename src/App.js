@@ -19,24 +19,23 @@ const App = () => {
     createTaskGroup,
     tasksRemainingCount,
     toggleTask,
-    deleteTask
-  } = useTask();
+    deleteTask,
+    renameTask,
+    selectAll,
+    selectNone
+  } = useTask(updateTasks);
 
   useEffect(() => {
     getTasks().then(updateTasks);
   }, []);
 
-  const handleToggleChange = (id, value) =>
-    toggleTask(id, value)
-      .then(getTasks().then(updateTasks))
+  const handleSelectAll = node =>
+    selectAll(node)
+      .then(getTasks().then(updateTasks));
 
-  const handleDeleteTask = (id, value) =>
-    deleteTask(id)
-      .then(getTasks().then(updateTasks))
-
-  const handleCreateTask = rootKey =>
-    createTask(rootKey)
-      .then(getTasks().then(updateTasks))
+  const handleSelectNone = node =>
+    selectNone(node)
+      .then(getTasks().then(updateTasks));
 
   return (
 
@@ -48,7 +47,9 @@ const App = () => {
           <TaskGroup
             key={rootKey}
             title={rootKey}
-            node={node}>
+            node={node}
+            onSelectAll={handleSelectAll}
+            onSelectNone={handleSelectNone}>
 
             {
               mapObjectToValues(({ id, text, isChecked }, key) =>
@@ -58,8 +59,10 @@ const App = () => {
                   id={id}
                   text={text}
                   isChecked={isChecked}
-                  onToggleChange={handleToggleChange}
-                  onDeleteTask={handleDeleteTask}
+                  onToggleChange={(id, value) => toggleTask(id, value)}
+                  onDeleteTask={id => deleteTask(id)}
+                  onRenameTask={(id, value) => renameTask(id, value)}
+                  onSelectAll={handleSelectAll}
                 />
 
               )(node)
@@ -67,8 +70,7 @@ const App = () => {
 
             <AddTask
               disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-              onClick={() =>
-                handleCreateTask(rootKey)}>
+              onClick={() => createTask(rootKey)}>
               +
               </AddTask>
 
