@@ -16,7 +16,7 @@
       "id": "f8193032-837c-471e-a470-bdd08bcc7fb5",
       "text": "Walk the Dog",
       "group": "Must get done today",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "4657f654-6344-424a-901f-6a31038ec913",
@@ -28,6 +28,12 @@
       "id": "27c52dbd-05e4-474a-a2a0-88580b5501ff",
       "text": "New Task Name",
       "group": "Must get done today",
+      "isChecked": true
+    },
+    {
+      "id": "cf09118f-3764-42f4-a7b5-45a8fe7cf145",
+      "text": "fghdfgh",
+      "group": "Today's Shopping List",
       "isChecked": false
     }
   ]

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { values } from "ramda";
+import { values, reduce } from "ramda";
 import Task from "./task/task";
 import TaskGroup from "./task-group/task-group";
 import { mapObjectToValues } from "./app.service";
@@ -66,7 +66,9 @@ const App = () => {
             }
 
             <AddTask
-              onClick={() => handleCreateTask(rootKey)}>
+              disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+              onClick={() =>
+                handleCreateTask(rootKey)}>
               +
               </AddTask>
 
