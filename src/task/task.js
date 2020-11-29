@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { Container, Checkbox, Input } from "./task.styled";
+import {
+  Container,
+  Checkbox,
+  Input,
+  DeleteButton
+} from "./task.styled";
+import useTask from "../useTask";
 
 const Expression = ({
   id,
   text,
-  isChecked
+  isChecked,
+  onToggleChange,
+  onDeleteTask
 }) => {
 
   const [isActive, setIsActive] = useState(isChecked);
+
+  const {
+    renameTask
+  } = useTask();
 
   return (
 
@@ -17,22 +28,24 @@ const Expression = ({
       <Checkbox
         type="checkbox"
         checked={isActive}
-        onChange={event => {
+        onChange={() => {
           setIsActive(!isActive);
-          axios.patch(`/tasks/${id}`, { isChecked: !isActive });
+          onToggleChange(id, isActive)
         }}
       />
 
       <Input
         type="text"
         isChecked={isActive}
-        onChange={event =>
-          axios.patch(`/tasks/${id}`, { text: event.target.value })
-        }
+        onChange={event => renameTask(id, event.target.value)}
         defaultValue={text}
         placeholder="Enter task name"
-
       />
+
+      <DeleteButton
+        onClick={() => onDeleteTask(id)}>
+        x
+        </DeleteButton>
 
     </Container>
 

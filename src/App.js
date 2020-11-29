@@ -1,74 +1,82 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import { prop } from "ramda";
+import { values } from "ramda";
 import Task from "./task/task";
 import TaskGroup from "./task-group/task-group";
 import { mapObjectToValues } from "./app.service";
-import { AddTask, DeleteButton } from "./app.styled";
+import { AddTask, ItemsRemaining } from "./app.styled";
 import useTask from "./useTask";
 
 ///////////////////////
 
 const App = () => {
 
+  const [tasks, updateTasks] = useState();
+
   const {
     getTasks,
     createTask,
     createTaskGroup,
-    deleteTask,
-    taskData
+    tasksRemainingCount,
+    toggleTask,
+    deleteTask
   } = useTask();
 
   useEffect(() => {
-    getTasks();
+    getTasks().then(updateTasks);
   }, []);
+
+  const handleToggleChange = (id, value) =>
+    toggleTask(id, value)
+      .then(getTasks().then(updateTasks))
+
+  const handleDeleteTask = (id, value) =>
+    deleteTask(id)
+      .then(getTasks().then(updateTasks))
+
+  const handleCreateTask = rootKey =>
+    createTask(rootKey)
+      .then(getTasks().then(updateTasks))
 
   return (
 
     <div className="App">
 
       {
-        mapObjectToValues((node, rootKey) => {
+        mapObjectToValues((node, rootKey) =>
 
-          return (
-            <TaskGroup
-              key={rootKey}
-              title={rootKey}>
+          <TaskGroup
+            key={rootKey}
+            title={rootKey}
+            node={node}>
 
-              {
-                mapObjectToValues((item, key) => {
+            {
+              mapObjectToValues(({ id, text, isChecked }, key) =>
 
-                  return (
+                <Task
+                  key={key}
+                  id={id}
+                  text={text}
+                  isChecked={isChecked}
+                  onToggleChange={handleToggleChange}
+                  onDeleteTask={handleDeleteTask}
+                />
 
-                    <div style={{ position: "relative" }}>
+              )(node)
+            }
 
-                      <Task
-                        key={key}
-                        id={prop("id", item)}
-                        text={prop("text")(item)}
-                        isChecked={prop("isChecked", item)}
-                      />
+            <AddTask
+              onClick={() => handleCreateTask(rootKey)}>
+              +
+              </AddTask>
 
-                      <DeleteButton
-                        onClick={() => deleteTask(prop("id", item))}>
-                        x
-                          </DeleteButton>
+            <ItemsRemaining>
+              {tasksRemainingCount(values(node))} items left
+              </ItemsRemaining>
 
-                    </div>
+          </TaskGroup>
 
-                  )
-                })(node)
-              }
-
-              <AddTask
-                onClick={() => createTask(rootKey)}>
-                +
-            </AddTask>
-
-            </TaskGroup>
-
-          )
-        })(taskData)
+        )(tasks)
       }
 
       <button onClick={() => createTaskGroup()}>Add Task Group</button>

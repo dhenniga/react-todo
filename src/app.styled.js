@@ -10,6 +10,10 @@ export const AddTask = styled.div`
   font-family: sans-serif;
   font-size: 20pt;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const ItemTotal = styled.div`
@@ -19,27 +23,12 @@ export const ItemTotal = styled.div`
   color: #aab2bd;
 `;
 
-export const DeleteButton = styled.button`
-  background-color: red;
-  height: 16px;
-  width: 16px;
-  display: grid;
-  border-radius: 3px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 13px;
-  right: 0px;
-  border: none;
-  outline: 0px;
-  color: white;
-  cursor: pointer;
+export const ItemsRemaining = styled.label`
   font-family: sans-serif;
-  font-weight: 900;
-  font-size: 9pt;
-  opacity: 0.2;
-
-  &:hover {
-    opacity: 1;
-  }
+  font-size: 8pt;
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  top: -20px;              
 `;
