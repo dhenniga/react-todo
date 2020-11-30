@@ -2,15 +2,15 @@
   "tasks": [
     {
       "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
-      "text": "Enter Race",
+      "text": "Get Milk",
       "group": "Today's Shopping List",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
-      "text": "This is is the",
+      "text": "Buy Bread",
       "group": "Today's Shopping List",
-      "isChecked": false
+      "isChecked": true
     },
     {
       "id": "f8193032-837c-471e-a470-bdd08bcc7fb5",
@@ -20,14 +20,14 @@
     },
     {
       "id": "4657f654-6344-424a-901f-6a31038ec913",
-      "text": "Get Milk",
+      "text": "Purchase battteries",
       "group": "Must get done today",
-      "isChecked": false
+      "isChecked": true
     },
     {
-      "id": "93032e80-72c2-4f3f-bbbb-a464e8b2ea27",
-      "text": "affgfdfg",
-      "group": "Today's Shopping List",
+      "id": "f71d143c-e6ba-4dfb-9c7f-823e425e36be",
+      "text": "Read Books from Library",
+      "group": "Must get done today",
       "isChecked": false
     }
   ]

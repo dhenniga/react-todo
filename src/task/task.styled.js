@@ -18,8 +18,15 @@ export const Input = styled.input`
   text-align: left;
   color: black;
   font-family: sans-serif;
+  background-color: transparent;
   border: 0px;
   outline: 0px;
+
+  &:focus {
+    ${Container} {
+      background-color: orange;
+    }
+  }
 
   ${(props) =>
     props.checked &&
