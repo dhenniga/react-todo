@@ -3,13 +3,13 @@
     {
       "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
       "text": "2 Litres of Milk",
-      "group": "Today's Shopping List",
+      "group": "Weekly Shopping List",
       "isChecked": false
     },
     {
       "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
       "text": "Bread (Loaf)",
-      "group": "Today's Shopping List",
+      "group": "Weekly Shopping List",
       "isChecked": false
     },
     {
@@ -33,7 +33,13 @@
     {
       "id": "b6b24917-ec6c-498e-86e2-c29da78f8d9f",
       "text": "Butter",
-      "group": "Today's Shopping List",
+      "group": "Weekly Shopping List",
+      "isChecked": false
+    },
+    {
+      "id": "20d81ebf-563b-499d-b663-614a6c4c6e6e",
+      "text": "Monster Munch",
+      "group": "Weekly Shopping List",
       "isChecked": false
     }
   ]

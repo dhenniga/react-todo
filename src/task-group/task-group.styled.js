@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: auto;
+  width: 400px;
   padding: 20px;
   margin: 20px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);

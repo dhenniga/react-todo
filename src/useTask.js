@@ -32,7 +32,7 @@ const useTask = updateTasks => {
     api.post(`/tasks/`, {
       "id": uuidv4(),
       "text": "",
-      "group": "Undefined Tasks",
+      "group": "",
       "isChecked": false
     })
       .then(getTasks().then(updateTasks));
@@ -61,11 +61,21 @@ const useTask = updateTasks => {
 
   /////////////////////////////
 
+  const renameGroup = (node, value) =>
+    map(item =>
+      api.patch(
+        `/tasks/${item.id}`,
+        { group: value })
+    )(node);
+  // getTasks().then(updateTasks);
+
+  /////////////////////////////
+
   const selectAll = node => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: true })
     ))(node);
-    getTasks().then(updateTasks);
+    // getTasks().then(updateTasks);
   }
 
   /////////////////////////////
@@ -74,7 +84,7 @@ const useTask = updateTasks => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: false })
     ))(node);
-    getTasks().then(updateTasks);
+    // getTasks().then(updateTasks);
   }
 
   /////////////////////////////
@@ -101,6 +111,7 @@ const useTask = updateTasks => {
     deleteTask,
     toggleTask,
     renameTask,
+    renameGroup,
     selectAll,
     selectNone,
     tasksRemainingCount,

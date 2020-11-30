@@ -16,7 +16,10 @@ const Group = ({
   onSelectNone
 }) => {
 
-  const { allSelected } = useTask();
+  const {
+    allSelected,
+    renameGroup
+  } = useTask();
 
   const isChecked = allSelected(node);
 
@@ -31,6 +34,7 @@ const Group = ({
         <Input
           defaultValue={title}
           placeholder="Enter Group Name..."
+          onBlur={event => renameGroup(node, event.target.value)}
         />
 
         <ToggleSelectAll
