@@ -13,7 +13,7 @@ const useTask = updateTasks => {
 
   const getTasks = () =>
     api.get(`/tasks`)
-      .then(({ data }) => converter(data))
+      .then(({ data }) => converter(data));
 
   /////////////////////////////
 
@@ -41,7 +41,7 @@ const useTask = updateTasks => {
 
   const deleteTask = id =>
     api.delete(`/tasks/${id}`)
-      .then(getTasks().then(updateTasks))
+      .then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
@@ -49,7 +49,7 @@ const useTask = updateTasks => {
     api.patch(
       `/tasks/${id}`,
       { isChecked: !state })
-      .then(getTasks().then(updateTasks))
+      .then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
@@ -65,7 +65,7 @@ const useTask = updateTasks => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: true })
     ))(node);
-    getTasks().then(updateTasks)
+    getTasks().then(updateTasks);
   }
 
   /////////////////////////////
@@ -74,7 +74,7 @@ const useTask = updateTasks => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: false })
     ))(node);
-    getTasks().then(updateTasks)
+    getTasks().then(updateTasks);
   }
 
   /////////////////////////////
@@ -107,5 +107,7 @@ const useTask = updateTasks => {
     allSelected
   }
 }
+
+/////////////////////////////
 
 export default useTask;

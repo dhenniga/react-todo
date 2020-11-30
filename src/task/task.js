@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useTask from "../useTask";
 import {
   Container,
   Checkbox,
@@ -6,14 +7,19 @@ import {
   DeleteButton
 } from "./task.styled";
 
+
 const Expression = ({
   id,
   text,
   isChecked,
-  onToggleChange,
-  onDeleteTask,
-  onRenameTask
+  updateTasks
 }) => {
+
+  const {
+    toggleTask,
+    deleteTask,
+    renameTask
+  } = useTask(updateTasks);
 
   const [isActive, setIsActive] = useState(isChecked);
 
@@ -26,21 +32,21 @@ const Expression = ({
         checked={isActive}
         onChange={() => {
           setIsActive(!isActive);
-          onToggleChange(id, isActive);
+          toggleTask(id, isActive)
         }}
       />
 
       <Input
         type="text"
         checked={isActive}
-        onBlur={event => onRenameTask(id, event.target.value)}
+        onBlur={event => renameTask(id, event.target.value)}
         defaultValue={text}
         onChange={() => { }}
         placeholder="Enter task name"
       />
 
       <DeleteButton
-        onClick={() => onDeleteTask(id)}>
+        onClick={() => deleteTask(id)}>
         x
       </DeleteButton>
 

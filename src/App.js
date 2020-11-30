@@ -18,9 +18,6 @@ const App = () => {
     createTask,
     createTaskGroup,
     tasksRemainingCount,
-    toggleTask,
-    deleteTask,
-    renameTask,
     selectAll,
     selectNone
   } = useTask(updateTasks);
@@ -51,9 +48,7 @@ const App = () => {
                   id={id}
                   text={text}
                   isChecked={isChecked}
-                  onToggleChange={(id, value) => toggleTask(id, value)}
-                  onDeleteTask={id => deleteTask(id)}
-                  onRenameTask={(id, value) => renameTask(id, value)}
+                  updateTasks={updateTasks}
                 />
 
               )(node)

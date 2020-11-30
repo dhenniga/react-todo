@@ -2,13 +2,13 @@
   "tasks": [
     {
       "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
-      "text": "Get Milk",
+      "text": "2 Litres of Milk",
       "group": "Today's Shopping List",
-      "isChecked": true
+      "isChecked": false
     },
     {
       "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
-      "text": "Buy Bread",
+      "text": "Bread (Loaf)",
       "group": "Today's Shopping List",
       "isChecked": true
     },
@@ -26,9 +26,15 @@
     },
     {
       "id": "f71d143c-e6ba-4dfb-9c7f-823e425e36be",
-      "text": "Read Books from Library",
+      "text": "Read Books from Library and return before 5:00pm on Friday evening",
       "group": "Must get done today",
       "isChecked": false
+    },
+    {
+      "id": "b6b24917-ec6c-498e-86e2-c29da78f8d9f",
+      "text": "Butter",
+      "group": "Today's Shopping List",
+      "isChecked": true
     }
   ]
 }

@@ -21,12 +21,9 @@ export const Input = styled.input`
   background-color: transparent;
   border: 0px;
   outline: 0px;
-
-  &:focus {
-    ${Container} {
-      background-color: orange;
-    }
-  }
+  width: calc(100% - 35px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   ${(props) =>
     props.checked &&
