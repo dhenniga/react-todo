@@ -10,7 +10,7 @@
       "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
       "text": "Bread (Loaf)",
       "group": "Today's Shopping List",
-      "isChecked": true
+      "isChecked": false
     },
     {
       "id": "f8193032-837c-471e-a470-bdd08bcc7fb5",
@@ -34,7 +34,7 @@
       "id": "b6b24917-ec6c-498e-86e2-c29da78f8d9f",
       "text": "Butter",
       "group": "Today's Shopping List",
-      "isChecked": true
+      "isChecked": false
     }
   ]
 }
