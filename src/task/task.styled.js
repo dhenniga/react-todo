@@ -22,7 +22,7 @@ export const Input = styled.input`
   outline: 0px;
 
   ${(props) =>
-    props.isChecked &&
+    props.checked &&
     css`
       text-decoration: line-through;
       font-style: italic;

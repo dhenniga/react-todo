@@ -29,14 +29,6 @@ const App = () => {
     getTasks().then(updateTasks);
   }, []);
 
-  const handleSelectAll = node =>
-    selectAll(node)
-      .then(getTasks().then(updateTasks));
-
-  const handleSelectNone = node =>
-    selectNone(node)
-      .then(getTasks().then(updateTasks));
-
   return (
 
     <div className="App">
@@ -48,8 +40,8 @@ const App = () => {
             key={rootKey}
             title={rootKey}
             node={node}
-            onSelectAll={handleSelectAll}
-            onSelectNone={handleSelectNone}>
+            onSelectAll={node => selectAll(node)}
+            onSelectNone={node => selectNone(node)}>
 
             {
               mapObjectToValues(({ id, text, isChecked }, key) =>
@@ -62,7 +54,6 @@ const App = () => {
                   onToggleChange={(id, value) => toggleTask(id, value)}
                   onDeleteTask={id => deleteTask(id)}
                   onRenameTask={(id, value) => renameTask(id, value)}
-                  onSelectAll={handleSelectAll}
                 />
 
               )(node)
@@ -75,7 +66,7 @@ const App = () => {
               </AddTask>
 
             <ItemsRemaining>
-              {tasksRemainingCount(values(node))} items left
+              {tasksRemainingCount(node)} items left
               </ItemsRemaining>
 
           </TaskGroup>
@@ -83,7 +74,11 @@ const App = () => {
         )(tasks)
       }
 
-      <button onClick={() => createTaskGroup()}>Add Task Group</button>
+      <button
+        onClick={() =>
+          createTaskGroup()}>
+        Add Task Group
+      </button>
 
     </div>
 

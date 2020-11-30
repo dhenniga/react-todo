@@ -13,7 +13,7 @@ const useTask = updateTasks => {
 
   const getTasks = () =>
     api.get(`/tasks`)
-      .then(({ data }) => converter(data));
+      .then(({ data }) => converter(data))
 
   /////////////////////////////
 
@@ -32,7 +32,7 @@ const useTask = updateTasks => {
     api.post(`/tasks/`, {
       "id": uuidv4(),
       "text": "",
-      "group": "",
+      "group": "Undefined Tasks",
       "isChecked": false
     })
       .then(getTasks().then(updateTasks));
@@ -61,18 +61,21 @@ const useTask = updateTasks => {
 
   /////////////////////////////
 
-  const selectAll = node =>
+  const selectAll = node => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: true })
     ))(node);
-
+    getTasks().then(updateTasks)
+  }
 
   /////////////////////////////
 
-  const selectNone = node =>
+  const selectNone = node => {
     map(item => (
       api.patch(`/tasks/${item.id}`, { isChecked: false })
     ))(node);
+    getTasks().then(updateTasks)
+  }
 
   /////////////////////////////
 

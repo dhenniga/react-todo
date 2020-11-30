@@ -26,14 +26,13 @@ const Expression = ({
         checked={isActive}
         onChange={() => {
           setIsActive(!isActive);
-          onToggleChange(id, isActive)
+          onToggleChange(id, isActive);
         }}
       />
 
       <Input
-        id={id}
         type="text"
-        isChecked={isActive}
+        checked={isActive}
         onChange={event => onRenameTask(id, event.target.value)}
         defaultValue={text}
         placeholder="Enter task name"
@@ -42,7 +41,7 @@ const Expression = ({
       <DeleteButton
         onClick={() => onDeleteTask(id)}>
         x
-        </DeleteButton>
+      </DeleteButton>
 
     </Container>
 
