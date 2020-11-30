@@ -1,8 +1,12 @@
 # React TODO App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
 
 ## Available Scripts
+
+### `yarn install`
+
+AFter cloning this repo, you'll need to install the node-modules directory as this project uses a few external libraries.  This only needs to be done once.
 
 In the project directory, you can run:
 
