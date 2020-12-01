@@ -58,7 +58,7 @@ const App = () => {
               disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
               onClick={() => createTask(rootKey)}>
               +
-              </AddTask>
+            </AddTask>
 
             <ItemsRemaining>
               {tasksRemainingCount(node)} items left

@@ -61,31 +61,30 @@ const useTask = updateTasks => {
 
   /////////////////////////////
 
-  const renameGroup = (node, value) =>
+  const renameGroup = (node, value) => {
     map(item =>
       api.patch(
         `/tasks/${item.id}`,
         { group: value })
     )(node);
-  // getTasks().then(updateTasks);
-
-  /////////////////////////////
-
-  const selectAll = node => {
-    map(item => (
-      api.patch(`/tasks/${item.id}`, { isChecked: true })
-    ))(node);
-    // getTasks().then(updateTasks);
+    getTasks().then(updateTasks);
   }
 
   /////////////////////////////
 
-  const selectNone = node => {
-    map(item => (
-      api.patch(`/tasks/${item.id}`, { isChecked: false })
-    ))(node);
-    // getTasks().then(updateTasks);
-  }
+  const selectAll = node =>
+    map(item =>
+      api.patch(`tasks/${item.id}`,
+        { isChecked: true })
+    )(node);
+
+  /////////////////////////////
+
+  const selectNone = node =>
+    map(item =>
+      api.patch(`tasks/${item.id}`,
+        { isChecked: false })
+    )(node);
 
   /////////////////////////////
 
@@ -117,6 +116,7 @@ const useTask = updateTasks => {
     tasksRemainingCount,
     allSelected
   }
+
 }
 
 /////////////////////////////

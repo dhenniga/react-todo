@@ -39,7 +39,11 @@ const Expression = ({
       <Input
         type="text"
         checked={isActive}
-        onBlur={event => renameTask(id, event.target.value)}
+        onBlur={event =>
+          renameTask(
+            id,
+            event.target.value
+          )}
         defaultValue={text}
         onChange={() => { }}
         placeholder="Enter task name"

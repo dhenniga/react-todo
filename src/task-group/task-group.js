@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Chevron,
@@ -21,7 +21,10 @@ const Group = ({
     renameGroup
   } = useTask();
 
-  const isChecked = allSelected(node);
+  const [
+    checked,
+    setChecked
+  ] = useState(allSelected(node));
 
   return (
 
@@ -34,14 +37,19 @@ const Group = ({
         <Input
           defaultValue={title}
           placeholder="Enter Group Name..."
-          onBlur={event => renameGroup(node, event.target.value)}
+          onBlur={event =>
+            renameGroup(
+              node,
+              event.target.value
+            )}
         />
 
         <ToggleSelectAll
           type="checkbox"
-          checked={isChecked}
+          checked={checked}
           onChange={() => {
-            isChecked
+            setChecked(!checked);
+            checked
               ? onSelectNone(node)
               : onSelectAll(node)
           }} />

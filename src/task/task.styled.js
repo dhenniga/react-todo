@@ -31,10 +31,13 @@ export const Container = styled.div`
   grid-template-columns: 40px 1fr;
   align-content: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1px;
   transition: border-bottom-color 0.3s cubic-bezier(0,0,0,1);
 
   &:hover {
     border-bottom-color: rgb(255,94,19);
+    border-bottom-width: 2px;
+    margin-bottom: 0px;
     ${DeleteButton} {
       opacity: 1 !important;
     }
