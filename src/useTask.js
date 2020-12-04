@@ -2,7 +2,7 @@ import axios from "axios";
 import { converter } from "./app.service";
 import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
-import Moment from "moment";
+import moment from "moment";
 
 const useTask = updateTasks => {
 
@@ -24,8 +24,8 @@ const useTask = updateTasks => {
       "text": "",
       "group": rootKey,
       "isChecked": false,
-      "dateCreated": Moment(),
-      "dateToBeCompleted": Moment().add('minutes', 1)
+      "dateCreated": moment(),
+      "dateToBeCompleted": moment().add('minutes', 1)
     })
       .then(getTasks().then(updateTasks));
 
@@ -37,8 +37,8 @@ const useTask = updateTasks => {
       "text": "",
       "group": "",
       "isChecked": false,
-      "dateCreated": Moment(),
-      "dateToBeCompleted": Moment().add('minutes', 1)
+      "dateCreated": moment(),
+      "dateToBeCompleted": moment().add('minutes', 1)
     })
       .then(getTasks().then(updateTasks));
 

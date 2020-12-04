@@ -4,13 +4,9 @@ export const DeleteButton = styled.button`
   background-color: red;
   height: 16px;
   width: 16px;
-  display: grid;
   border-radius: 3px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 13px;
-  right: 0px;
+  position: relative;
+  top: 8px;
   border: none;
   outline: 0px;
   color: white;
@@ -29,14 +25,14 @@ export const Container = styled.div`
   display: grid;
   /* align-content: center; */
   position: relative;
-  grid-template-columns: 40px 1fr;
+  grid-template-columns: 26px 1fr max-content;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 1px;
+  /* margin-bottom: 1px; */
   transition: border-bottom-color 0.3s cubic-bezier(0,0,0,1);
 
   &:hover {
-    border-bottom-color: rgb(255,94,19);
-    border-bottom-width: 2px;
+    border-bottom-color: #656d78;
+    border-bottom-width: 1px;
     margin-bottom: 0px;
     ${DeleteButton} {
       opacity: 1 !important;
@@ -47,7 +43,8 @@ export const Container = styled.div`
 export const Input = styled.input`
   text-align: left;
   color: black;
-  font-family: ${props => props.theme.rwThin};
+  font-family: ${props => props.theme.rwRegular};
+  font-weight: 600;
   background-color: transparent;
   border: 0px;
   outline: 0px;
@@ -69,5 +66,5 @@ export const Input = styled.input`
 export const Checkbox = styled.input`
   position: relative;
   top: 11px;
-  left: 9px;
+  left: 0;
 `;

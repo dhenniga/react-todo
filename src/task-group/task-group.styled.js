@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: 400px;
+  width: calc(100% - 80px);
   padding: 20px;
   margin: 20px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,7 @@ export const Chevron = styled.div`
 
 export const Input = styled.input`
   font-family: ${props => props.theme.Light};
-  letter-spacing: -0.5px;
+  letter-spacing: 0.2px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
