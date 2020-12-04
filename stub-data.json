@@ -1,36 +1,12 @@
 {
   "tasks": [
     {
-      "id": "f92f74d4-630a-4f84-a96a-687e867b4453",
-      "text": "2 Litres of Milk",
-      "group": "Weekly Shopping List INto",
+      "id": "8e823670-0b75-479d-8480-83ba754bd7e1",
+      "text": "Task 99",
+      "group": "",
       "isChecked": false,
-      "_method": "patch"
-    },
-    {
-      "id": "ac46ee88-b2e2-4bc8-9500-aff799cb6b18",
-      "text": "Bread (Loaf)",
-      "group": "Weekly Shopping List INto",
-      "isChecked": true,
-      "_method": "patch"
-    },
-    {
-      "id": "f5bb1fde-951b-4d2b-82c0-af03d37992a3",
-      "text": "Bicycle Pump",
-      "group": "Collect from Friend",
-      "isChecked": false
-    },
-    {
-      "id": "f6cf3e46-9566-488d-86b9-9724dfc6e354",
-      "text": "Sweater for Bill",
-      "group": "Collect from Friend",
-      "isChecked": true
-    },
-    {
-      "id": "11c472fc-2819-4f47-bb9f-055664f70a60",
-      "text": "Batteries for remote control",
-      "group": "Collect from Friend",
-      "isChecked": true
+      "dateCreated": "2020-12-04T11:21:24.932Z",
+      "dateToBeCompleted": "2020-12-05T00:00:00.000Z"
     }
   ]
 }

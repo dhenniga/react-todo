@@ -4,7 +4,11 @@ import { values, reduce } from "ramda";
 import Task from "./task/task";
 import TaskGroup from "./task-group/task-group";
 import { mapObjectToValues } from "./app.service";
-import { AddTask, ItemsRemaining } from "./app.styled";
+import {
+  AddTask,
+  AddGroupButton,
+  ItemsRemaining
+} from "./app.styled";
 import useTask from "./useTask";
 
 ///////////////////////
@@ -30,6 +34,13 @@ const App = () => {
 
     <div className="App">
 
+      <div style={{
+        width: "calc(100% - 40px)",
+        height: "fit-content",
+        backgroundColor: "#e6e9ed",
+        padding: "20px"
+      }}>React TODO Application</div>
+
       {
         mapObjectToValues((node, rootKey) =>
 
@@ -41,7 +52,13 @@ const App = () => {
             onSelectNone={node => selectNone(node)}>
 
             {
-              mapObjectToValues(({ id, text, isChecked }, key) =>
+              mapObjectToValues(({
+                id,
+                text,
+                isChecked,
+                dateCreated,
+                dateToBeCompleted
+              }, key) =>
 
                 <Task
                   key={key}
@@ -49,6 +66,8 @@ const App = () => {
                   text={text}
                   isChecked={isChecked}
                   updateTasks={updateTasks}
+                  dateCreated={dateCreated}
+                  dateToBeCompleted={dateToBeCompleted}
                 />
 
               )(node)
@@ -69,11 +88,10 @@ const App = () => {
         )(tasks)
       }
 
-      <button
-        onClick={() =>
-          createTaskGroup()}>
+      <AddGroupButton
+        onClick={() => createTaskGroup()}>
         Add Task Group
-      </button>
+      </AddGroupButton>
 
     </div>
 

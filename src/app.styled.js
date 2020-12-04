@@ -32,11 +32,29 @@ export const ItemTotal = styled.div`
 `;
 
 export const ItemsRemaining = styled.label`
-  font-family: sans-serif;
+  font-family: ${props => props.theme.Regular};
+  letter-spacing: -0.5px;
   font-size: 8pt;
   float: right;
   height: 40px;
   line-height: 40px;
   position: relative;
   top: -20px;              
+`;
+
+export const AddGroupButton = styled.button`
+  background-color: #434a54;
+  color: white;
+  border: 0;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 5px;
+  float: left;
+  cursor: pointer;
+  outline: none;
+  transition: ${props => props.theme.fastEasing};
+
+  &:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
 `;

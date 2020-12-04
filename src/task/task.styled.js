@@ -27,9 +27,9 @@ export const Container = styled.div`
   height: 40px;
   width: 100%;
   display: grid;
+  /* align-content: center; */
   position: relative;
   grid-template-columns: 40px 1fr;
-  align-content: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 1px;
   transition: border-bottom-color 0.3s cubic-bezier(0,0,0,1);
@@ -47,7 +47,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   text-align: left;
   color: black;
-  font-family: sans-serif;
+  font-family: ${props => props.theme.rwThin};
   background-color: transparent;
   border: 0px;
   outline: 0px;
@@ -66,4 +66,8 @@ export const Input = styled.input`
     `}
 `;
 
-export const Checkbox = styled.input``;
+export const Checkbox = styled.input`
+  position: relative;
+  top: 11px;
+  left: 9px;
+`;

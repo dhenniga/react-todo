@@ -2,6 +2,7 @@ import axios from "axios";
 import { converter } from "./app.service";
 import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
+import Moment from "moment";
 
 const useTask = updateTasks => {
 
@@ -22,7 +23,9 @@ const useTask = updateTasks => {
       "id": uuidv4(),
       "text": "",
       "group": rootKey,
-      "isChecked": false
+      "isChecked": false,
+      "dateCreated": Moment(),
+      "dateToBeCompleted": Moment().add('minutes', 1)
     })
       .then(getTasks().then(updateTasks));
 
@@ -33,7 +36,9 @@ const useTask = updateTasks => {
       "id": uuidv4(),
       "text": "",
       "group": "",
-      "isChecked": false
+      "isChecked": false,
+      "dateCreated": Moment(),
+      "dateToBeCompleted": Moment().add('minutes', 1)
     })
       .then(getTasks().then(updateTasks));
 
@@ -103,6 +108,23 @@ const useTask = updateTasks => {
 
   /////////////////////////////
 
+  const calculateRemainingPercentage = (
+    dateCreated,
+    dateToBeCompleted
+  ) => {
+    const startDate = new Date(dateCreated);
+    const endDate = new Date(dateToBeCompleted);
+    return Math.round((new Date() - startDate) / (endDate - startDate) * 100);
+  }
+
+  const updateDateToBeCompleted = (id, date) =>
+    api.patch(
+      `/tasks/${id}`,
+      { dateToBeCompleted: date })
+      .then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
   return {
     getTasks,
     createTask,
@@ -114,7 +136,9 @@ const useTask = updateTasks => {
     selectAll,
     selectNone,
     tasksRemainingCount,
-    allSelected
+    allSelected,
+    calculateRemainingPercentage,
+    updateDateToBeCompleted
   }
 
 }

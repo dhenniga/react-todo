@@ -23,6 +23,8 @@ export const Chevron = styled.div`
 `;
 
 export const Input = styled.input`
+  font-family: ${props => props.theme.Light};
+  letter-spacing: -0.5px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
