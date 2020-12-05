@@ -1,12 +1,36 @@
 {
   "tasks": [
     {
-      "id": "81e948cb-21ed-41d8-b93d-34761a40a9c2",
-      "text": "New Task Name",
-      "group": "Collect Shopping",
+      "id": "e7dca927-9afa-4762-b0e9-fee28abdd35a",
+      "text": "Carrotts",
+      "group": "Shopping List",
+      "isChecked": false,
+      "dateCreated": "2020-12-05T21:01:12.976Z",
+      "dateToBeCompleted": ""
+    },
+    {
+      "id": "24bd5056-bdd2-4f27-a8e6-8116d40bfd3d",
+      "text": "Bread (White Loaf)",
+      "group": "Shopping List",
+      "isChecked": false,
+      "dateCreated": "2020-12-05T21:01:41.240Z",
+      "dateToBeCompleted": ""
+    },
+    {
+      "id": "1e7dd0b0-95b0-4175-8bec-497f34661e28",
+      "text": "Butter (1oz) * 2",
+      "group": "Shopping List",
       "isChecked": true,
-      "dateCreated": "2020-12-04T21:06:26.628Z",
-      "dateToBeCompleted": "2020-12-04T21:07:26.628Z"
+      "dateCreated": "2020-12-05T21:01:54.875Z",
+      "dateToBeCompleted": ""
+    },
+    {
+      "id": "2e60eddf-d6c8-4c1e-976e-98ec6d2746c9",
+      "text": "Popcorn",
+      "group": "Shopping List",
+      "isChecked": true,
+      "dateCreated": "2020-12-05T21:34:10.599Z",
+      "dateToBeCompleted": "Sat Dec 05 2020 21:35:09 GMT+0000 (Greenwich Mean Time)"
     }
   ]
 }

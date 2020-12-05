@@ -2,14 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: calc(100% - 80px);
-  padding: 20px;
-  margin: 20px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+  width: 450px;
+  padding: 10px;
+  margin: 10px;
   position: relative;
-  background-color: white;
-  box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.1);
 `;
 
 export const Chevron = styled.div`
@@ -30,6 +26,7 @@ export const Input = styled.input`
   white-space: nowrap;
   margin-right: 40px;
   user-select: none;
+  background-color: transparent;
   border: none;
   outline: 0px;
   font-size: 12pt;
@@ -39,12 +36,11 @@ export const Input = styled.input`
 export const Header = styled.div`
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 40px 1fr 13px;
   align-items: center;
 `;
 
 export const ToggleSelectAll = styled.input`
-  position: absolute;
-  right: 18px;
-  top: 30px;
+  margin: 0px;
+  padding: 0px;
 `;

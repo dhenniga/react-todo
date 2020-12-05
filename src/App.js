@@ -37,7 +37,6 @@ const App = () => {
       <div style={{
         width: "calc(100% - 40px)",
         height: "fit-content",
-        backgroundColor: "#e6e9ed",
         padding: "20px"
       }}>React TODO Application</div>
 
@@ -73,15 +72,25 @@ const App = () => {
               )(node)
             }
 
-            <AddTask
-              disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-              onClick={() => createTask(rootKey)}>
-              +
+            <div
+              style={{
+                height: "40px",
+                display: "grid",
+                gridTemplateColumns: "max-content 1fr",
+                alignItems: "center"
+              }}>
+
+              <AddTask
+                disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+                onClick={() => createTask(rootKey)}>
+                +
             </AddTask>
 
-            <ItemsRemaining>
-              {tasksRemainingCount(node)} items left
+              <ItemsRemaining>
+                {tasksRemainingCount(node)} items left
               </ItemsRemaining>
+
+            </div>
 
           </TaskGroup>
 

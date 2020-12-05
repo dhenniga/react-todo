@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
 export const AddTask = styled.button`
-  width: 20px;
-  height: 40px;
+  width: 50px;
   color: black;
-  display: grid;
   outline: 0px;
   border: 0px;
-  justify-content: center;
-  align-items: center;
   font-family: sans-serif;
   font-size: 20pt;
   cursor: pointer;
@@ -33,13 +29,8 @@ export const ItemTotal = styled.div`
 
 export const ItemsRemaining = styled.label`
   font-family: ${props => props.theme.Regular};
-  letter-spacing: -0.5px;
   font-size: 8pt;
-  float: right;
-  height: 40px;
-  line-height: 40px;
-  position: relative;
-  top: -20px;              
+  text-align: right; 
 `;
 
 export const AddGroupButton = styled.button`
