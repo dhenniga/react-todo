@@ -28,14 +28,10 @@ export const Container = styled.div`
   position: relative;
   grid-template-columns: 26px 1fr max-content;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  /* margin-bottom: 1px; */
   transition: border-bottom-color 0.3s cubic-bezier(0,0,0,1);
-  /* box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.05); */
 
   &:hover {
     border-bottom-color: #656d78;
-    border-bottom-width: 1px;
-    margin-bottom: 0px;
     ${DeleteButton} {
       opacity: 1 !important;
     }

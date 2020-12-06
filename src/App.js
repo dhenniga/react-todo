@@ -37,7 +37,9 @@ const App = () => {
       <div style={{
         width: "calc(100% - 40px)",
         height: "fit-content",
-        padding: "20px"
+        padding: "20px",
+        backgroundColor: "black",
+        color: "white"
       }}>React TODO Application</div>
 
       {
@@ -74,10 +76,11 @@ const App = () => {
 
             <div
               style={{
-                height: "40px",
+                height: "37px",
                 display: "grid",
                 gridTemplateColumns: "max-content 1fr",
-                alignItems: "center"
+                alignItems: "center",
+                borderBottom: "3px solid black"
               }}>
 
               <AddTask

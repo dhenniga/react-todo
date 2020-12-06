@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const AddTask = styled.button`
-  width: 50px;
   color: black;
   outline: 0px;
+  padding: 0px;
   border: 0px;
   font-family: sans-serif;
   font-size: 20pt;
