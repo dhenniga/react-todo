@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: 450px;
+  width: 300px;
   padding: 10px;
   margin: 10px;
   position: relative;
@@ -24,7 +24,7 @@ export const Input = styled.input`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  margin-right: 40px;
+  margin-right: 15px;
   user-select: none;
   background-color: transparent;
   border: none;

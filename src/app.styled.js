@@ -6,7 +6,10 @@ export const AddTask = styled.button`
   padding: 0px;
   border: 0px;
   font-family: sans-serif;
-  font-size: 20pt;
+  position: relative;
+  top: -2px;
+  font-weight: 600;
+  font-size: 17pt;
   cursor: pointer;
   background-color: transparent;
   transition: transform 0.5s cubic-bezier(0,0,0,1);

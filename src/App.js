@@ -58,7 +58,8 @@ const App = () => {
                 text,
                 isChecked,
                 dateCreated,
-                dateToBeCompleted
+                dateToBeCompleted,
+                taskCompletedTime
               }, key) =>
 
                 <Task
@@ -69,6 +70,7 @@ const App = () => {
                   updateTasks={updateTasks}
                   dateCreated={dateCreated}
                   dateToBeCompleted={dateToBeCompleted}
+                  taskCompletedTime={taskCompletedTime}
                 />
 
               )(node)

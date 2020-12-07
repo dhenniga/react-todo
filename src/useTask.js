@@ -1,7 +1,7 @@
 import axios from "axios";
 import { converter } from "./app.service";
 import { v4 as uuidv4 } from 'uuid';
-import { map, reduce, values, keys, mapAccumRight } from "ramda";
+import { map, reduce, values, keys } from "ramda";
 import moment from "moment";
 
 const useTask = updateTasks => {
@@ -25,7 +25,8 @@ const useTask = updateTasks => {
       "group": rootKey,
       "isChecked": false,
       "dateCreated": moment(),
-      "dateToBeCompleted": ""
+      "dateToBeCompleted": "",
+      "taskCompletedTime": ""
     })
       .then(getTasks().then(updateTasks));
 
@@ -38,7 +39,8 @@ const useTask = updateTasks => {
       "group": "",
       "isChecked": false,
       "dateCreated": moment(),
-      "dateToBeCompleted": ""
+      "dateToBeCompleted": "",
+      "taskCompletedTime": ""
     })
       .then(getTasks().then(updateTasks));
 
@@ -53,8 +55,14 @@ const useTask = updateTasks => {
   const toggleTask = (id, state) =>
     api.patch(
       `/tasks/${id}`,
-      { isChecked: !state })
+      {
+        isChecked: !state,
+        taskCompletedTime: !state
+          ? moment()
+          : ""
+      })
       .then(getTasks().then(updateTasks));
+
 
   /////////////////////////////
 
@@ -115,7 +123,6 @@ const useTask = updateTasks => {
     const startDate = new Date(dateCreated);
     const endDate = new Date(dateToBeCompleted);
     const marp = (new Date() - startDate) / (endDate - startDate) * 100;
-    console.log(marp.toFixed(2));
     return marp.toFixed(2);
   }
 

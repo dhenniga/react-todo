@@ -1,21 +1,26 @@
 import styled, { css } from "styled-components";
+import Moment from "react-moment";
 
-export const DeleteButton = styled.button`
-  background-color: red;
-  height: 16px;
-  width: 16px;
-  border-radius: 3px;
-  border: none;
-  outline: 0px;
-  color: white;
-  cursor: pointer;
-  font-family: sans-serif;
-  text-align: center;
-  line-height: 0px;
-  font-weight: 400;
-  font-size: 9pt;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0,0,0,1);
+export const StyledMoment = styled(Moment)`
+   font-size: 8pt;
+    font-weight: 400;
+    font-family: sans-serif;
+    color: #656d78;
+    margin-right: 5px;
+`;
+
+export const TimeContainer = styled.div`
+display: grid;
+    grid-template-columns: 1fr 12px;
+    align-items: center;`;
+
+export const SettingsContainer = styled.div`
+  display: none;
+  grid-template-columns: 1fr max-content max-content;;
+  align-items: center;
+  overflow: hidden;
+  width: 0px;
+  margin-left: 20px;
 `;
 
 export const Container = styled.div`
@@ -32,8 +37,14 @@ export const Container = styled.div`
 
   &:hover {
     border-bottom-color: #656d78;
-    ${DeleteButton} {
-      opacity: 1 !important;
+    ${SettingsContainer} {
+      display: grid;
+      width: fit-content !important;
+      grid-template-columns: 1fr max-content max-content !important;
+    }
+
+    ${TimeContainer} {
+      display: none;
     }
   }
 `;
@@ -46,7 +57,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 0px;
   outline: 0px;
-  width: calc(100% - 35px);
+  width: calc(100% - 10px);
   text-overflow: ellipsis;
   white-space: nowrap;
 
@@ -66,8 +77,15 @@ export const Checkbox = styled.input`
   margin: auto 0px;
 `;
 
-export const SettingsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr max-content max-content;
-  align-items: center;
+export const TimePassingBar = styled.div`
+  height: 3px;
+  max-width: 100%;
+  transition: 1s cubic-bezier(0.5,0.5,0.5,0.5);
+  transition-property: background-color, width;
+  width: ${props => props.percentage}%;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  pointer-events: none;
+  z-index: 0
 `;
