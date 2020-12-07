@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Moment from "react-moment";
 
 export const StyledMoment = styled(Moment)`
-   font-size: 8pt;
+   font-size: 7pt;
     font-weight: 400;
     font-family: sans-serif;
     color: #656d78;
@@ -10,9 +10,10 @@ export const StyledMoment = styled(Moment)`
 `;
 
 export const TimeContainer = styled.div`
-display: grid;
-    grid-template-columns: 1fr 12px;
-    align-items: center;`;
+  display: grid;
+  grid-template-columns: 1fr 12px;
+  align-items: center;
+`;
 
 export const SettingsContainer = styled.div`
   display: none;
@@ -54,6 +55,7 @@ export const Input = styled.input`
   color: #656d78;
   font-family: ${props => props.theme.rwRegular};
   font-weight: 600;
+  font-size: 8pt;
   background-color: transparent;
   border: 0px;
   outline: 0px;

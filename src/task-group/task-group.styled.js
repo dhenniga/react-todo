@@ -6,6 +6,7 @@ export const Container = styled.div`
   padding: 10px;
   margin: 10px;
   position: relative;
+  display: inline-block;
 `;
 
 export const Chevron = styled.div`
