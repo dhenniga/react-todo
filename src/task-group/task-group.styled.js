@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: 300px;
+  width: calc(100% - 40px);
   padding: 10px;
   margin: 10px;
+  max-width: 350px;
   position: relative;
-  display: inline-block;
+  display: block;
 `;
 
 export const Chevron = styled.div`

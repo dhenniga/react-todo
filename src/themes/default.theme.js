@@ -1,7 +1,9 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 
-  background: "#434a54",
+  background: "255, 255, 255, 1",
+  inputColor: "101, 109, 120, 1",
+  containerBorderBottom: "0, 0, 0, 0.1",
 
   // Roboto Slab fonts
   rsThin: "rs_thin",

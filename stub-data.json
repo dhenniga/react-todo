@@ -1,85 +1,13 @@
 {
   "tasks": [
     {
-      "id": "203bae18-56e8-4f7b-909c-97f1ef8490fd",
-      "text": "Bread",
-      "group": "Shopping List",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T00:07:35.689Z",
-      "dateToBeCompleted": "",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "573a77a8-4a9c-4ec4-9420-680500ec8983",
-      "text": "Butter",
-      "group": "Shopping List",
+      "id": "0f949f87-70fd-45e2-a2e3-15d9b3420935",
+      "text": "",
+      "group": "",
       "isChecked": true,
-      "dateCreated": "2020-12-07T00:07:39.644Z",
-      "dateToBeCompleted": "",
-      "taskCompletedTime": "2020-12-07T00:25:36.357Z"
-    },
-    {
-      "id": "8723f0e4-f67c-4952-905f-21eca822a1c6",
-      "text": "Cheese",
-      "group": "Shopping List",
-      "isChecked": true,
-      "dateCreated": "2020-12-07T00:07:43.795Z",
-      "dateToBeCompleted": "",
-      "taskCompletedTime": "2020-12-07T00:25:37.106Z"
-    },
-    {
-      "id": "3fb51c78-256e-4f0c-94e5-99a022400b99",
-      "text": "Collect Kids",
-      "group": "Times Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T00:08:08.584Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 01:08:05 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "156a59d0-5b44-40fa-b786-c9d91122a1b1",
-      "text": "One minute timer",
-      "group": "Times Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T00:08:23.282Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 00:09:21 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "22d07858-38bb-4d70-851f-f6f90295be87",
-      "text": "Small test",
-      "group": "Times Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T00:26:14.800Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 00:41:13 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "4cdf6529-5440-4397-9692-de28620e37d6",
-      "text": "New Task",
-      "group": "Times Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T15:24:29.856Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 15:39:28 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "cee699ab-deb6-4ea5-b6b4-be1e7105c6a8",
-      "text": "Create successful application",
-      "group": "Very Long Term Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T15:40:45.898Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 17:40:44 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
-    },
-    {
-      "id": "bc5e99cc-a8af-4b40-b6dc-8f54805ac689",
-      "text": "Something else ",
-      "group": "Very Long Term Tasks",
-      "isChecked": false,
-      "dateCreated": "2020-12-07T15:41:00.834Z",
-      "dateToBeCompleted": "Mon Dec 07 2020 16:40:58 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": ""
+      "dateCreated": "2020-12-10T00:39:40.181Z",
+      "dateToBeCompleted": "Thu Dec 10 2020 00:40:37 GMT+0000 (Greenwich Mean Time)",
+      "taskCompletedTime": "2020-12-10T08:47:11.295Z"
     }
   ]
 }

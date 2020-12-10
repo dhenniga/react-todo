@@ -1,5 +1,32 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  background-color: rgba(${props => props.theme.background});
+  height: 100vh;
+`;
+
+export const Header = styled.div`
+  width: calc(100% - 40px);
+  height: fit-content;
+  padding: 20px;
+  background-color: black;
+  color: white;
+`;
+
+export const AppBody = styled.div`
+  display: grid;
+  align-items: center;
+  justify-items: center;
+`;
+
+export const TaskGroupFooter = styled.div`
+  height: 37px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  border-bottom: 3px solid black;
+`;
+
 export const AddTask = styled.button`
   color: black;
   outline: 0px;
@@ -38,12 +65,12 @@ export const ItemsRemaining = styled.label`
 
 export const AddGroupButton = styled.button`
   background-color: #434a54;
+  float: right;
   color: white;
   border: 0;
-  margin: 15px;
-  padding: 15px;
+  /* margin: 15px; */
+  padding:  5px 10px; 
   border-radius: 5px;
-  float: left;
   cursor: pointer;
   outline: none;
   transition: ${props => props.theme.fastEasing};

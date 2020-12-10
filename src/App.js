@@ -5,9 +5,13 @@ import Task from "./task/task";
 import TaskGroup from "./task-group/task-group";
 import { mapObjectToValues } from "./app.service";
 import {
+  Container,
   AddTask,
   AddGroupButton,
-  ItemsRemaining
+  ItemsRemaining,
+  Header,
+  TaskGroupFooter,
+  AppBody
 } from "./app.styled";
 import useTask from "./useTask";
 
@@ -16,6 +20,8 @@ import useTask from "./useTask";
 const App = () => {
 
   const [tasks, updateTasks] = useState();
+
+  ///////////////////////
 
   const {
     getTasks,
@@ -26,90 +32,90 @@ const App = () => {
     selectNone
   } = useTask(updateTasks);
 
+  ///////////////////////
+
   useEffect(() => {
     getTasks().then(updateTasks);
   }, []);
 
+  ///////////////////////
+
   return (
 
-    <div className="App">
+    <Container>
 
-      <div style={{
-        width: "calc(100% - 40px)",
-        height: "fit-content",
-        padding: "20px",
-        backgroundColor: "black",
-        color: "white"
-      }}>React TODO Application</div>
+      <Header>
 
-      {
-        mapObjectToValues((node, rootKey) =>
+        React TODO Application
 
-          <TaskGroup
-            key={rootKey}
-            title={rootKey}
-            node={node}
-            onSelectAll={node => selectAll(node)}
-            onSelectNone={node => selectNone(node)}>
+        <AddGroupButton
+          onClick={() => createTaskGroup()}>
+          Add Task Group
+        </AddGroupButton>
 
-            {
-              mapObjectToValues(({
-                id,
-                text,
-                isChecked,
-                dateCreated,
-                dateToBeCompleted,
-                taskCompletedTime
-              }, key) =>
+      </Header>
 
-                <Task
-                  key={key}
-                  id={id}
-                  text={text}
-                  isChecked={isChecked}
-                  updateTasks={updateTasks}
-                  dateCreated={dateCreated}
-                  dateToBeCompleted={dateToBeCompleted}
-                  taskCompletedTime={taskCompletedTime}
-                />
+      <AppBody>
 
-              )(node)
-            }
+        {
+          mapObjectToValues((node, rootKey) =>
 
-            <div
-              style={{
-                height: "37px",
-                display: "grid",
-                gridTemplateColumns: "max-content 1fr",
-                alignItems: "center",
-                borderBottom: "3px solid black"
-              }}>
+            <TaskGroup
+              key={rootKey}
+              title={rootKey}
+              node={node}
+              onSelectAll={node => selectAll(node)}
+              onSelectNone={node => selectNone(node)}>
 
-              <AddTask
-                disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-                onClick={() => createTask(rootKey)}>
-                +
-            </AddTask>
+              {
+                mapObjectToValues(({
+                  id,
+                  text,
+                  isChecked,
+                  dateCreated,
+                  dateToBeCompleted,
+                  taskCompletedTime
+                }, key) =>
 
-              <ItemsRemaining>
-                {tasksRemainingCount(node)} items left
-              </ItemsRemaining>
+                  <Task
+                    key={key}
+                    id={id}
+                    text={text}
+                    isChecked={isChecked}
+                    updateTasks={updateTasks}
+                    dateCreated={dateCreated}
+                    dateToBeCompleted={dateToBeCompleted}
+                    taskCompletedTime={taskCompletedTime}
+                  />
 
-            </div>
+                )(node)
+              }
 
-          </TaskGroup>
+              <TaskGroupFooter>
 
-        )(tasks)
-      }
+                <AddTask
+                  disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+                  onClick={() => createTask(rootKey)}>
+                  +
+                </AddTask>
 
-      <AddGroupButton
-        onClick={() => createTaskGroup()}>
-        Add Task Group
-      </AddGroupButton>
+                <ItemsRemaining>
+                  {tasksRemainingCount(node)} items left
+                </ItemsRemaining>
 
-    </div>
+              </TaskGroupFooter>
+
+            </TaskGroup>
+
+          )(tasks)
+        }
+
+      </AppBody>
+
+    </Container>
 
   );
+
 };
 
 export default App;
