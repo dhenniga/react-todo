@@ -1,13 +1,67 @@
 {
   "tasks": [
     {
-      "id": "0f949f87-70fd-45e2-a2e3-15d9b3420935",
-      "text": "",
-      "group": "",
+      "id": "25573dca-906b-478b-a72c-f93ba1050a0d",
+      "text": "Task #1 - Something small",
+      "group": "Random Tasks",
       "isChecked": true,
-      "dateCreated": "2020-12-10T00:39:40.181Z",
-      "dateToBeCompleted": "Thu Dec 10 2020 00:40:37 GMT+0000 (Greenwich Mean Time)",
-      "taskCompletedTime": "2020-12-10T08:47:11.295Z"
+      "dateCreated": "2020-12-10T08:49:31.993Z",
+      "dateToBeCompleted": "Thu Dec 10 2020 08:50:29 GMT+0000 (Greenwich Mean Time)",
+      "taskCompletedTime": "2020-12-10T10:37:58.493Z"
+    },
+    {
+      "id": "8e488f58-cd21-4aa4-81c4-5e13ab685be5",
+      "text": "Longer Task with Longer Name",
+      "group": "Random Tasks",
+      "isChecked": true,
+      "dateCreated": "2020-12-10T08:49:47.272Z",
+      "dateToBeCompleted": "Thu Dec 10 2020 08:54:45 GMT+0000 (Greenwich Mean Time)",
+      "taskCompletedTime": "2020-12-10T10:37:58.877Z"
+    },
+    {
+      "id": "0335fe8e-9e24-4e87-8699-92b2fd9b161f",
+      "text": "Task with No time",
+      "group": "Random Tasks",
+      "isChecked": false,
+      "dateCreated": "2020-12-10T08:49:51.361Z",
+      "dateToBeCompleted": "",
+      "taskCompletedTime": ""
+    },
+    {
+      "id": "60021a07-b0e2-4a6d-95eb-f66b61207dce",
+      "text": "sdfgsdkfjg",
+      "group": "Random Tasks",
+      "isChecked": true,
+      "dateCreated": "2020-12-10T10:32:10.332Z",
+      "dateToBeCompleted": "2020-12-10T10:37:10.331Z",
+      "taskCompletedTime": "2020-12-10T10:39:04.980Z"
+    },
+    {
+      "id": "a2f6fe8a-6e95-403b-86e1-209a65402a3d",
+      "text": "Small Task with a Long Name",
+      "group": "Random Tasks",
+      "isChecked": true,
+      "dateCreated": "2020-12-10T10:36:43.434Z",
+      "dateToBeCompleted": "2020-12-10T10:37:43.428Z",
+      "taskCompletedTime": "2020-12-10T10:44:39.556Z"
+    },
+    {
+      "id": "b46d2153-d021-4185-9aad-03eb52ca1450",
+      "text": "Need to get better at time constraints",
+      "group": "Much More Structured Tasks",
+      "isChecked": false,
+      "dateCreated": "2020-12-10T10:38:57.212Z",
+      "dateToBeCompleted": "2020-12-10T10:58:57.212Z",
+      "taskCompletedTime": ""
+    },
+    {
+      "id": "889d6ec3-b395-48a0-b3b4-d8474a1d5fda",
+      "text": "Add New Task",
+      "group": "Much More Structured Tasks",
+      "isChecked": false,
+      "dateCreated": "2020-12-10T10:50:34.374Z",
+      "dateToBeCompleted": "2020-12-10T10:55:34.373Z",
+      "taskCompletedTime": ""
     }
   ]
 }

@@ -118,6 +118,10 @@ export const TimePassingBar = styled.div`
   z-index: 0;
 
   ${props => props.isOverDue && css`
-    background-color: transparent !important;
+    display: none !important;
+  `};
+
+  ${props => props.checked && css`
+    display: none !important;
   `};
 `;

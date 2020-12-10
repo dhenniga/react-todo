@@ -40,6 +40,7 @@ export const AddTask = styled.button`
   cursor: pointer;
   background-color: transparent;
   transition: transform 0.5s cubic-bezier(0,0,0,1);
+  user-select: none;
 
   &:hover {
     transform: scale(1.2);
@@ -61,6 +62,7 @@ export const ItemsRemaining = styled.label`
   font-family: ${props => props.theme.Regular};
   font-size: 8pt;
   text-align: right; 
+  user-select: none;
 `;
 
 export const AddGroupButton = styled.button`

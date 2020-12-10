@@ -112,6 +112,7 @@ const Task = ({
 
       <TimePassingBar
         ref={barRef}
+        checked={isActive}
         percentage={percentage}
         isOverDue={isOverDue}
       />

@@ -17,7 +17,7 @@ const useTaskService = (percentage, isActive) => {
     barRef.current.style.backgroundColor = res;
   };
 
-  const isOverDue = percentage > 101 && !isActive;
+  const isOverDue = percentage >= 100 && !isActive;
 
 
   return {
