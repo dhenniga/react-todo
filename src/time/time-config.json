@@ -1,0 +1,52 @@
+[
+  {
+    "time": 1,
+    "range": "minutes",
+    "text": "1 minute"
+  },
+  {
+    "time": 5,
+    "range": "minutes",
+    "text": "5 minutes"
+  },
+  {
+    "time": 10,
+    "range": "minutes",
+    "text": "10 minutes"
+  },
+  {
+    "time": 20,
+    "range": "minutes",
+    "text": "20 minutes"
+  },
+  {
+    "time": 1,
+    "range": "hours",
+    "text": "1 Hour"
+  },
+  {
+    "time": 2,
+    "range": "hours",
+    "text": "2 hours"
+  },
+  {
+    "time": 1,
+    "range": "days",
+    "text": "tomorrow"
+  },
+  {
+    "time": 7,
+    "range": "days",
+    "text": "this day next week"
+  },
+  {
+    "time": 1,
+    "range": "years",
+    "text": "Next Year"
+  },
+  {
+    "time": 200,
+    "range": "years",
+    "text": "200 Years"
+  },
+]
