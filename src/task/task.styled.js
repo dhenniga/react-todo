@@ -1,6 +1,29 @@
 import styled, { css } from "styled-components";
 import Moment from "react-moment";
 
+export const AddSubTask = styled.div`
+  font-family: sans-serif;
+  font-size: 23px;
+  font-weight: 400;
+  color: ${props => props.isOverDue ? "white" : "black"};
+  padding: 0px;
+  margin: 0px;
+  line-height: 16px;
+  margin: 0px 4px;
+  width: 16px;
+  text-align: center;
+  position: relative;
+  top: -2px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3 cubic-bezier(0,0,0,1);
+  transition-property: transform;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
 export const StyledMoment = styled(Moment)`
   font-size: 7pt;
   font-weight: 400;
@@ -25,11 +48,31 @@ export const TimeContainer = styled.div`
 
 export const SettingsContainer = styled.div`
   display: none;
-  grid-template-columns: 1fr max-content max-content;;
+  grid-template-columns: 1fr max-content max-content max-content;
   align-items: center;
   overflow: hidden;
   width: 0px;
   margin-left: 20px;
+`;
+
+export const QuantityContainer = styled.div`
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  background-color: ${props => props.isOverDue ? "white" : "black"};
+  border-radius: 90px;
+color: ${props => props.isOverDue ? "red" : "white"};
+  font-family: sans-serif;
+  font-size: 8pt;
+  text-align: center;
+  font-weight: 900;
+  margin-left: 10px;
+  opacity: ${props => props.checked ? 0.2 : 1};
+`;
+
+export const DisplayContainer = styled.div`
+  display: grid;
+  grid-template-columns: ${props => props.quantity ? "max-content" : ""} ${props => props.dateToBeCompleted ? "max-content" : ""};
 `;
 
 export const Container = styled.div`
@@ -55,6 +98,14 @@ export const Container = styled.div`
 
     ${TimeContainer} {
       display: none;
+    }
+
+    ${DisplayContainer} {
+      display: none;
+    }
+
+    ${QuantityContainer} {
+      display: ${props => props.checked ? "inline" : "none"};
     }
   }
 
@@ -108,7 +159,7 @@ export const Checkbox = styled.input`
 export const TimePassingBar = styled.div`
   height: 3px;
   max-width: 100%;
-  transition: 1s cubic-bezier(0,0,0,1);
+  transition: 1s cubic-bezier(1,1,1,1);
   transition-property: background-color, width;
   width: ${props => props.percentage}%;
   position: absolute;

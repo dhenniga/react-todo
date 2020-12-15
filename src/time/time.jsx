@@ -29,28 +29,32 @@ const Time = ({
         isOverDue={isOverDue}
         handleClick={() => setIsOpen(!isOpen)} />
 
-      {isOpen && <TimeContainerBackground>
+      {
+        isOpen &&
+        <TimeContainerBackground
+          onClick={() => setIsOpen(false)}>
 
-        {
-          map(item =>
-            <TimeContainer
-              onClick={() => {
-                setIsOpen(false);
-                updateDateToBeCompleted(
-                  id,
-                  moment().add(
-                    prop("range", item),
-                    prop("time", item)
-                  )
-                );
-              }}>
-              {prop("text", item)}
-            </TimeContainer>
-          )(timeConfig)
+          {
+            map(item =>
+              <TimeContainer
+                onClick={() => {
+                  setIsOpen(false);
+                  updateDateToBeCompleted(
+                    id,
+                    moment().add(
+                      prop("range", item),
+                      prop("time", item)
+                    )
+                  );
+                }}>
+                {prop("text", item)}
+              </TimeContainer>
+            )(timeConfig)
 
-        }
+          }
 
-      </TimeContainerBackground>}
+        </TimeContainerBackground>
+      }
 
     </Fragment>
 

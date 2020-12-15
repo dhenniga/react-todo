@@ -74,18 +74,21 @@ const App = () => {
                   isChecked,
                   dateCreated,
                   dateToBeCompleted,
-                  taskCompletedTime
+                  taskCompletedTime,
+                  quantity
                 }, key) =>
 
                   <Task
                     key={key}
                     id={id}
+                    rootKey={rootKey}
                     text={text}
                     isChecked={isChecked}
                     updateTasks={updateTasks}
                     dateCreated={dateCreated}
                     dateToBeCompleted={dateToBeCompleted}
                     taskCompletedTime={taskCompletedTime}
+                    quantity={quantity}
                   />
 
                 )(node)

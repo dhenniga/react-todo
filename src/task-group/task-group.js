@@ -32,7 +32,13 @@ const Group = ({
 
       <Header>
 
-        <Chevron>&#8250;</Chevron>
+        <Chevron>
+          <svg
+            width="16"
+            height="8">
+            <path d="M16 0h-4.283L8 3.717 4.283 0H0l8 8z" />
+          </svg>
+        </Chevron>
 
         <Input
           defaultValue={title}

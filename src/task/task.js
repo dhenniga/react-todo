@@ -8,7 +8,9 @@ import {
   SettingsContainer,
   TimeContainer,
   StyledMoment,
-  TimePassingBar
+  TimePassingBar,
+  QuantityContainer,
+  DisplayContainer
 } from "./task.styled";
 import DeleteButton from "../buttons/delete";
 import useTaskService from "./task.service";
@@ -17,11 +19,13 @@ import WatchIcon from "../buttons/watch-icon";
 const Task = ({
   id,
   text,
+  rootKey,
   isChecked,
   updateTasks,
   dateCreated,
   dateToBeCompleted,
-  taskCompletedTime
+  taskCompletedTime,
+  quantity
 }) => {
 
   const barRef = useRef();
@@ -30,7 +34,8 @@ const Task = ({
     toggleTask,
     deleteTask,
     renameTask,
-    calculateRemainingPercentage
+    calculateRemainingPercentage,
+    changeQuantity
   } = useTask(updateTasks);
 
   const [isActive, setIsActive] = useState(isChecked);
@@ -57,7 +62,8 @@ const Task = ({
   return (
 
     <Container
-      isOverDue={isOverDue}>
+      isOverDue={isOverDue}
+      checked={isActive}>
 
       <Checkbox
         type="checkbox"
@@ -78,37 +84,64 @@ const Task = ({
         placeholder="Enter task name..."
       />
 
-      {
-        dateToBeCompleted &&
-        <TimeContainer>
+      <DisplayContainer
+        quantity={quantity}
+        dateToBeCompleted={dateToBeCompleted}>
 
-          <StyledMoment
-            interval={60000}
-            to={dateToBeCompleted}
+        {
+          dateToBeCompleted &&
+          <TimeContainer>
+
+            <StyledMoment
+              interval={60000}
+              to={dateToBeCompleted}
+              isOverDue={isOverDue}
+            />
+
+            <WatchIcon
+              isOverDue={isOverDue}
+            />
+
+          </TimeContainer>
+        }
+
+        {
+          quantity &&
+          <QuantityContainer
+            checked={isActive}
+            isOverDue={isOverDue}>
+            {quantity}
+          </QuantityContainer>
+        }
+
+      </DisplayContainer>
+
+      {!isActive &&
+        <SettingsContainer>
+
+          <input style={{
+            fontFamily: "sans-serif",
+            width: "25px",
+            margin: "0px 5px"
+          }}
+            min="0"
+            type="number"
+            defaultValue={quantity}
+            onChange={e => changeQuantity(id, e.target.value)} />
+
+          <Time
+            id={id}
+            updateTasks={updateTasks}
             isOverDue={isOverDue}
           />
 
-          <WatchIcon
+          <DeleteButton
+            handleClick={() => deleteTask(id)}
             isOverDue={isOverDue}
           />
 
-        </TimeContainer>
+        </SettingsContainer>
       }
-
-      <SettingsContainer>
-
-        <Time
-          id={id}
-          updateTasks={updateTasks}
-          isOverDue={isOverDue}
-        />
-
-        <DeleteButton
-          handleClick={() => deleteTask(id)}
-          isOverDue={isOverDue}
-        />
-
-      </SettingsContainer>
 
       <TimePassingBar
         ref={barRef}

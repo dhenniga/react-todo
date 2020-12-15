@@ -7,6 +7,7 @@ export const TimeContainerBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
   /* display: grid;
   justify-content: center;
   align-items: center; */
@@ -14,9 +15,9 @@ export const TimeContainerBackground = styled.div`
 
 export const TimeContainer = styled.div`
   margin: 15px;
-  display: inline;
-  width: 100px;
-  height: 100px;
+  display: block;
+  width: fit-content;
+  height: fit-content;
   background-color: orange;
   color: white;
   padding: 20px;

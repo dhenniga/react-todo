@@ -14,19 +14,21 @@ const useTask = updateTasks => {
 
   const getTasks = () =>
     api.get(`/tasks`)
-      .then(({ data }) => converter(data));
+      .then(({ data }) =>
+        converter(data));
 
   /////////////////////////////
 
   const createTask = rootKey =>
-    api.post(`/tasks/`, {
+    api.post(`/tasks`, {
       "id": uuidv4(),
       "text": "",
       "group": rootKey,
       "isChecked": false,
       "dateCreated": moment(),
       "dateToBeCompleted": "",
-      "taskCompletedTime": ""
+      "taskCompletedTime": "",
+      "quantity": null
     })
       .then(getTasks().then(updateTasks));
 
@@ -40,7 +42,8 @@ const useTask = updateTasks => {
       "isChecked": false,
       "dateCreated": moment(),
       "dateToBeCompleted": "",
-      "taskCompletedTime": ""
+      "taskCompletedTime": "",
+      "quantity": null
     })
       .then(getTasks().then(updateTasks));
 
@@ -70,6 +73,14 @@ const useTask = updateTasks => {
     api.patch(
       `/tasks/${id}`,
       { text: value })
+      .then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
+  const changeQuantity = (id, value) =>
+    api.patch(
+      `/tasks/${id}`,
+      { quantity: value })
       .then(getTasks().then(updateTasks));
 
   /////////////////////////////
@@ -150,7 +161,8 @@ const useTask = updateTasks => {
     tasksRemainingCount,
     allSelected,
     calculateRemainingPercentage,
-    updateDateToBeCompleted
+    updateDateToBeCompleted,
+    changeQuantity
   }
 
 }

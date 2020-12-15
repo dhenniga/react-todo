@@ -2,22 +2,27 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  width: calc(100% - 40px);
+  /* width: calc(100% - 40px); */
+  /* width: 350px; */
   padding: 10px;
   margin: 10px;
-  max-width: 350px;
+  /* max-width: 350px; */
   position: relative;
-  display: block;
+  display: inline-block;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.1);
 `;
 
 export const Chevron = styled.div`
   padding: 0;
   margin: 0;
-  font-size: 30pt;
-  width: 40px;
+  width: 25px;
   height: 40px;
-  transform: rotate(90deg) !important;
-  text-align: center;
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  opacity: 0.1;
 `;
 
 export const Input = styled.input`
@@ -38,7 +43,7 @@ export const Input = styled.input`
 export const Header = styled.div`
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
   display: grid;
-  grid-template-columns: 40px 1fr 13px;
+  grid-template-columns: 25px 1fr 13px;
   align-items: center;
 `;
 

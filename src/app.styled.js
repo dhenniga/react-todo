@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: rgba(${props => props.theme.background});
+  display: grid;
+  grid-template-rows: max-content 1fr;
   height: 100vh;
+  overflow: hidden;
+
 `;
 
 export const Header = styled.div`
@@ -11,12 +15,18 @@ export const Header = styled.div`
   padding: 20px;
   background-color: black;
   color: white;
+  z-index: 2;
 `;
 
 export const AppBody = styled.div`
+  /* display: inline-grid; */
+  /* align-items: center;
+  justify-items: center;  */
+  /* transition: all 1s cubic-bezier(0.5, 0.2, 0, 1); */
+  overflow-y: scroll;
   display: grid;
-  align-items: center;
-  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #f3f7fa;
 `;
 
 export const TaskGroupFooter = styled.div`
