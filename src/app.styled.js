@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const AppTitle = styled.label`
+  font-size: 10pt;
+  text-transform: uppercase;
+  font-family: rw_bold;
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 26px;
+`;
+
 export const Container = styled.div`
   background-color: rgba(${props => props.theme.background});
   display: grid;
@@ -86,6 +95,9 @@ export const ItemsRemaining = styled.label`
 export const AddGroupButton = styled.button`
   background-color: #434a54;
   float: right;
+  font-size: 20pt;
+  font-weight: 600;
+  line-height: 16px;
   color: white;
   border: 0;
   /* margin: 15px; */

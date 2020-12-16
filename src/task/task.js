@@ -51,8 +51,9 @@ const Task = ({
 
   /////////////////////////////////////////
 
+  const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted);
   const [isActive, setIsActive] = useState(isChecked);
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, setPercentage] = useState(percentageRemaining);
   const { gradientColours, isOverDue } = useTaskService(percentage, isActive);
 
   /////////////////////////////////////////
@@ -62,7 +63,7 @@ const Task = ({
     if (percentage >= 101 || !dateToBeCompleted || taskCompletedTime) { return "" };
 
     const intervalId = setInterval(() => {
-      setPercentage(calculateRemainingPercentage(dateCreated, dateToBeCompleted));
+      setPercentage(percentageRemaining);
       gradientColours(barRef, percentage);
     }, 1000);
 
@@ -75,6 +76,7 @@ const Task = ({
     gradientColours,
     isOverDue,
     percentage,
+    percentageRemaining,
     taskCompletedTime
   ]);
 

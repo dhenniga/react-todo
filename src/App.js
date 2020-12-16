@@ -11,7 +11,8 @@ import {
   ItemsRemaining,
   Header,
   TaskGroupFooter,
-  AppBody
+  AppBody,
+  AppTitle
 } from "./app.styled";
 import useTask from "./useTask";
 
@@ -46,11 +47,13 @@ const App = () => {
 
       <Header>
 
-        React TODO Application
+        <AppTitle>
+          TaskBoard
+        </AppTitle>
 
         <AddGroupButton
           onClick={() => createTaskGroup()}>
-          Add Task Group
+          +
         </AddGroupButton>
 
       </Header>
