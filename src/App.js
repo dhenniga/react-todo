@@ -75,7 +75,8 @@ const App = () => {
                   dateCreated,
                   dateToBeCompleted,
                   taskCompletedTime,
-                  quantity
+                  quantity,
+                  note
                 }, key) =>
 
                   <Task
@@ -89,6 +90,7 @@ const App = () => {
                     dateToBeCompleted={dateToBeCompleted}
                     taskCompletedTime={taskCompletedTime}
                     quantity={quantity}
+                    note={note}
                   />
 
                 )(node)

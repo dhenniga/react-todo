@@ -4,7 +4,7 @@ export const Container = styled.div`
   text-align: left;
   /* width: calc(100% - 40px); */
   /* width: 350px; */
-  padding: 10px;
+  padding: 10px 15px;
   margin: 10px;
   /* max-width: 350px; */
   position: relative;

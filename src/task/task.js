@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import useTask from "../useTask";
 import Time from "../time/time";
 import {
@@ -12,9 +12,11 @@ import {
   QuantityContainer,
   DisplayContainer
 } from "./task.styled";
+import { ifElse } from "ramda";
 import DeleteButton from "../buttons/delete";
 import useTaskService from "./task.service";
 import WatchIcon from "../buttons/watch-icon";
+import NoteButton from "../buttons/note";
 
 const Task = ({
   id,
@@ -25,7 +27,8 @@ const Task = ({
   dateCreated,
   dateToBeCompleted,
   taskCompletedTime,
-  quantity
+  quantity,
+  note
 }) => {
 
   const barRef = useRef();
@@ -35,11 +38,13 @@ const Task = ({
     deleteTask,
     renameTask,
     calculateRemainingPercentage,
-    changeQuantity
+    changeQuantity,
+    updateNote
   } = useTask(updateTasks);
 
   const [isActive, setIsActive] = useState(isChecked);
   const [percentage, setPercentage] = useState(0);
+  const [taskNote, updateTaskNote] = useState(note);
 
   const {
     gradientColours,
@@ -61,96 +66,174 @@ const Task = ({
 
   return (
 
-    <Container
-      isOverDue={isOverDue}
-      checked={isActive}>
+    <Fragment>
 
-      <Checkbox
-        type="checkbox"
-        checked={isActive}
-        onChange={() => {
-          setIsActive(!isActive);
-          toggleTask(id, isActive)
-        }}
-      />
-
-      <Input
-        type="text"
-        checked={isActive}
+      <Container
         isOverDue={isOverDue}
-        onBlur={event => renameTask(id, event.target.value)}
-        defaultValue={text}
-        onChange={() => { }}
-        placeholder="Enter task name..."
-      />
+        checked={isActive}>
 
-      <DisplayContainer
-        quantity={quantity}
-        dateToBeCompleted={dateToBeCompleted}>
-
-        {
-          dateToBeCompleted &&
-          <TimeContainer>
-
-            <StyledMoment
-              interval={60000}
-              to={dateToBeCompleted}
-              isOverDue={isOverDue}
-            />
-
-            <WatchIcon
-              isOverDue={isOverDue}
-            />
-
-          </TimeContainer>
-        }
-
-        {
-          quantity &&
-          <QuantityContainer
-            checked={isActive}
-            isOverDue={isOverDue}>
-            {quantity}
-          </QuantityContainer>
-        }
-
-      </DisplayContainer>
-
-      {!isActive &&
-        <SettingsContainer>
-
-          <input style={{
-            fontFamily: "sans-serif",
-            width: "25px",
-            margin: "0px 5px"
+        <Checkbox
+          type="checkbox"
+          checked={isActive}
+          onChange={() => {
+            setIsActive(!isActive);
+            toggleTask(id, isActive)
           }}
-            min="0"
-            type="number"
-            defaultValue={quantity}
-            onChange={e => changeQuantity(id, e.target.value)} />
+        />
 
-          <Time
-            id={id}
-            updateTasks={updateTasks}
-            isOverDue={isOverDue}
-          />
+        <Input
+          type="text"
+          checked={isActive}
+          isOverDue={isOverDue}
+          onBlur={event => renameTask(id, event.target.value)}
+          defaultValue={text}
+          onChange={() => { }}
+          placeholder="Enter task name..."
+        />
 
-          <DeleteButton
-            handleClick={() => deleteTask(id)}
-            isOverDue={isOverDue}
-          />
+        <DisplayContainer
+          quantity={quantity}
+          dateToBeCompleted={dateToBeCompleted}>
 
-        </SettingsContainer>
+          {
+            dateToBeCompleted &&
+            <TimeContainer>
+
+              <StyledMoment
+                interval={60000}
+                to={dateToBeCompleted}
+                isOverDue={isOverDue}
+              />
+
+              <WatchIcon
+                isOverDue={isOverDue}
+              />
+
+            </TimeContainer>
+          }
+
+          {
+            quantity &&
+            <QuantityContainer
+              checked={isActive}
+              isOverDue={isOverDue}>
+              {quantity}
+            </QuantityContainer>
+          }
+
+        </DisplayContainer>
+
+        {!isActive &&
+          <SettingsContainer>
+
+            <input style={{
+              fontFamily: "sans-serif",
+              width: "25px",
+              margin: "0px 5px"
+            }}
+              min="1"
+              type="number"
+              defaultValue={quantity}
+              onChange={e => changeQuantity(id, e.target.value)} />
+
+            <Time
+              id={id}
+              updateTasks={updateTasks}
+              isOverDue={isOverDue}
+            />
+
+            <NoteButton
+              handleClick={() => updateTaskNote("This is a Note")}
+              isOverDue={isOverDue}
+            />
+
+            <DeleteButton
+              handleClick={() => deleteTask(id)}
+              isOverDue={isOverDue}
+            />
+
+          </SettingsContainer>
+        }
+
+        <TimePassingBar
+          ref={barRef}
+          checked={isActive}
+          percentage={percentage}
+          isOverDue={isOverDue}
+        />
+
+      </Container >
+
+      {taskNote && <div
+        style={{
+          width: "calc(100% - 55px)",
+          padding: "15px",
+          backgroundColor: "#f3f7fa",
+          fontFamily: "rw_regular",
+          fontSize: "8.3pt",
+          position: "relative",
+          marginTop: "-5px",
+          marginBottom: "10px",
+          float: "right",
+          borderBottomLeftRadius: "5px",
+          borderBottomRightRadius: "5px"
+        }}>
+
+
+        <div
+          contentEditable
+          // ref={
+          //   ifElse(
+          //     elem => elem != null,
+          //     elem => {
+          //       elem.focus();
+          //     },
+          //     () => { }
+          //   )
+          // }
+          style={{
+            width: "100%",
+            resize: "none",
+            outline: "0px",
+            border: "0px",
+            backgroundColor: "transparent"
+          }}
+
+          onKeyPress={e => {
+            console.log(e.target.value);
+            updateNote(id, e.target.value);
+          }}
+        >   {note}
+        </div>
+
+
+        {/* <textarea
+          // ref={
+          //   ifElse(
+          //     elem => elem != null,
+          //     elem => {
+          //       elem.focus();
+          //     },
+          //     () => { }
+          //   )
+          // }
+          style={{
+            width: "100%",
+            resize: "none",
+            outline: "0px",
+            border: "0px",
+            backgroundColor: "transparent"
+          }}
+          defaultValue={note}
+          onChange={e => {
+            console.log(e.target.value);
+            updateNote(id, e.target.value);
+          }}
+        /> */}
+      </div>
       }
 
-      <TimePassingBar
-        ref={barRef}
-        checked={isActive}
-        percentage={percentage}
-        isOverDue={isOverDue}
-      />
-
-    </Container >
+    </Fragment>
 
   );
 

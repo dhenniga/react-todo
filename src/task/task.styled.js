@@ -48,7 +48,7 @@ export const TimeContainer = styled.div`
 
 export const SettingsContainer = styled.div`
   display: none;
-  grid-template-columns: 1fr max-content max-content max-content;
+  grid-template-columns: max-content max-content max-content max-content;
   align-items: center;
   overflow: hidden;
   width: 0px;
@@ -76,7 +76,7 @@ export const DisplayContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  height: 39px;
+  min-height: 39px;
   width: 100%;
   padding: 0px;
   margin: 5px 0px;
@@ -93,7 +93,7 @@ export const Container = styled.div`
     ${SettingsContainer} {
       display: grid;
       width: fit-content !important;
-      grid-template-columns: 1fr max-content max-content !important;
+      grid-template-columns: 1fr max-content max-content max-content !important;
     }
 
     ${TimeContainer} {

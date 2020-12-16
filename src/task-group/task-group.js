@@ -32,7 +32,8 @@ const Group = ({
 
       <Header>
 
-        <Chevron>
+        <Chevron
+          onClick={() => console.log("Close Group?")}>
           <svg
             width="16"
             height="8">

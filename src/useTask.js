@@ -28,7 +28,8 @@ const useTask = updateTasks => {
       "dateCreated": moment(),
       "dateToBeCompleted": "",
       "taskCompletedTime": "",
-      "quantity": null
+      "quantity": null,
+      "note": ""
     })
       .then(getTasks().then(updateTasks));
 
@@ -43,7 +44,8 @@ const useTask = updateTasks => {
       "dateCreated": moment(),
       "dateToBeCompleted": "",
       "taskCompletedTime": "",
-      "quantity": null
+      "quantity": null,
+      "note": ""
     })
       .then(getTasks().then(updateTasks));
 
@@ -81,6 +83,14 @@ const useTask = updateTasks => {
     api.patch(
       `/tasks/${id}`,
       { quantity: value })
+      .then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
+  const updateNote = (id, value) =>
+    api.patch(
+      `/tasks/${id}`,
+      { note: value })
       .then(getTasks().then(updateTasks));
 
   /////////////////////////////
@@ -162,7 +172,8 @@ const useTask = updateTasks => {
     allSelected,
     calculateRemainingPercentage,
     updateDateToBeCompleted,
-    changeQuantity
+    changeQuantity,
+    updateNote
   }
 
 }
