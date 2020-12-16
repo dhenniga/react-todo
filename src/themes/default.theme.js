@@ -19,6 +19,9 @@ export default {
   rwBold: "rw_bold",
   rwBlack: "rw_black",
 
+  // Bebas font
+  bnRegular: "bn_regular",
+
   // Easing
   slowEasing: "0.5s cubic-bezier(0.66, 0, 0, 1)",
   mediumEasing: "0.3s cubic-bezier(0, 0, 0, 1)",

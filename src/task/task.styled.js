@@ -58,16 +58,17 @@ export const SettingsContainer = styled.div`
 export const QuantityContainer = styled.div`
   width: 18px;
   height: 18px;
-  line-height: 18px;
+  line-height: 20px;
   background-color: ${props => props.isOverDue ? "white" : "black"};
   border-radius: 90px;
 color: ${props => props.isOverDue ? "red" : "white"};
-  font-family: sans-serif;
-  font-size: 8pt;
+  font-family: ${props => props.theme.bnRegular};
+  font-size: 8.3pt;
   text-align: center;
-  font-weight: 900;
+  font-weight: 100;
   margin-left: 10px;
   opacity: ${props => props.checked ? 0.2 : 1};
+  text-align:center;
 `;
 
 export const DisplayContainer = styled.div`
