@@ -12,7 +12,6 @@ import {
   QuantityContainer,
   DisplayContainer
 } from "./task.styled";
-import { ifElse } from "ramda";
 import DeleteButton from "../buttons/delete";
 import useTaskService from "./task.service";
 import WatchIcon from "../buttons/watch-icon";
@@ -44,7 +43,6 @@ const Task = ({
 
   const [isActive, setIsActive] = useState(isChecked);
   const [percentage, setPercentage] = useState(0);
-  const [taskNote, updateTaskNote] = useState(note);
 
   const {
     gradientColours,
@@ -143,7 +141,7 @@ const Task = ({
             />
 
             <NoteButton
-              handleClick={() => updateTaskNote("This is a Note")}
+              handleClick={() => updateNote(id, " ")}
               isOverDue={isOverDue}
             />
 
@@ -164,73 +162,39 @@ const Task = ({
 
       </Container >
 
-      {taskNote && <div
-        style={{
-          width: "calc(100% - 55px)",
-          padding: "15px",
-          backgroundColor: "#f3f7fa",
-          fontFamily: "rw_regular",
-          fontSize: "8.3pt",
-          position: "relative",
-          marginTop: "-5px",
-          marginBottom: "10px",
-          float: "right",
-          borderBottomLeftRadius: "5px",
-          borderBottomRightRadius: "5px"
-        }}>
-
-
+      {
+        note &&
         <div
-          contentEditable
-          // ref={
-          //   ifElse(
-          //     elem => elem != null,
-          //     elem => {
-          //       elem.focus();
-          //     },
-          //     () => { }
-          //   )
-          // }
           style={{
-            width: "100%",
-            resize: "none",
-            outline: "0px",
-            border: "0px",
-            backgroundColor: "transparent"
-          }}
+            width: "calc(100% - 55px)",
+            padding: "15px",
+            backgroundColor: "#f3f7fa",
+            fontFamily: "rw_regular",
+            fontSize: "8.3pt",
+            position: "relative",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            float: "right",
+            borderBottomLeftRadius: "5px",
+            borderBottomRightRadius: "5px"
+          }}>
 
-          onKeyPress={e => {
-            console.log(e.target.value);
-            updateNote(id, e.target.value);
-          }}
-        >   {note}
+
+          <div
+            contentEditable
+            style={{
+              width: "100%",
+              resize: "none",
+              outline: "0px",
+              border: "0px",
+              backgroundColor: "transparent"
+            }}
+
+            onBlur={e => updateNote(id, e.target.innerText)}>
+            {note}
+          </div>
+
         </div>
-
-
-        {/* <textarea
-          // ref={
-          //   ifElse(
-          //     elem => elem != null,
-          //     elem => {
-          //       elem.focus();
-          //     },
-          //     () => { }
-          //   )
-          // }
-          style={{
-            width: "100%",
-            resize: "none",
-            outline: "0px",
-            border: "0px",
-            backgroundColor: "transparent"
-          }}
-          defaultValue={note}
-          onChange={e => {
-            console.log(e.target.value);
-            updateNote(id, e.target.value);
-          }}
-        /> */}
-      </div>
       }
 
     </Fragment>
