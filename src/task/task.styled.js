@@ -177,3 +177,21 @@ export const TimePassingBar = styled.div`
     display: none !important;
   `};
 `;
+
+export const NoteContainer = styled.div`
+  width: calc(100% - 55px);
+  padding: 15px;
+  background-color: #f3f7fa;
+  position:relative;
+  right: -25px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+`;
+
+export const NoteText = styled.div`
+  font-family: rw_regular;
+  font-size: 8.3pt;
+  outline: none;
+`;

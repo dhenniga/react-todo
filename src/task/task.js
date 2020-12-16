@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import useTask from "../useTask";
-import Time from "../time/time";
 import {
   Container,
   Checkbox,
@@ -10,17 +9,22 @@ import {
   StyledMoment,
   TimePassingBar,
   QuantityContainer,
-  DisplayContainer
+  DisplayContainer,
+  NoteContainer,
+  NoteText
 } from "./task.styled";
+import { isEmpty } from "ramda";
+import Time from "../time/time";
 import DeleteButton from "../buttons/delete";
 import useTaskService from "./task.service";
 import WatchIcon from "../buttons/watch-icon";
 import NoteButton from "../buttons/note";
 
+/////////////////////////////////////////
+
 const Task = ({
   id,
   text,
-  rootKey,
   isChecked,
   updateTasks,
   dateCreated,
@@ -30,7 +34,11 @@ const Task = ({
   note
 }) => {
 
+  /////////////////////////////////////////
+
   const barRef = useRef();
+
+  /////////////////////////////////////////
 
   const {
     toggleTask,
@@ -41,13 +49,13 @@ const Task = ({
     updateNote
   } = useTask(updateTasks);
 
+  /////////////////////////////////////////
+
   const [isActive, setIsActive] = useState(isChecked);
   const [percentage, setPercentage] = useState(0);
+  const { gradientColours, isOverDue } = useTaskService(percentage, isActive);
 
-  const {
-    gradientColours,
-    isOverDue
-  } = useTaskService(percentage, isActive);
+  /////////////////////////////////////////
 
   useEffect(() => {
 
@@ -60,7 +68,17 @@ const Task = ({
 
     return () => clearInterval(intervalId);
 
-  }, [calculateRemainingPercentage, dateCreated, dateToBeCompleted, gradientColours, isOverDue, percentage, taskCompletedTime]);
+  }, [
+    calculateRemainingPercentage,
+    dateCreated,
+    dateToBeCompleted,
+    gradientColours,
+    isOverDue,
+    percentage,
+    taskCompletedTime
+  ]);
+
+  /////////////////////////////////////////
 
   return (
 
@@ -141,7 +159,7 @@ const Task = ({
             />
 
             <NoteButton
-              handleClick={() => updateNote(id, " ")}
+              handleClick={() => isEmpty(note) && updateNote(id, " ")}
               isOverDue={isOverDue}
             />
 
@@ -164,37 +182,17 @@ const Task = ({
 
       {
         note &&
-        <div
-          style={{
-            width: "calc(100% - 55px)",
-            padding: "15px",
-            backgroundColor: "#f3f7fa",
-            fontFamily: "rw_regular",
-            fontSize: "8.3pt",
-            position: "relative",
-            marginTop: "-5px",
-            marginBottom: "10px",
-            float: "right",
-            borderBottomLeftRadius: "5px",
-            borderBottomRightRadius: "5px"
-          }}>
+        <NoteContainer>
 
-
-          <div
+          <NoteText
             contentEditable
-            style={{
-              width: "100%",
-              resize: "none",
-              outline: "0px",
-              border: "0px",
-              backgroundColor: "transparent"
-            }}
-
-            onBlur={e => updateNote(id, e.target.innerText)}>
+            onBlur={e =>
+              updateNote(id, e.target.textContent)
+            }>
             {note}
-          </div>
+          </NoteText>
 
-        </div>
+        </NoteContainer>
       }
 
     </Fragment>

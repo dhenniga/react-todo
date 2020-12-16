@@ -27,6 +27,14 @@ export const AppBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: #f3f7fa;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const TaskGroupFooter = styled.div`

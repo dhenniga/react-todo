@@ -82,7 +82,6 @@ const App = () => {
                   <Task
                     key={key}
                     id={id}
-                    rootKey={rootKey}
                     text={text}
                     isChecked={isChecked}
                     updateTasks={updateTasks}
