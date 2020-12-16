@@ -3,6 +3,11 @@ html {
 }
 
 @font-face {
+  font-family: bn_regular;
+  src: url(./fonts/bebas-neue/regular.ttf);
+}
+
+@font-face {
   font-family: rs_thin;
   src: url(./fonts/roboto_slab/thin.ttf);
 }
