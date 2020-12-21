@@ -9,9 +9,9 @@ export const Container = styled.div`
   /* max-width: 350px; */
   position: relative;
   display: inline-block;
-  background-color: white;
+  background-color: rgba(${props => props.theme.taskGroup.groupBGColor});
   border-radius: 5px;
-  box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.1);
+  box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor};
 `;
 
 export const Chevron = styled.div`
@@ -22,7 +22,10 @@ export const Chevron = styled.div`
   display: grid;
   justify-content: start;
   align-items: center;
-  opacity: 0.1;
+`;
+
+export const ChevronPath = styled.path`
+  fill: rgba(${props => props.theme.taskGroup.chevronPathColor});
 `;
 
 export const Input = styled.input`
@@ -38,10 +41,11 @@ export const Input = styled.input`
   outline: 0px;
   font-size: 12pt;
   font-weight: 600;
+  color: rgba(${props => props.theme.groupHeaderTextColor});
 `;
 
 export const Header = styled.div`
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(${props => props.theme.groupHeaderBorderBottomColor});
   display: grid;
   grid-template-columns: 25px 1fr 13px;
   align-items: center;

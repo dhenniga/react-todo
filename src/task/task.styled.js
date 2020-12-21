@@ -85,7 +85,7 @@ export const Container = styled.div`
   align-content: center;
   position: relative;
   grid-template-columns: 26px 1fr max-content;
-  border-bottom: 1px solid rgba(${props => props.theme.containerBorderBottom});
+  border-bottom: 1px solid rgba(${props => props.theme.task.taskBorderBottomcolor});
   transition: 0.3s cubic-bezier(0,0,0,1);
   transition-property: border-bottom-color, background-color, padding;
 
@@ -111,7 +111,7 @@ export const Container = styled.div`
   }
 
   ${props => props.isOverDue && css`
-  background-color: rgba(255,0,0,0.9) !important;
+  background-color: rgba(${props => props.theme.task.taskOverDueColor}) !important;
   padding: 0px 15px;
   width: calc(100% - 30px) !important;
   border-radius: 5px;
@@ -120,7 +120,7 @@ export const Container = styled.div`
 
 export const Input = styled.input`
   text-align: left;
-  color: rgba(${props => props.theme.inputColor});
+  color: rgba(${props => props.theme.task.taskInputTextColor});
   font-family: ${props => props.theme.rwRegular};
   font-weight: 600;
   font-size: 9pt;
@@ -181,7 +181,7 @@ export const TimePassingBar = styled.div`
 export const NoteContainer = styled.div`
   width: calc(100% - 55px);
   padding: 15px;
-  background-color: #f3f7fa;
+  background-color: rgba(${props => props.theme.task.taskNoteBGColor});
   position:relative;
   right: -25px;
   margin-top: -5px;
@@ -194,4 +194,5 @@ export const NoteText = styled.div`
   font-family: rw_regular;
   font-size: 8.3pt;
   outline: none;
+  color: rgba(${props => props.theme.task.taskNoteTextColor});
 `;

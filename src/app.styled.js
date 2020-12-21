@@ -35,7 +35,7 @@ export const AppBody = styled.div`
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #f3f7fa;
+  background-color: rgba(${props => props.theme.mainBackground});
 
   @media (max-width: 1280px) {
     grid-template-columns: 1fr 1fr;
@@ -66,6 +66,7 @@ export const AddTask = styled.button`
   font-size: 17pt;
   cursor: pointer;
   background-color: transparent;
+  color: rgba(${props => props.theme.taskGroup.addTaskColor});
   transition: transform 0.5s cubic-bezier(0,0,0,1);
   user-select: none;
 
@@ -90,6 +91,7 @@ export const ItemsRemaining = styled.label`
   font-size: 8pt;
   text-align: right; 
   user-select: none;
+  color: rgba(${props => props.theme.taskGroup.tasksRemainingTextColor});
 `;
 
 export const AddGroupButton = styled.button`

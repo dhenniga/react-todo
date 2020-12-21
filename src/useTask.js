@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
 import moment from "moment";
 
-const useTask = updateTasks => {
+const useTask = (updateTasks, updateConfig) => {
 
   const api = axios.create({
     baseUrl: `http://localhost:5000`
@@ -12,10 +12,25 @@ const useTask = updateTasks => {
 
   /////////////////////////////
 
+  const getConfig = () =>
+    api.get(`/config`)
+      .then(({ data }) => data)
+
+  /////////////////////////////
+
   const getTasks = () =>
     api.get(`/tasks`)
       .then(({ data }) =>
         converter(data));
+
+  /////////////////////////////
+
+  const toggleTheme = value =>
+    api.patch(
+      `/config`,
+      { isDarkTheme: value }
+    )
+      .then(getConfig().then(updateConfig));
 
   /////////////////////////////
 
@@ -160,6 +175,7 @@ const useTask = updateTasks => {
 
   return {
     getTasks,
+    getConfig,
     createTask,
     createTaskGroup,
     deleteTask,
@@ -173,7 +189,8 @@ const useTask = updateTasks => {
     calculateRemainingPercentage,
     updateDateToBeCompleted,
     changeQuantity,
-    updateNote
+    updateNote,
+    toggleTheme
   }
 
 }

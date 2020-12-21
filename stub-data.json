@@ -1,4 +1,7 @@
 {
+  "config": {
+    "isDarkTheme": true
+  },
   "tasks": [
     {
       "id": "c98c656e-b407-427c-8994-21a585700156",
@@ -48,8 +51,8 @@
       "text": "Write documentation for app",
       "group": "Need to get done this week",
       "isChecked": false,
-      "dateCreated": "2020-12-14T07:14:26.373Z",
-      "dateToBeCompleted": "2020-12-21T07:14:26.336Z",
+      "dateCreated": "2020-12-21T00:23:12.058Z",
+      "dateToBeCompleted": "2020-12-28T00:23:12.043Z",
       "taskCompletedTime": "",
       "note": ""
     },
@@ -58,8 +61,8 @@
       "text": "Charge Laptop",
       "group": "Need to get done this week",
       "isChecked": false,
-      "dateCreated": "2020-12-14T07:14:42.365Z",
-      "dateToBeCompleted": "2020-12-21T07:14:42.364Z",
+      "dateCreated": "2020-12-21T00:23:22.237Z",
+      "dateToBeCompleted": "2020-12-22T00:23:22.237Z",
       "taskCompletedTime": "",
       "note": "It's now at 6% battery and probably won't last the next few minutes.  The charger is upstairs on the bedsid table.\n\nGot it.  That was close. :)"
     },
@@ -125,7 +128,7 @@
       "dateToBeCompleted": "2020-12-15T20:34:05.704Z",
       "taskCompletedTime": "2020-12-16T10:34:47.537Z",
       "quantity": "2",
-      "note": "Bobby is into Thomas the Tank Engine and Lucy likes Star Wars (particularly toys about Bobba Fett).  Hope that narrows it down. Also, get them some art equipment (markers, paints, etc.) as a smaller gift.  Thanks."
+      "note": "Bobby is into Thomas the Tank Engine and Lucy likes Star Wars (particularly toys about Bobba Fett).  Hope that narrows it down. Also, get them some art equipment (markers, paints, etc.) as a smaller gift.  Thanks."
     },
     {
       "id": "adb7f264-2eae-4964-88f5-113a58178c11",
@@ -246,7 +249,7 @@
       "dateToBeCompleted": "",
       "taskCompletedTime": "2020-12-16T15:47:06.545Z",
       "quantity": null,
-      "note": "Found something in Smyths ToyStore that might work,  It's a small car that has a red stripe.  That should work. :)"
+      "note": "Found something in Smyths ToyStore that might work,  It's a small car that has a red stripe.  That should work. :)"
     },
     {
       "id": "8382e017-5c44-4638-8b77-1591c72aac0e",
