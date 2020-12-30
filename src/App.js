@@ -87,7 +87,7 @@ const App = () => {
               transform: prop("isDarkTheme", config) ? "rotate(0deg)" : "rotate(180deg)"
             }}
             onClick={() => {
-              toggleTheme(!prop("isDarkTheme", config))
+              toggleTheme(prop("isDarkTheme", config))
             }}>
             <svg
               width="20"

@@ -41,10 +41,11 @@ const Time = ({
                   setIsOpen(false);
                   updateDateToBeCompleted(
                     id,
+                    // new Date(date.getTime() + minutes*60000)
                     moment().add(
                       prop("range", item),
                       prop("time", item)
-                    )
+                    ).toString()
                   );
                 }}>
                 {prop("text", item)}

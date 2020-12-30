@@ -95,7 +95,7 @@ const Task = ({
           checked={isActive}
           onChange={() => {
             setIsActive(!isActive);
-            toggleTask(id, isActive)
+            toggleTask(id, isActive ? 0 : 1)
           }}
         />
 

@@ -2,138 +2,153 @@ import axios from "axios";
 import { converter } from "./app.service";
 import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
-import moment from "moment";
+import qs from 'qs';
 
 const useTask = (updateTasks, updateConfig) => {
-
-  const api = axios.create({
-    baseUrl: `http://localhost:5000`
-  });
 
   /////////////////////////////
 
   const getConfig = () =>
-    api.get(`/config`)
-      .then(({ data }) => data)
+    axios.get("api/get-config.php")
+      .then(({ data }) => data);
 
   /////////////////////////////
 
   const getTasks = () =>
-    api.get(`/tasks`)
-      .then(({ data }) =>
-        converter(data));
-
-  /////////////////////////////
-
-  const toggleTheme = value =>
-    api.patch(
-      `/config`,
-      { isDarkTheme: value }
-    )
-      .then(getConfig().then(updateConfig));
+    axios.get("api/get-tasks.php")
+      .then(({ data }) => converter(data));
 
   /////////////////////////////
 
   const createTask = rootKey =>
-    api.post(`/tasks`, {
-      "id": uuidv4(),
-      "text": "",
-      "group": rootKey,
-      "isChecked": false,
-      "dateCreated": moment(),
-      "dateToBeCompleted": "",
-      "taskCompletedTime": "",
-      "quantity": null,
-      "note": ""
-    })
-      .then(getTasks().then(updateTasks));
+    axios.post("api/create-task.php",
+      qs.stringify({
+        id: uuidv4(),
+        taskText: "",
+        taskGroup: rootKey,
+        dateCreated: new Date(),
+        dateToBeCompleted: "",
+        taskCompletedTime: "",
+        quantity: "",
+        note: "",
+        isChecked: false,
+      },
+        { parseArrays: false }
+      )
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
   const createTaskGroup = () =>
-    api.post(`/tasks/`, {
-      "id": uuidv4(),
-      "text": "",
-      "group": "",
-      "isChecked": false,
-      "dateCreated": moment(),
-      "dateToBeCompleted": "",
-      "taskCompletedTime": "",
-      "quantity": null,
-      "note": ""
-    })
-      .then(getTasks().then(updateTasks));
+    axios.post(`api/create-task-group.php`,
+      qs.stringify({
+        id: uuidv4(),
+        taskText: "",
+        taskGroup: "",
+        dateCreated: new Date(),
+        dateToBeCompleted: "",
+        taskCompletedTime: "",
+        quantity: "",
+        note: "",
+        isChecked: false
+      },
+        { parseArrays: false }
+      )
+    ).then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
+  const toggleTheme = state =>
+    axios.post(`api/toggle-theme.php`,
+      qs.stringify({ isDarkTheme: state ? 0 : 1 })
+    ).then(getConfig().then(updateConfig));
 
   /////////////////////////////
 
   const deleteTask = id =>
-    api.delete(`/tasks/${id}`)
-      .then(getTasks().then(updateTasks));
-
-  /////////////////////////////
-
-  const toggleTask = (id, state) =>
-    api.patch(
-      `/tasks/${id}`,
-      {
-        isChecked: !state,
-        taskCompletedTime: !state
-          ? moment()
-          : ""
-      })
-      .then(getTasks().then(updateTasks));
-
+    axios.post(`api/delete-task.php`,
+      qs.stringify({ id })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
   const renameTask = (id, value) =>
-    api.patch(
-      `/tasks/${id}`,
-      { text: value })
-      .then(getTasks().then(updateTasks));
+    axios.post(`api/rename-task.php`,
+      qs.stringify({ id, value })
+    ).then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
+  const toggleTask = (id, state) =>
+    axios.post(`api/toggle-task.php`,
+      qs.stringify({ id, state })
+    ).then(getTasks().then(updateTasks));
+
+  /////////////////////////////
+
+  // const toggleTask = (id, state) =>
+  //   api.patch(
+  //     `/tasks/${id}`,
+  //     {
+  //       isChecked: !state,
+  //       taskCompletedTime: !state
+  //         ? new Data()
+  //         : ""
+  //     })
+  //     .then(getTasks().then(updateTasks));
+
 
   /////////////////////////////
 
   const changeQuantity = (id, value) =>
-    api.patch(
-      `/tasks/${id}`,
-      { quantity: value })
-      .then(getTasks().then(updateTasks));
+    axios.post(`api/change-quantity.php`,
+      qs.stringify({ id, value })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
   const updateNote = (id, value) =>
-    api.patch(
-      `/tasks/${id}`,
-      { note: value })
-      .then(getTasks().then(updateTasks));
+    axios.post(`api/update-note.php`,
+      qs.stringify({ id, value })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
+  // const renameGroup = (node, value) => {
+  //   map(item =>
+  //     api.patch(
+  //       `/tasks/${item.id}`,
+  //       { group: value })
+  //   )(node);
+  //   getTasks().then(updateTasks);
+  // }
+
   const renameGroup = (node, value) => {
     map(item =>
-      api.patch(
-        `/tasks/${item.id}`,
-        { group: value })
+      axios.post(
+        `api/rename-group.php`,
+        qs.stringify({
+          id: item.id,
+          taskGroup: value
+        })
+      )
     )(node);
     getTasks().then(updateTasks);
   }
 
   /////////////////////////////
 
-  const selectAll = node =>
-    map(item =>
-      api.patch(`tasks/${item.id}`,
-        { isChecked: true })
-    )(node);
+  const selectAll = taskGroup =>
+    axios.post(`api/select-all.php`,
+      qs.stringify({ taskGroup })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
-  const selectNone = node =>
-    map(item =>
-      api.patch(`tasks/${item.id}`,
-        { isChecked: false })
-    )(node);
+  const selectNone = taskGroup =>
+    axios.post(`api/select-none.php`,
+      qs.stringify({ taskGroup })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 
@@ -162,14 +177,12 @@ const useTask = (updateTasks, updateConfig) => {
     return marp.toFixed(2);
   }
 
+  /////////////////////////////
+
   const updateDateToBeCompleted = (id, date) =>
-    api.patch(
-      `/tasks/${id}`,
-      {
-        dateCreated: moment(),
-        dateToBeCompleted: date
-      })
-      .then(getTasks().then(updateTasks));
+    axios.post(`api/update-date-to-be-completed.php`,
+      qs.stringify({ id, date })
+    ).then(getTasks().then(updateTasks));
 
   /////////////////////////////
 

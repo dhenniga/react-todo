@@ -36,7 +36,10 @@ export default {
     taskInputTextColor: "101, 109, 120, 1",
     taskNoteBGColor: "243, 247, 250, 1",
     taskNoteTextColor: "0,0,0,0.7",
-    taskOverDueColor: "255,0,0,0.9"
+    taskOverDueColor: "255,0,0",
+    taskOverDueGlowColor: "0,0,0,0",
+    taskQuantityText: "255,255,255",
+    taskQuantityTextBackground: "0,0,0"
   },
   taskGroup: {
     chevronPathColor: "0,0,0,0.1",

@@ -59,9 +59,9 @@ export const QuantityContainer = styled.div`
   width: 18px;
   height: 18px;
   line-height: 20px;
-  background-color: ${props => props.isOverDue ? "white" : "black"};
+  background-color: rgb(${props => props.theme.task.taskQuantityTextBackground});
+  color: rgb(${props => props.theme.task.taskQuantityText});
   border-radius: 90px;
-color: ${props => props.isOverDue ? "red" : "white"};
   font-family: ${props => props.theme.bnRegular};
   font-size: 8.3pt;
   text-align: center;
@@ -69,6 +69,11 @@ color: ${props => props.isOverDue ? "red" : "white"};
   margin-left: 10px;
   opacity: ${props => props.checked ? 0.2 : 1};
   text-align:center;
+
+  ${props => props.isOverDue && css`
+    background-color: white !important;
+    color: rgb(${props.theme.task.taskOverDueColor}) !important;
+  `}
 `;
 
 export const DisplayContainer = styled.div`
@@ -111,16 +116,18 @@ export const Container = styled.div`
   }
 
   ${props => props.isOverDue && css`
-  background-color: rgba(${props => props.theme.task.taskOverDueColor}) !important;
+  background-color: rgb(${props => props.theme.task.taskOverDueColor}) !important;
   padding: 0px 15px;
   width: calc(100% - 30px) !important;
   border-radius: 5px;
+  box-shadow: 0px 0px 30px 0px rgba(${props => props.theme.task.taskOverDueGlowColor});
+  z-index: 100;
   `}
 `;
 
 export const Input = styled.input`
   text-align: left;
-  color: rgba(${props => props.theme.task.taskInputTextColor});
+  color: rgba(${props => props.isOverDue ? "255,255,255,1" : props.theme.task.taskInputTextColor});
   font-family: ${props => props.theme.rwRegular};
   font-weight: 600;
   font-size: 9pt;
@@ -143,13 +150,6 @@ export const Input = styled.input`
       user-select: none;
       pointer-events: none;
     `}
-
-  ${props => props.isOverDue && css`
-    color: white !important;
-    ::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
-  `}
 `;
 
 export const Checkbox = styled.input`

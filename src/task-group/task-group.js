@@ -60,8 +60,8 @@ const Group = ({
           onChange={() => {
             setChecked(!checked);
             checked
-              ? onSelectNone(node)
-              : onSelectAll(node)
+              ? onSelectNone(title)
+              : onSelectAll(title)
           }} />
 
       </Header>
