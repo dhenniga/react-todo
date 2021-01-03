@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 import useTask from "../useTask";
-import moment from "moment";
-import { map, prop } from "ramda";
+import { map } from "ramda";
 import timeConfig from "./time-config.json";
 import {
   TimeContainerBackground,
   TimeContainer
 } from "./time.styled";
 import TimeButton from "../buttons/timeButton";
+import dayjs from "dayjs";
 
 const Time = ({
   id,
@@ -35,20 +35,16 @@ const Time = ({
           onClick={() => setIsOpen(false)}>
 
           {
-            map(item =>
+            map(({ text, time, range }) =>
               <TimeContainer
                 onClick={() => {
                   setIsOpen(false);
                   updateDateToBeCompleted(
                     id,
-                    // new Date(date.getTime() + minutes*60000)
-                    moment().add(
-                      prop("range", item),
-                      prop("time", item)
-                    ).toString()
+                    dayjs().add(time, range).toString()
                   );
                 }}>
-                {prop("text", item)}
+                {text}
               </TimeContainer>
             )(timeConfig)
 

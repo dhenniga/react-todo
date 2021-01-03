@@ -32,9 +32,7 @@ const useTask = (updateTasks, updateConfig) => {
         quantity: "",
         note: "",
         isChecked: false,
-      },
-        { parseArrays: false }
-      )
+      })
     ).then(getTasks().then(updateTasks));
 
   /////////////////////////////

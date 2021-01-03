@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import Moment from "react-moment";
 
 export const AddSubTask = styled.div`
   font-family: sans-serif;
@@ -24,7 +23,7 @@ export const AddSubTask = styled.div`
   }
 `;
 
-export const StyledMoment = styled(Moment)`
+export const TimeText = styled.div`
   font-size: 7pt;
   font-weight: 400;
   font-family: sans-serif;

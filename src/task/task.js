@@ -6,7 +6,7 @@ import {
   Input,
   SettingsContainer,
   TimeContainer,
-  StyledMoment,
+  TimeText,
   TimePassingBar,
   QuantityContainer,
   DisplayContainer,
@@ -19,6 +19,9 @@ import DeleteButton from "../buttons/delete";
 import useTaskService from "./task.service";
 import WatchIcon from "../buttons/watch-icon";
 import NoteButton from "../buttons/note";
+import dayjs from "dayjs";
+import RelativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(RelativeTime);
 
 /////////////////////////////////////////
 
@@ -117,11 +120,10 @@ const Task = ({
             dateToBeCompleted &&
             <TimeContainer>
 
-              <StyledMoment
-                interval={60000}
-                to={dateToBeCompleted}
-                isOverDue={isOverDue}
-              />
+              <TimeText
+                isOverDue={isOverDue}>
+                {dayjs().to(dayjs(dateToBeCompleted))}
+              </TimeText>
 
               <WatchIcon
                 isOverDue={isOverDue}
@@ -161,7 +163,7 @@ const Task = ({
             />
 
             <NoteButton
-              handleClick={() => isEmpty(note) && updateNote(id, " ")}
+              handleClick={() => isEmpty(note) && updateNote(id, undefined)}
               isOverDue={isOverDue}
             />
 

@@ -1,52 +1,52 @@
 [
   {
     "time": 1,
-    "range": "minutes",
+    "range": "minute",
     "text": "1 minute"
   },
   {
     "time": 5,
-    "range": "minutes",
+    "range": "minute",
     "text": "5 minutes"
   },
   {
     "time": 10,
-    "range": "minutes",
+    "range": "minute",
     "text": "10 minutes"
   },
   {
     "time": 20,
-    "range": "minutes",
+    "range": "minute",
     "text": "20 minutes"
   },
   {
     "time": 1,
-    "range": "hours",
+    "range": "hour",
     "text": "1 Hour"
   },
   {
     "time": 2,
-    "range": "hours",
+    "range": "hour",
     "text": "2 hours"
   },
   {
     "time": 1,
-    "range": "days",
+    "range": "day",
     "text": "tomorrow"
   },
   {
     "time": 7,
-    "range": "days",
+    "range": "day",
     "text": "this day next week"
   },
   {
     "time": 1,
-    "range": "years",
+    "range": "year",
     "text": "Next Year"
   },
   {
     "time": 200,
-    "range": "years",
+    "range": "year",
     "text": "200 Years"
   }
 ]

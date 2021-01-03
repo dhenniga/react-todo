@@ -7,7 +7,7 @@ export const TimeContainerBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 3000;
   /* display: grid;
   justify-content: center;
   align-items: center; */
