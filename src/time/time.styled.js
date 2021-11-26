@@ -8,9 +8,6 @@ export const TimeContainerBackground = styled.div`
   top: 0;
   left: 0;
   z-index: 3000;
-  /* display: grid;
-  justify-content: center;
-  align-items: center; */
 `;
 
 export const TimeContainer = styled.div`

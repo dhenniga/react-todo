@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import { values, reduce, prop } from "ramda";
+import { values, reduce } from "ramda";
 import Task from "./task/task";
 import TaskGroup from "./task-group/task-group";
 import { mapObjectToValues } from "./app.service";
@@ -19,6 +19,7 @@ import { ThemeProvider } from "styled-components";
 import light from "./themes/light.theme";
 import dark from "./themes/dark.theme";
 import ToggleThemeButton from "./buttons/toggle-theme";
+import { useConfig, useTasks } from './hooks/useTaskHook'
 
 ///////////////////////
 
@@ -26,123 +27,129 @@ const App = () => {
 
   ///////////////////////
 
-  const [tasks, updateTasks] = useState();
-  const [config, updateConfig] = useState();
+  const { isDarkTheme } = useConfig()
+  const { tasks } = useTasks()
 
   ///////////////////////
 
   const {
-    getTasks,
-    getConfig,
     createTask,
     createTaskGroup,
     tasksRemainingCount,
     selectAll,
     selectNone,
     toggleTheme
-  } = useTask(updateTasks, updateConfig);
+  } = useTask()
 
-  ///////////////////////
-
-  useEffect(() => {
-    getTasks().then(updateTasks);
-    getConfig().then(updateConfig);
-  }, []);
 
   ///////////////////////
 
   return (
+    <>
+      {tasks &&
 
-    <ThemeProvider theme={
-      prop("isDarkTheme", config)
-        ? dark
-        : light
-    }>
+        <ThemeProvider theme={
+          !!+isDarkTheme
+            ? light
+            : dark
+        }>
 
-      <Container>
+          <Container>
 
-        <Header>
+            <Header>
 
-          <AppTitle>
-            TaskBoard
-          </AppTitle>
+              <AppTitle>
+                TaskBoard
+              </AppTitle>
 
-          <AddGroupButton
-            onClick={() => createTaskGroup()}>
-            +
-          </AddGroupButton>
+              <AddGroupButton
+                onClick={() => createTaskGroup()}>
+                +
+              </AddGroupButton>
 
-          <ToggleThemeButton
-            isDarkTheme={prop("isDarkTheme", config)}
-            handleClick={() => toggleTheme(prop("isDarkTheme", config))}
-          />
+              <ToggleThemeButton
+                isDarkTheme={!!+isDarkTheme}
+                handleClick={() => toggleTheme(isDarkTheme)}
+              />
 
-        </Header>
+            </Header>
 
-        <AppBody>
+            <AppBody>
 
-          {
-            mapObjectToValues((node, rootKey) =>
+              {
+                mapObjectToValues((node, rootKey) => {
 
-              <TaskGroup
-                key={rootKey}
-                title={rootKey}
-                node={node}
-                onSelectAll={node => selectAll(node)}
-                onSelectNone={node => selectNone(node)}>
+                  console.log(tasks)
+                  console.log(node)
 
-                {
-                  mapObjectToValues(({
-                    id,
-                    text,
-                    isChecked,
-                    dateCreated,
-                    dateToBeCompleted,
-                    taskCompletedTime,
-                    quantity,
-                    note
-                  }, key) =>
+                  return (
 
-                    <Task
-                      key={key}
-                      id={id}
-                      text={text}
-                      isChecked={isChecked}
-                      updateTasks={updateTasks}
-                      dateCreated={dateCreated}
-                      dateToBeCompleted={dateToBeCompleted}
-                      taskCompletedTime={taskCompletedTime}
-                      quantity={quantity}
-                      note={note}
-                    />
+                    <TaskGroup
+                      key={rootKey}
+                      title={rootKey}
+                      node={node}
+                      onSelectAll={node => selectAll(node)}
+                      onSelectNone={node => selectNone(node)}>
 
-                  )(node)
+                      {
+                        mapObjectToValues(({
+                          id,
+                          text,
+                          isChecked,
+                          dateCreated,
+                          dateToBeCompleted,
+                          taskCompletedTime,
+                          quantity,
+                          note,
+                          timeDisplayType,
+                          lastUpdated
+                        }, key) =>
+
+                          <Task
+                            key={key}
+                            id={id}
+                            text={text}
+                            isChecked={!!+isChecked}
+                            dateCreated={dateCreated}
+                            dateToBeCompleted={dateToBeCompleted}
+                            taskCompletedTime={taskCompletedTime}
+                            quantity={quantity}
+                            note={note}
+                            timeDisplayType={timeDisplayType}
+                            lastUpdated={lastUpdated}
+                          />
+
+                        )(node)
+                      }
+
+                      <TaskGroupFooter>
+
+                        <AddTask
+                          disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+                          onClick={() => createTask(rootKey)}>
+                          +
+                        </AddTask>
+
+                        <ItemsRemaining>
+                          {tasksRemainingCount(node)} items left
+                        </ItemsRemaining>
+
+                      </TaskGroupFooter>
+
+                    </TaskGroup>
+                  )
                 }
 
-                <TaskGroupFooter>
+                )(tasks)
+              }
 
-                  <AddTask
-                    disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-                    onClick={() => createTask(rootKey)}>
-                    +
-                </AddTask>
+            </AppBody>
 
-                  <ItemsRemaining>
-                    {tasksRemainingCount(node)} items left
-                </ItemsRemaining>
+          </Container>
 
-                </TaskGroupFooter>
-
-              </TaskGroup>
-
-            )(tasks)
-          }
-
-        </AppBody>
-
-      </Container>
-
-    </ThemeProvider>
+        </ThemeProvider>
+      }
+    </>
 
   );
 

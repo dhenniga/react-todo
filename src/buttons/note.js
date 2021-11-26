@@ -20,7 +20,7 @@ const Button = styled.button`
   }
 `;
 
-const DeleteButton = ({ isOverDue, handleClick }) => {
+const NoteButton = ({ isOverDue, handleClick }) => {
 
   const marp = useTheme().buttonIconColor;
 
@@ -41,4 +41,4 @@ const DeleteButton = ({ isOverDue, handleClick }) => {
   )
 }
 
-export default DeleteButton
+export default NoteButton

@@ -15,6 +15,8 @@ export const Container = styled.div`
   grid-template-rows: max-content 1fr;
   height: 100vh;
   overflow: hidden;
+  max-width: 600px;
+  margin: 0px auto;
 
 `;
 
@@ -28,12 +30,14 @@ export const Header = styled.div`
 `;
 
 export const AppBody = styled.div`
-  /* display: inline-grid; */
-  /* align-items: center;
-  justify-items: center;  */
-  /* transition: all 1s cubic-bezier(0.5, 0.2, 0, 1); */
-  overflow-y: scroll;
-  display: grid;
+  overflow-y: overlay;
+  display: block;
+  /* flex-direction: row;
+  flex-basis: 100%;
+  flex: 1; */
+  /* box-sizing:border-box; */
+  min-width: 350px;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: rgba(${props => props.theme.mainBackground});
 

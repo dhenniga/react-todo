@@ -1,27 +1,14 @@
 import axios from "axios";
-import { converter } from "./app.service";
 import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
 import qs from 'qs';
 
-const useTask = (updateTasks, updateConfig) => {
-
-  /////////////////////////////
-
-  const getConfig = () =>
-    axios.get("api/get-config.php")
-      .then(({ data }) => data);
-
-  /////////////////////////////
-
-  const getTasks = () =>
-    axios.get("api/get-tasks.php")
-      .then(({ data }) => converter(data));
+const useTask = () => {
 
   /////////////////////////////
 
   const createTask = rootKey =>
-    axios.post("api/create-task.php",
+    axios.post("http://www.fluidmotion.ie/taskboard/api/create-task.php",
       qs.stringify({
         id: uuidv4(),
         taskText: "",
@@ -33,12 +20,12 @@ const useTask = (updateTasks, updateConfig) => {
         note: "",
         isChecked: false,
       })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
   const createTaskGroup = () =>
-    axios.post(`api/create-task-group.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/create-task-group.php`,
       qs.stringify({
         id: uuidv4(),
         taskText: "",
@@ -52,35 +39,44 @@ const useTask = (updateTasks, updateConfig) => {
       },
         { parseArrays: false }
       )
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
   const toggleTheme = state =>
-    axios.post(`api/toggle-theme.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/toggle-theme.php`,
       qs.stringify({ isDarkTheme: state ? 0 : 1 })
-    ).then(getConfig().then(updateConfig));
+    )
+
+
+  /////////////////////////////
+
+  const deleteGroup = taskGroup =>
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/delete-group.php`,
+      qs.stringify({ taskGroup })
+    )
 
   /////////////////////////////
 
   const deleteTask = id =>
-    axios.post(`api/delete-task.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/delete-task.php`,
       qs.stringify({ id })
-    ).then(getTasks().then(updateTasks));
+    )
+
 
   /////////////////////////////
 
   const renameTask = (id, value) =>
-    axios.post(`api/rename-task.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/rename-task.php`,
       qs.stringify({ id, value })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
   const toggleTask = (id, state) =>
-    axios.post(`api/toggle-task.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/toggle-task.php`,
       qs.stringify({ id, state })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
@@ -99,16 +95,16 @@ const useTask = (updateTasks, updateConfig) => {
   /////////////////////////////
 
   const changeQuantity = (id, value) =>
-    axios.post(`api/change-quantity.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/change-quantity.php`,
       qs.stringify({ id, value })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
   const updateNote = (id, value) =>
-    axios.post(`api/update-note.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/update-note.php`,
       qs.stringify({ id, value })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
@@ -124,29 +120,28 @@ const useTask = (updateTasks, updateConfig) => {
   const renameGroup = (node, value) => {
     map(item =>
       axios.post(
-        `api/rename-group.php`,
+        `http://www.fluidmotion.ie/taskboard/api/rename-group.php`,
         qs.stringify({
           id: item.id,
           taskGroup: value
         })
       )
-    )(node);
-    getTasks().then(updateTasks);
+    )(node)
   }
 
   /////////////////////////////
 
   const selectAll = taskGroup =>
-    axios.post(`api/select-all.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/select-all.php`,
       qs.stringify({ taskGroup })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
   const selectNone = taskGroup =>
-    axios.post(`api/select-none.php`,
+    axios.post(`http://www.fluidmotion.ie/taskboard/api/select-none.php`,
       qs.stringify({ taskGroup })
-    ).then(getTasks().then(updateTasks));
+    )
 
   /////////////////////////////
 
@@ -177,19 +172,22 @@ const useTask = (updateTasks, updateConfig) => {
 
   /////////////////////////////
 
-  const updateDateToBeCompleted = (id, date) =>
-    axios.post(`api/update-date-to-be-completed.php`,
-      qs.stringify({ id, date })
-    ).then(getTasks().then(updateTasks));
+  const updateDateToBeCompleted = (id, date, type) => {
+    console.log(type)
+    return (axios.post(`http://www.fluidmotion.ie/taskboard/api/update-date-to-be-completed.php`,
+      qs.stringify({ id, date, type })
+    ))
+  }
 
   /////////////////////////////
 
   return {
-    getTasks,
-    getConfig,
+    // getTasks,
+    // getConfig,
     createTask,
     createTaskGroup,
     deleteTask,
+    deleteGroup,
     toggleTask,
     renameTask,
     renameGroup,

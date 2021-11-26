@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Container,
   Chevron,
@@ -19,22 +19,30 @@ const Group = ({
 
   const {
     allSelected,
-    renameGroup
+    renameGroup,
+    deleteGroup
   } = useTask();
 
-  const [
-    checked,
-    setChecked
-  ] = useState(allSelected(node));
+  const [checked, setChecked] = useState(allSelected(node))
+  const [isOpen, setIsOpen] = useState(true)
+  const ref = useRef()
+
+  useEffect(() => {
+    console.log(ref.current.clientHeight)
+  }, [])
 
   return (
 
-    <Container>
+    <Container
+      isOpen={isOpen}
+      thingHeight={ref?.current?.clientHeight}>
 
-      <Header>
+      <Header
+        isOpen={isOpen}>
 
         <Chevron
-          onClick={() => console.log("Close Group?")}>
+          isOpen={isOpen}
+          onClick={() => setIsOpen(!isOpen)}>
           <svg
             width="16"
             height="8">
@@ -42,19 +50,35 @@ const Group = ({
           </svg>
         </Chevron>
 
-        <Input
-          defaultValue={title}
-          placeholder="Enter Group Name..."
-          onBlur={event =>
-            renameGroup(
-              node,
-              event.target.value
-            )}
-        />
+        <div style={{
+          display: isOpen ? "block" : "grid",
+          gridTemplateRow: "1fr 1fr"
+
+        }}>
+          <Input
+            defaultValue={title}
+            placeholder="Enter Group Name..."
+            onBlur={event =>
+              renameGroup(
+                node,
+                event.target.value
+              )}
+          />
+
+          {!isOpen && <span
+            style={{
+              fontSize: '8pt',
+              color: 'rgba(120, 120, 120)'
+
+            }}>
+            Updated: <span style={{ fontWeight: 'bold' }}>20 minutes ago</span>
+          </span>}
+
+        </div>
 
 
 
-        <ToggleSelectAll
+        {isOpen && <><ToggleSelectAll
           type="checkbox"
           checked={checked}
           onChange={() => {
@@ -64,9 +88,22 @@ const Group = ({
               : onSelectAll(title)
           }} />
 
+          <button
+            style={{ width: 18, padding: 0, margin: 0, backgroundColor: "red", color: 'white', border: 0, outline: 0, borderRadius: 50, fontSize: '7pt', fontWeight: 900, height: '18px' }}
+            onClick={() => deleteGroup(title)}
+          >X</button>
+        </>}
+
       </Header>
 
-      {children}
+      <div ref={ref}
+        style={{
+          transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
+          // transitionDelay: '00ms',
+          opacity: isOpen ? 1 : 0
+        }}>
+        {children}
+      </div>
 
     </Container>
 

@@ -22,7 +22,7 @@ const Button = styled.div`
 }
 `;
 
-const ToggleThemeButton = ({ isDarkTheme, handleClick }) =>
+const ToggleThemeButton = ({ isDarkTheme, handleClick }) => 
 
   <Button
     isDarkTheme={isDarkTheme}

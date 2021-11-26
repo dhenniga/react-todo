@@ -12,12 +12,15 @@ import {
   mergeAll,
 } from "ramda";
 
-export const mapObjectToValues = mapper => {
-  return compose(
-    values,
-    mapObjIndexed(mapper)
-  )
-}
+///
+
+export const mapObjectToValues = obj => 
+compose(
+  values,
+  mapObjIndexed(obj)
+)
+
+///
 
 export const converter = data => {
   let configArray = [];

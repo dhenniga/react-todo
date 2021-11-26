@@ -24,7 +24,7 @@ export const AddSubTask = styled.div`
 `;
 
 export const TimeText = styled.div`
-  font-size: 7pt;
+  font-size: 8pt;
   font-weight: 400;
   font-family: sans-serif;
   letter-spacing: 0px;
@@ -192,6 +192,10 @@ export const NoteContainer = styled.div`
 export const NoteText = styled.div`
   font-family: rw_regular;
   font-size: 8.3pt;
-  outline: none;
   color: rgba(${props => props.theme.task.taskNoteTextColor});
+  resize: none;
+  width: 100%;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
 `;

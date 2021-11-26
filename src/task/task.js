@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useTask from "../useTask";
 import {
   Container,
@@ -29,12 +29,13 @@ const Task = ({
   id,
   text,
   isChecked,
-  updateTasks,
   dateCreated,
   dateToBeCompleted,
   taskCompletedTime,
   quantity,
-  note
+  note,
+  timeDisplayType,
+  lastUpdated
 }) => {
 
   /////////////////////////////////////////
@@ -50,14 +51,14 @@ const Task = ({
     calculateRemainingPercentage,
     changeQuantity,
     updateNote
-  } = useTask(updateTasks);
+  } = useTask();
 
   /////////////////////////////////////////
 
   const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted);
   const [isActive, setIsActive] = useState(isChecked);
   const [percentage, setPercentage] = useState(percentageRemaining);
-  const { gradientColours, isOverDue } = useTaskService(percentage, isActive);
+  const { gradientColours, isOverDue } = useTaskService(percentage, isChecked);
 
   /////////////////////////////////////////
 
@@ -85,26 +86,30 @@ const Task = ({
 
   /////////////////////////////////////////
 
+  useEffect(() => {
+    setIsActive(isChecked)
+  }, [isChecked])
+
   return (
 
-    <Fragment>
+    <>
 
       <Container
         isOverDue={isOverDue}
-        checked={isActive}>
+        checked={isChecked}>
 
         <Checkbox
           type="checkbox"
-          checked={isActive}
+          checked={isChecked}
           onChange={() => {
-            setIsActive(!isActive);
-            toggleTask(id, isActive ? 0 : 1)
+            setIsActive(!isChecked);
+            toggleTask(id, isChecked ? 0 : 1)
           }}
         />
 
         <Input
           type="text"
-          checked={isActive}
+          checked={isChecked}
           isOverDue={isOverDue}
           onBlur={event => renameTask(id, event.target.value)}
           defaultValue={text}
@@ -122,10 +127,14 @@ const Task = ({
 
               <TimeText
                 isOverDue={isOverDue}>
-                {dayjs().to(dayjs(dateToBeCompleted))}
+                {timeDisplayType === 'on' && dayjs(dateToBeCompleted).format('MMMM D, YYYY')}
+                {timeDisplayType === 'in' && dayjs().to(dayjs(dateToBeCompleted))}
+                {!timeDisplayType && 'broken'} 
+                {timeDisplayType === 'at' && dayjs(dateToBeCompleted).format('HH:mm')}
               </TimeText>
 
               <WatchIcon
+                timeDisplayType={timeDisplayType}
                 isOverDue={isOverDue}
               />
 
@@ -158,12 +167,11 @@ const Task = ({
 
             <Time
               id={id}
-              updateTasks={updateTasks}
               isOverDue={isOverDue}
             />
 
             <NoteButton
-              handleClick={() => isEmpty(note) && updateNote(id, undefined)}
+              handleClick={() => isEmpty(note) && updateNote(id, ' ')}
               isOverDue={isOverDue}
             />
 
@@ -199,7 +207,7 @@ const Task = ({
         </NoteContainer>
       }
 
-    </Fragment>
+    </>
 
   );
 
