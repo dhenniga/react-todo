@@ -23,7 +23,7 @@ const Time = ({
 
   return (
 
-    <Fragment>
+    <>
 
       <TimeButton
         isOverDue={isOverDue}
@@ -88,7 +88,7 @@ const Time = ({
 
 
 
-    </Fragment>
+    </>
 
   )
 

@@ -1,9 +1,9 @@
-import React from "react";
-import "./App.css";
-import { values, reduce } from "ramda";
-import Task from "./task/task";
-import TaskGroup from "./task-group/task-group";
-import { mapObjectToValues } from "./app.service";
+import React, { useState, useEffect } from "react"
+import "./App.css"
+import { values, reduce, type } from "ramda"
+import Task from "./task/task"
+import TaskGroup from "./task-group/task-group"
+import { mapObjectToValues } from "./app.service"
 import {
   Container,
   AddTask,
@@ -13,13 +13,21 @@ import {
   TaskGroupFooter,
   AppBody,
   AppTitle
-} from "./app.styled";
-import useTask from "./useTask";
-import { ThemeProvider } from "styled-components";
-import light from "./themes/light.theme";
-import dark from "./themes/dark.theme";
-import ToggleThemeButton from "./buttons/toggle-theme";
+} from "./app.styled"
+import useTask from "./useTask"
+import { ThemeProvider } from "styled-components"
+import light from "./themes/light.theme"
+import dark from "./themes/dark.theme"
+import ToggleThemeButton from "./buttons/toggle-theme"
 import { useConfig, useTasks } from './hooks/useTaskHook'
+import PreGroup from './task-group/pre-task-group'
+import ReactDOM from 'react-dom'
+import GridLayout, { WidthProvider } from "react-grid-layout"
+import 'react-grid-layout/css/styles.css'
+import "react-resizable/css/styles.css"
+import qs from 'qs'
+
+const NewGridLayout = WidthProvider(GridLayout)
 
 ///////////////////////
 
@@ -27,7 +35,7 @@ const App = () => {
 
   ///////////////////////
 
-  const { isDarkTheme } = useConfig()
+  const { isDarkTheme, gridLayout } = useConfig()
   const { tasks } = useTasks()
 
   ///////////////////////
@@ -38,15 +46,16 @@ const App = () => {
     tasksRemainingCount,
     selectAll,
     selectNone,
-    toggleTheme
+    toggleTheme,
+    saveGridLayout
   } = useTask()
-
 
   ///////////////////////
 
   return (
     <>
-      {tasks &&
+
+      {tasks && gridLayout &&
 
         <ThemeProvider theme={
           !!+isDarkTheme
@@ -59,11 +68,19 @@ const App = () => {
             <Header>
 
               <AppTitle>
-                TaskBoard
+                A&amp;D Tasks
               </AppTitle>
 
               <AddGroupButton
-                onClick={() => createTaskGroup()}>
+                // onClick={() => createTaskGroup()}>
+                onClick={() => {
+                  const title = React.createElement(PreGroup, null, null)
+                  document.getElementById('marp').style.display = 'inline'
+                  ReactDOM.render(
+                    title,
+                    document.getElementById('marp')
+                  )
+                }}>
                 +
               </AddGroupButton>
 
@@ -74,73 +91,88 @@ const App = () => {
 
             </Header>
 
+
             <AppBody>
 
+              <div id='marp' style={{ display: 'none' }}></div>
+
               {
-                mapObjectToValues((node, rootKey) => {
+                gridLayout &&
+                <NewGridLayout
+                  layout={JSON.parse(gridLayout)}
+                  isResizable={false}
+                  onDragStop={layout => saveGridLayout(JSON.stringify(layout))}
+                  rowHeight={60}
+                  cols={1}
+                >
 
-                  console.log(tasks)
-                  console.log(node)
+                  {
+                    mapObjectToValues((node, rootKey) => {
 
-                  return (
+                      return (
 
-                    <TaskGroup
-                      key={rootKey}
-                      title={rootKey}
-                      node={node}
-                      onSelectAll={node => selectAll(node)}
-                      onSelectNone={node => selectNone(node)}>
+                        <div
+                          key={rootKey}>
 
-                      {
-                        mapObjectToValues(({
-                          id,
-                          text,
-                          isChecked,
-                          dateCreated,
-                          dateToBeCompleted,
-                          taskCompletedTime,
-                          quantity,
-                          note,
-                          timeDisplayType,
-                          lastUpdated
-                        }, key) =>
+                          <TaskGroup
+                            key={rootKey}
+                            title={rootKey}
+                            node={node}
+                            onSelectAll={node => selectAll(node)}
+                            onSelectNone={node => selectNone(node)}>
 
-                          <Task
-                            key={key}
-                            id={id}
-                            text={text}
-                            isChecked={!!+isChecked}
-                            dateCreated={dateCreated}
-                            dateToBeCompleted={dateToBeCompleted}
-                            taskCompletedTime={taskCompletedTime}
-                            quantity={quantity}
-                            note={note}
-                            timeDisplayType={timeDisplayType}
-                            lastUpdated={lastUpdated}
-                          />
+                            {
+                              mapObjectToValues(({
+                                id,
+                                text,
+                                isChecked,
+                                dateCreated,
+                                dateToBeCompleted,
+                                taskCompletedTime,
+                                quantity,
+                                note,
+                                timeDisplayType
+                              }, key) =>
 
-                        )(node)
-                      }
+                                <Task
+                                  key={key}
+                                  id={id}
+                                  text={text}
+                                  isChecked={!!+isChecked}
+                                  dateCreated={dateCreated}
+                                  dateToBeCompleted={dateToBeCompleted}
+                                  taskCompletedTime={taskCompletedTime}
+                                  quantity={quantity}
+                                  note={note}
+                                  timeDisplayType={timeDisplayType}
+                                />
 
-                      <TaskGroupFooter>
+                              )(node)
+                            }
 
-                        <AddTask
-                          disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-                          onClick={() => createTask(rootKey)}>
-                          +
-                        </AddTask>
+                            <TaskGroupFooter>
 
-                        <ItemsRemaining>
-                          {tasksRemainingCount(node)} items left
-                        </ItemsRemaining>
+                              <AddTask
+                                disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+                                onClick={() => createTask(rootKey)}>
+                                +
+                              </AddTask>
 
-                      </TaskGroupFooter>
+                              <ItemsRemaining>
+                                {tasksRemainingCount(node)} items left
+                              </ItemsRemaining>
 
-                    </TaskGroup>
-                  )
-                }
+                            </TaskGroupFooter>
 
-                )(tasks)
+                          </TaskGroup>
+
+                        </div>
+                      )
+                    }
+
+                    )(tasks)
+                  }
+                </NewGridLayout>
               }
 
             </AppBody>
@@ -149,8 +181,8 @@ const App = () => {
 
         </ThemeProvider>
       }
-    </>
 
+    </>
   );
 
 };

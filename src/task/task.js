@@ -34,8 +34,7 @@ const Task = ({
   taskCompletedTime,
   quantity,
   note,
-  timeDisplayType,
-  lastUpdated
+  timeDisplayType
 }) => {
 
   /////////////////////////////////////////
@@ -129,7 +128,7 @@ const Task = ({
                 isOverDue={isOverDue}>
                 {timeDisplayType === 'on' && dayjs(dateToBeCompleted).format('MMMM D, YYYY')}
                 {timeDisplayType === 'in' && dayjs().to(dayjs(dateToBeCompleted))}
-                {!timeDisplayType && 'broken'} 
+                {!timeDisplayType && 'broken'}
                 {timeDisplayType === 'at' && dayjs(dateToBeCompleted).format('HH:mm')}
               </TimeText>
 

@@ -24,12 +24,12 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const createTaskGroup = () =>
+  const createTaskGroup = title =>
     axios.post(`http://www.fluidmotion.ie/taskboard/api/create-task-group.php`,
       qs.stringify({
         id: uuidv4(),
         taskText: "",
-        taskGroup: "",
+        taskGroup: title,
         dateCreated: new Date(),
         dateToBeCompleted: "",
         taskCompletedTime: "",
@@ -48,6 +48,13 @@ const useTask = () => {
       qs.stringify({ isDarkTheme: state ? 0 : 1 })
     )
 
+  /////////////////////////////
+
+  const saveGridLayout = gridLayout => {
+    return axios.post(`http://www.fluidmotion.ie/taskboard/api/save-grid-layout.php`,
+      qs.stringify({ gridLayout })
+      )  
+    }
 
   /////////////////////////////
 
@@ -199,7 +206,8 @@ const useTask = () => {
     updateDateToBeCompleted,
     changeQuantity,
     updateNote,
-    toggleTheme
+    toggleTheme,
+    saveGridLayout
   }
 
 }

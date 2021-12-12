@@ -5,9 +5,12 @@ import {
   ChevronPath,
   Input,
   Header,
-  ToggleSelectAll
+  ToggleSelectAll,
+  DeleteGroupButton
 } from "./task-group.styled";
 import useTask from "../useTask";
+import { map, sort, pipe } from 'ramda'
+import dayjs from "dayjs";
 
 const Group = ({
   children,
@@ -24,12 +27,15 @@ const Group = ({
   } = useTask();
 
   const [checked, setChecked] = useState(allSelected(node))
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
+  const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
   const ref = useRef()
 
   useEffect(() => {
-    console.log(ref.current.clientHeight)
-  }, [])
+    let arr = []
+    map(item => arr.push(item.lastUpdated))(node)
+    setTimeUpdate(sort((a, b) => b.localeCompare(a), arr).shift())
+  }, [node])
 
   return (
 
@@ -53,7 +59,6 @@ const Group = ({
         <div style={{
           display: isOpen ? "block" : "grid",
           gridTemplateRow: "1fr 1fr"
-
         }}>
           <Input
             defaultValue={title}
@@ -71,35 +76,36 @@ const Group = ({
               color: 'rgba(120, 120, 120)'
 
             }}>
-            Updated: <span style={{ fontWeight: 'bold' }}>20 minutes ago</span>
+            Updated: <span style={{ fontWeight: 'bold' }}>{dayjs().to(dayjs(new Date(timeUpdate)))}</span>
           </span>}
 
         </div>
 
 
 
-        {isOpen && <><ToggleSelectAll
-          type="checkbox"
-          checked={checked}
-          onChange={() => {
-            setChecked(!checked);
-            checked
-              ? onSelectNone(title)
-              : onSelectAll(title)
-          }} />
+        {isOpen &&
+          <ToggleSelectAll
+            type="checkbox"
+            checked={checked}
+            onChange={() => {
+              setChecked(!checked);
+              checked
+                ? onSelectNone(title)
+                : onSelectAll(title)
+            }} />
+        }
 
-          <button
-            style={{ width: 18, padding: 0, margin: 0, backgroundColor: "red", color: 'white', border: 0, outline: 0, borderRadius: 50, fontSize: '7pt', fontWeight: 900, height: '18px' }}
-            onClick={() => deleteGroup(title)}
-          >X</button>
-        </>}
+        <DeleteGroupButton
+          isOpen={isOpen}
+          onClick={() => deleteGroup(title)}>
+          X
+        </DeleteGroupButton>
 
       </Header>
 
       <div ref={ref}
         style={{
           transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
-          // transitionDelay: '00ms',
           opacity: isOpen ? 1 : 0
         }}>
         {children}

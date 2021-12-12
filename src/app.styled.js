@@ -10,14 +10,13 @@ export const AppTitle = styled.label`
 `;
 
 export const Container = styled.div`
-  background-color: rgba(${props => props.theme.background});
-  display: grid;
-  grid-template-rows: max-content 1fr;
-  height: 100vh;
-  overflow: hidden;
-  max-width: 600px;
-  margin: 0px auto;
-
+   background-color: rgba(${props => props.theme.background});
+  /* display: grid;
+  grid-template-rows: max-content 1fr; */
+  /* height: 100vh; */
+  /* overflow: hidden; */
+  /* max-width: 600px; */
+  /* margin: 0px auto; */
 `;
 
 export const Header = styled.div`
@@ -31,15 +30,26 @@ export const Header = styled.div`
 
 export const AppBody = styled.div`
   overflow-y: overlay;
-  display: block;
-  /* flex-direction: row;
-  flex-basis: 100%;
-  flex: 1; */
-  /* box-sizing:border-box; */
   min-width: 350px;
   width: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
+  height: calc(100vh - 70px);
+  /* display: flex;
+  flex-wrap: wrap; */
   background-color: rgba(${props => props.theme.mainBackground});
+
+  ::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(${props => props.theme.accentColor}, 0.1);
+}
 
   @media (max-width: 1280px) {
     grid-template-columns: 1fr 1fr;

@@ -62,10 +62,14 @@ class DB_Functions
         $stmt = $this->conn->prepare('SELECT * from config LIMIT 1');
 
         if ($stmt->execute()) {
-            $stmt->bind_result($isDarkTheme);
+            $stmt->bind_result(
+                $isDarkTheme,
+                $gridLayout
+            );
             $rows = array();
             while ($r = mysqli_stmt_fetch($stmt)) {
                 $config['isDarkTheme'] = $isDarkTheme;
+                $config['gridLayout'] = $gridLayout;
             }
             $stmt->close();
         }
@@ -77,27 +81,84 @@ class DB_Functions
     public function toggleTheme($isDarkTheme)
     {
         $stmt = $this->conn->prepare('UPDATE config SET isDarkTheme = ?');
-        $stmt->bind_param('s', $isDarkTheme);
+        $stmt->bind_param(
+            's',
+            $isDarkTheme
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
 
     ////////////////////////
 
-    public function createTask($id, $taskText, $taskGroup, $dateCreated, $dateToBeCompleted, $taskCompletedTime, $quantity, $note, $isChecked)
+    public function saveGridLayout($gridLayout)
     {
-        $stmt = $this->conn->prepare('INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted, taskCompletedTime, quantity, note, isChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->bind_param('sssssssss', $id, $taskText, $taskGroup, $dateCreated, $dateToBeCompleted, $taskCompletedTime, $quantity, $note, $isChecked);
+        $stmt = $this->conn->prepare('UPDATE config SET gridLayout = ?');
+        $stmt->bind_param(
+            's',
+            $gridLayout
+        );
+        $result = $stmt->execute();
+        $stmt->close();
+    }
+
+
+    ////////////////////////
+
+    public function createTask(
+        $id,
+        $taskText,
+        $taskGroup,
+        $dateCreated,
+        $dateToBeCompleted,
+        $taskCompletedTime,
+        $quantity,
+        $note,
+        $isChecked
+    ) {
+        $stmt = $this->conn->prepare('INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted, taskCompletedTime, quantity, note, isChecked, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())');
+        $stmt->bind_param(
+            'sssssssss',
+            $id,
+            $taskText,
+            $taskGroup,
+            $dateCreated,
+            $dateToBeCompleted,
+            $taskCompletedTime,
+            $quantity,
+            $note,
+            $isChecked
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
 
     ////////////////////////
 
-    public function createTaskGroup($id, $taskText, $taskGroup, $dateCreated, $dateToBeCompleted, $taskCompletedTime, $quantity, $note, $isChecked)
-    {
+    public function createTaskGroup(
+        $id,
+        $taskText,
+        $taskGroup,
+        $dateCreated,
+        $dateToBeCompleted,
+        $taskCompletedTime,
+        $quantity,
+        $note,
+        $isChecked
+    ) {
         $stmt = $this->conn->prepare('INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted, taskCompletedTime, quantity, note, isChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->bind_param('sssssssss', $id, $taskText, $taskGroup, $dateCreated, $dateToBeCompleted, $taskCompletedTime, $quantity, $note, $isChecked);
+        $stmt->bind_param(
+            'sssssssss',
+            $id,
+            $taskText,
+            $taskGroup,
+            $dateCreated,
+            $dateToBeCompleted,
+            $taskCompletedTime,
+            $quantity,
+            $note,
+            $isChecked
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -107,7 +168,10 @@ class DB_Functions
     public function deleteTask($id)
     {
         $stmt = $this->conn->prepare('DELETE FROM tasks WHERE id = ?');
-        $stmt->bind_param('s', $id);
+        $stmt->bind_param(
+            's',
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -116,8 +180,12 @@ class DB_Functions
 
     public function toggleTask($id, $state)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = ? WHERE id = ?');
-        $stmt->bind_param('ss', $state, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = ?, lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'ss',
+            $state,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -126,8 +194,12 @@ class DB_Functions
 
     public function renameTask($id, $value)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET taskText = ? WHERE id = ?');
-        $stmt->bind_param('ss', $value, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET taskText = ?, lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'ss',
+            $value,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -136,8 +208,12 @@ class DB_Functions
 
     public function changeQuantity($id, $value)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET quantity = ? WHERE id = ?');
-        $stmt->bind_param('ss', $value, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET quantity = ?, lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'ss',
+            $value,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -146,8 +222,12 @@ class DB_Functions
 
     public function updateNote($id, $value)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET note = ? WHERE id = ?');
-        $stmt->bind_param('ss', $value, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET note = ?, lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'ss',
+            $value,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -158,7 +238,10 @@ class DB_Functions
     public function deleteGroup($taskGroup)
     {
         $stmt = $this->conn->prepare('DELETE FROM tasks WHERE taskGroup = ?');
-        $stmt->bind_param('s', $taskGroup);
+        $stmt->bind_param(
+            's',
+            $taskGroup
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -167,8 +250,12 @@ class DB_Functions
 
     public function renameGroup($id, $taskGroup)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET taskGroup = ? WHERE id = ?');
-        $stmt->bind_param('ss', $taskGroup, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET taskGroup = ?, lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'ss',
+            $taskGroup,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -177,8 +264,11 @@ class DB_Functions
 
     public function selectAll($taskGroup)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = 1 WHERE taskGroup = ?');
-        $stmt->bind_param('s', $taskGroup);
+        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = 1, lastUpdated = NOW() WHERE taskGroup = ?');
+        $stmt->bind_param(
+            's',
+            $taskGroup
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -187,8 +277,11 @@ class DB_Functions
 
     public function selectNone($taskGroup)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = 0 WHERE taskGroup = ?');
-        $stmt->bind_param('s', $taskGroup);
+        $stmt = $this->conn->prepare('UPDATE tasks SET isChecked = 0, lastUpdated = NOW() WHERE taskGroup = ?');
+        $stmt->bind_param(
+            's',
+            $taskGroup
+        );
         $result = $stmt->execute();
         $stmt->close();
     }
@@ -197,8 +290,13 @@ class DB_Functions
 
     public function updateDateToBeCompleted($id, $date, $type)
     {
-        $stmt = $this->conn->prepare('UPDATE tasks SET dateCreated = NOW(), timeDisplayType = ?, dateToBeCompleted = ? WHERE id = ?');
-        $stmt->bind_param('sss', $type, $date, $id);
+        $stmt = $this->conn->prepare('UPDATE tasks SET dateCreated = NOW(), timeDisplayType = ?, dateToBeCompleted = ? , lastUpdated = NOW() WHERE id = ?');
+        $stmt->bind_param(
+            'sss',
+            $type,
+            $date,
+            $id
+        );
         $result = $stmt->execute();
         $stmt->close();
     }

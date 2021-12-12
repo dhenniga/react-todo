@@ -5,6 +5,7 @@ export default {
   inputColor: "101, 109, 120, 1",
   containerBorderBottom: "0, 0, 0, 0.1",
   buttonIconColor: "white",
+  accentColor: "255,0,100",
 
   // Roboto Slab fonts
   rsThin: "rs_thin",
