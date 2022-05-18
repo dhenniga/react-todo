@@ -12,8 +12,7 @@ export const useConfig = () => {
     "http://www.fluidmotion.ie/taskboard/api/get-config.php",
     fetcher,
     {
-      refreshInterval: 1000,
-      suspense: true
+      refreshInterval: 1000
     }
   )
   if (error) return

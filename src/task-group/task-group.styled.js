@@ -3,25 +3,46 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   text-align: left;
   padding: 10px 15px;
-  /* margin: 10px 10px 0px 10px; */
   position: relative;
-  /* width: calc(100% - 50px); */
-  /* display: inline-block; */
-  background-color: rgba(${props => props.theme.taskGroup.groupBGColor});
+  /* background-color: rgba(${props => props.theme.taskGroup.groupBGColor}); */
+  background-color: rgba(255, 0, 0, 0.5);
   border-radius: 5px;
-  height: 100%;
+  /* height: calc(100% - 10px); */
+  /* height: max-content; */
+
     /* height: calc(${props => props.thingHeight}px + 60px); */
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: padding-bottom height;
-  overflow: hidden;
-  padding-bottom: ${props => props.isOpen ? 5 : 20}px;
+  overflow: hidden scroll;
+  padding-bottom: ${props => props.isOpen ? 0 : 0}px;
   box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor};
-  /* flex: 1 0 21%; */
-  /* flex: 1 0 21%; */
+
+  ::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(${props => props.theme.accentColor}, 0.3);
+}
 
   ${props => !props.isOpen && css`
-    height: 30px !important;
+    /* height: 30px !important; */
   `}
+
+  ${props => props.isEditModeOn && css`
+    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.1) !important;
+  `}
+
+  
+
+
 `;
 
 export const Chevron = styled.div`
@@ -95,4 +116,50 @@ export const DeleteGroupButton = styled.button`
   font-weight: 900;
   height: 18px;
   cursor: pointer;
+  transition: opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+
+  ${props => props.isEditModeOn && css`
+    opacity: 0 !important;
+  `  }
 `
+
+export const TaskGroupFooter = styled.div`
+  height: 37px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  border-bottom: 3px solid black;
+`;
+
+export const AddTask = styled.button`
+  color: black;
+  outline: 0px;
+  padding: 0px;
+  border: 0px;
+  font-family: sans-serif;
+  position: relative;
+  top: -2px;
+  font-weight: 600;
+  font-size: 17pt;
+  cursor: pointer;
+  background-color: transparent;
+  color: rgba(${props => props.theme.taskGroup.addTaskColor});
+  transition: transform 0.5s cubic-bezier(0,0,0,1);
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:disabled {
+    opacity: 0.2;
+  }
+`;
+
+export const ItemsRemaining = styled.label`
+  font-family: ${props => props.theme.Regular};
+  font-size: 8pt;
+  text-align: right; 
+  user-select: none;
+  color: rgba(${props => props.theme.taskGroup.tasksRemainingTextColor});
+`;

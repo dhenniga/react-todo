@@ -6,30 +6,39 @@ import {
   Input,
   Header,
   ToggleSelectAll,
-  DeleteGroupButton
+  DeleteGroupButton,
+  TaskGroupFooter,
+  AddTask,
+  ItemsRemaining
 } from "./task-group.styled";
+import { values, reduce } from "ramda"
 import useTask from "../useTask";
-import { map, sort, pipe } from 'ramda'
+import { map, sort } from 'ramda'
 import dayjs from "dayjs";
 
 const Group = ({
+  rootKey,
   children,
   title,
   node,
   onSelectAll,
-  onSelectNone
+  onSelectNone,
+  isEditModeOn
 }) => {
 
   const {
+    createTask,
+    tasksRemainingCount,
     allSelected,
     renameGroup,
     deleteGroup
   } = useTask();
 
   const [checked, setChecked] = useState(allSelected(node))
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
   const ref = useRef()
+  const containerRef = useRef()
 
   useEffect(() => {
     let arr = []
@@ -37,10 +46,17 @@ const Group = ({
     setTimeUpdate(sort((a, b) => b.localeCompare(a), arr).shift())
   }, [node])
 
+  useEffect(() => {
+    containerRef && console.log(Math.round(containerRef.current.scrollHeight / 60))
+  }, [containerRef])
+
   return (
 
     <Container
+      id='tester-container'
+      ref={containerRef}
       isOpen={isOpen}
+      isEditModeOn={isEditModeOn}
       thingHeight={ref?.current?.clientHeight}>
 
       <Header
@@ -73,7 +89,9 @@ const Group = ({
           {!isOpen && <span
             style={{
               fontSize: '8pt',
-              color: 'rgba(120, 120, 120)'
+              color: 'rgba(120, 120, 120)',
+              transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
+              opacity: isEditModeOn ? 0 : 1
 
             }}>
             Updated: <span style={{ fontWeight: 'bold' }}>{dayjs().to(dayjs(new Date(timeUpdate)))}</span>
@@ -96,6 +114,7 @@ const Group = ({
         }
 
         <DeleteGroupButton
+          isEditModeOn={isEditModeOn}
           isOpen={isOpen}
           onClick={() => deleteGroup(title)}>
           X
@@ -103,12 +122,30 @@ const Group = ({
 
       </Header>
 
-      <div ref={ref}
+      <div
+        ref={ref}
         style={{
           transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
-          opacity: isOpen ? 1 : 0
+          opacity: isOpen ? 1 : 0,
+          height: !isOpen && '0px',
+          overflow: 'visible'
         }}>
         {children}
+
+        <TaskGroupFooter>
+
+          <AddTask
+            disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+            onClick={() => createTask(rootKey)}>
+            +
+          </AddTask>
+
+          <ItemsRemaining>
+            {tasksRemainingCount(node)} items left
+          </ItemsRemaining>
+
+        </TaskGroupFooter>
+
       </div>
 
     </Container>

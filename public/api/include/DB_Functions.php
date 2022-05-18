@@ -116,7 +116,7 @@ class DB_Functions
         $note,
         $isChecked
     ) {
-        $stmt = $this->conn->prepare('INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted, taskCompletedTime, quantity, note, isChecked, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())');
+        $stmt = $this->conn->prepare('INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted,taskCompletedTime, quantity, note, isChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->bind_param(
             'sssssssss',
             $id,

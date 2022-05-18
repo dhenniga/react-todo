@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const AppTitle = styled.label`
   font-size: 10pt;
@@ -33,9 +33,13 @@ export const AppBody = styled.div`
   min-width: 350px;
   width: 100%;
   height: calc(100vh - 70px);
-  /* display: flex;
-  flex-wrap: wrap; */
   background-color: rgba(${props => props.theme.mainBackground});
+  transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+  transition-property: background-color;
+
+  ${props => props.isEditModeOn && css`
+    background-color: rgba(255,255,255,0.1) !important;
+  `}
 
   ::-webkit-scrollbar {
   width: 5px;
@@ -60,38 +64,7 @@ export const AppBody = styled.div`
   }
 `;
 
-export const TaskGroupFooter = styled.div`
-  height: 37px;
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  align-items: center;
-  border-bottom: 3px solid black;
-`;
-
-export const AddTask = styled.button`
-  color: black;
-  outline: 0px;
-  padding: 0px;
-  border: 0px;
-  font-family: sans-serif;
-  position: relative;
-  top: -2px;
-  font-weight: 600;
-  font-size: 17pt;
-  cursor: pointer;
-  background-color: transparent;
-  color: rgba(${props => props.theme.taskGroup.addTaskColor});
-  transition: transform 0.5s cubic-bezier(0,0,0,1);
-  user-select: none;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  &:disabled {
-    opacity: 0.2;
-  }
-`;
+////////////////////
 
 export const ItemTotal = styled.div`
   height: 40px;
@@ -100,13 +73,7 @@ export const ItemTotal = styled.div`
   color: #aab2bd;
 `;
 
-export const ItemsRemaining = styled.label`
-  font-family: ${props => props.theme.Regular};
-  font-size: 8pt;
-  text-align: right; 
-  user-select: none;
-  color: rgba(${props => props.theme.taskGroup.tasksRemainingTextColor});
-`;
+////////////////////
 
 export const AddGroupButton = styled.button`
   background-color: #434a54;

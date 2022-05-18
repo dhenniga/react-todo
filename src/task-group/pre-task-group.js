@@ -7,7 +7,7 @@ import {
   Header
 } from "./task-group.styled";
 import useTask from "../useTask";
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useEffect } from 'react/cjs/react.development';
 
 export const Container = styled.div`

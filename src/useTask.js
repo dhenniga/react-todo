@@ -18,7 +18,7 @@ const useTask = () => {
         taskCompletedTime: "",
         quantity: "",
         note: "",
-        isChecked: false,
+        isChecked: false
       })
     )
 
