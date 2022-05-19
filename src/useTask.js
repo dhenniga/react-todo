@@ -3,12 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
 import qs from 'qs';
 
+const baseUrl = "http://www.fluidmotion.ie/taskboard/api/"
+
 const useTask = () => {
 
   /////////////////////////////
 
   const createTask = rootKey =>
-    axios.post("http://www.fluidmotion.ie/taskboard/api/create-task.php",
+    axios.post(baseUrl + `create-task.php`,
       qs.stringify({
         id: uuidv4(),
         taskText: "",
@@ -25,7 +27,7 @@ const useTask = () => {
   /////////////////////////////
 
   const createTaskGroup = title =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/create-task-group.php`,
+    axios.post(baseUrl + `create-task-group.php`,
       qs.stringify({
         id: uuidv4(),
         taskText: "",
@@ -37,36 +39,37 @@ const useTask = () => {
         note: "",
         isChecked: false
       },
-        { parseArrays: false }
-      )
+        {
+          parseArrays: false
+        })
     )
 
   /////////////////////////////
 
   const toggleTheme = state =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/toggle-theme.php`,
+    axios.post(baseUrl + `toggle-theme.php`,
       qs.stringify({ isDarkTheme: state ? 0 : 1 })
     )
 
   /////////////////////////////
 
   const saveGridLayout = gridLayout => {
-    return axios.post(`http://www.fluidmotion.ie/taskboard/api/save-grid-layout.php`,
+    return axios.post(baseUrl + `save-grid-layout.php`,
       qs.stringify({ gridLayout })
-      )  
-    }
+    )
+  }
 
   /////////////////////////////
 
   const deleteGroup = taskGroup =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/delete-group.php`,
+    axios.post(baseUrl + `delete-group.php`,
       qs.stringify({ taskGroup })
     )
 
   /////////////////////////////
 
   const deleteTask = id =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/delete-task.php`,
+    axios.post(baseUrl + `delete-task.php`,
       qs.stringify({ id })
     )
 
@@ -74,14 +77,14 @@ const useTask = () => {
   /////////////////////////////
 
   const renameTask = (id, value) =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/rename-task.php`,
+    axios.post(baseUrl + `rename-task.php`,
       qs.stringify({ id, value })
     )
 
   /////////////////////////////
 
   const toggleTask = (id, state) =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/toggle-task.php`,
+    axios.post(baseUrl + `toggle-task.php`,
       qs.stringify({ id, state })
     )
 
@@ -102,14 +105,14 @@ const useTask = () => {
   /////////////////////////////
 
   const changeQuantity = (id, value) =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/change-quantity.php`,
+    axios.post(baseUrl + `change-quantity.php`,
       qs.stringify({ id, value })
     )
 
   /////////////////////////////
 
   const updateNote = (id, value) =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/update-note.php`,
+    axios.post(baseUrl + `update-note.php`,
       qs.stringify({ id, value })
     )
 
@@ -126,8 +129,7 @@ const useTask = () => {
 
   const renameGroup = (node, value) => {
     map(item =>
-      axios.post(
-        `http://www.fluidmotion.ie/taskboard/api/rename-group.php`,
+      axios.post(baseUrl + `rename-group.php`,
         qs.stringify({
           id: item.id,
           taskGroup: value
@@ -139,14 +141,14 @@ const useTask = () => {
   /////////////////////////////
 
   const selectAll = taskGroup =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/select-all.php`,
+    axios.post(baseUrl + `select-all.php`,
       qs.stringify({ taskGroup })
     )
 
   /////////////////////////////
 
   const selectNone = taskGroup =>
-    axios.post(`http://www.fluidmotion.ie/taskboard/api/select-none.php`,
+    axios.post(baseUrl + `select-none.php`,
       qs.stringify({ taskGroup })
     )
 
@@ -180,8 +182,7 @@ const useTask = () => {
   /////////////////////////////
 
   const updateDateToBeCompleted = (id, date, type) => {
-    console.log(type)
-    return (axios.post(`http://www.fluidmotion.ie/taskboard/api/update-date-to-be-completed.php`,
+    return (axios.post(`update-date-to-be-completed.php`,
       qs.stringify({ id, date, type })
     ))
   }

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import "./App.css"
 import Task from "./task/task"
 import TaskGroup from "./task-group/task-group"
@@ -16,9 +16,46 @@ import GridLayout, { WidthProvider } from "react-grid-layout"
 import AppHeader from './app-header'
 import 'react-grid-layout/css/styles.css'
 import "react-resizable/css/styles.css"
+import styled from 'styled-components'
 // import { map, pipe, mergeAll } from 'ramda'
+import { initializeApp } from "firebase/app"
+import { getMessaging, getToken } from "firebase/messaging"
+
+///
 
 const NewGridLayout = WidthProvider(GridLayout)
+
+///
+
+const Marper = styled(NewGridLayout)`
+  transition: all 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+`
+
+///
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBP1q266UOuYgRYDkjWtQLn-MxwW2Xkdow",
+  authDomain: "taskboard-4780f.firebaseapp.com",
+  projectId: "taskboard-4780f",
+  storageBucket: "taskboard-4780f.appspot.com",
+  messagingSenderId: "319293178748",
+  appId: "1:319293178748:web:ba2af71b08aa36cdd95af9"
+};
+
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app)
+
+getToken(messaging, {
+  vapidKey: 'BG4d7QJgGjgsOT_K9ZW6JjofrIGtiNkHVAX9FOpPvr1mjEXqQmz8UOhVxRddYK1KsMOTEy1E3jeWbLdIsmphpdM'
+}).then((currentToken) => {
+  if (currentToken) {
+    console.log(currentToken)
+  } else {
+    console.log('No registration token available. Request permission to generate one.')
+  }
+}).catch((err) => {
+  console.log('An error occurred while retrieving token. ', err)
+})
 
 ///////////////////////
 
@@ -57,6 +94,8 @@ const App = () => {
 
   ///////////////////////
 
+  tasks && console.log(tasks)
+
   return (
 
     <ThemeProvider theme={
@@ -78,19 +117,18 @@ const App = () => {
           <AppBody
             isEditModeOn={isEditModeOn}>
 
+            {/* whats' this */}
             <div id='marp' style={{ display: 'none' }}></div>
 
-            {
-              gridLayout &&
-              <NewGridLayout
+            {gridLayout &&
+
+              <Marper
                 layout={initialLayout}
                 isResizable={false}
-                isDraggable={isEditModeOn ? true : false}
+                isDraggable={isEditModeOn}
                 onDragStop={layout => saveGridLayout(JSON.stringify(layout))}
                 rowHeight={60}
-                cols={columnNum}
-                style={{ transition: 'all 0.3s cubic-bezier(0.5, 0.2, 0, 1)' }}
-              >
+                cols={columnNum}>
 
                 {
                   mapObjectToValues((node, rootKey) =>
@@ -142,13 +180,13 @@ const App = () => {
 
                       </TaskGroup>
 
-                   </div>
+                    </div>
 
                   )(tasks)
 
                 }
 
-              </NewGridLayout>
+              </Marper>
 
             }
 
