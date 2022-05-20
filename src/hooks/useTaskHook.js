@@ -9,23 +9,23 @@ const fetcher = (...args) =>
 
 export const useConfig = () => {
   const { data, error } = useSWR(
-    "http://www.fluidmotion.ie/taskboard/api/get-config.php",
+    "https://www.fluidmotion.ie/taskboard/api/get-config.php",
     fetcher,
     {
       refreshInterval: 1000
     }
   )
-  if (error) return
+  if (error) return console.log(error)
   return { ...data }
 }
 
 export const useTasks = () => {
   const { data, error } = useSWR(
-    "http://www.fluidmotion.ie/taskboard/api/get-tasks.php",
+    "https://www.fluidmotion.ie/taskboard/api/get-tasks.php",
     fetcher,
     { refreshInterval: 1000 }
   )
-  if (error) return
+  if (error) return console.log(error)
   const tasks = data && converter(data)
   return { tasks }
 }

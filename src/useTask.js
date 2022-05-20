@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { map, reduce, values, keys } from "ramda";
 import qs from 'qs';
 
-const baseUrl = "http://www.fluidmotion.ie/taskboard/api/"
+const baseUrl = "https://www.fluidmotion.ie/taskboard/api/"
 
 const useTask = () => {
 

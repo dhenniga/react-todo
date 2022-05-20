@@ -196,7 +196,7 @@ const Task = ({
         <NoteContainer>
 
           <NoteText
-            contentEditable
+            // contentEditable
             onBlur={e =>
               updateNote(id, e.target.textContent)
             }>

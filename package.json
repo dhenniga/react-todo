@@ -1,10 +1,11 @@
 {
   "name": "react-todo",
   "version": "0.1.0",
-  "homepage": "http://www.fluidmotion.ie/taskboard",
+  "homepage": "https://www.fluidmotion.ie/taskboard",
   "dependencies": {
     "axios": "^0.21.0",
     "dayjs": "^1.9.8",
+    "firebase": "^9.8.1",
     "qs": "^6.9.4",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
