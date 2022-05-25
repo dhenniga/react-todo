@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import useTask from "../useTask";
 import {
   Container,
@@ -9,9 +9,7 @@ import {
   TimeText,
   TimePassingBar,
   QuantityContainer,
-  DisplayContainer,
-  NoteContainer,
-  NoteText
+  DisplayContainer
 } from "./task.styled";
 import { isEmpty } from "ramda";
 import Time from "../time/time";
@@ -21,7 +19,11 @@ import WatchIcon from "../buttons/watch-icon";
 import NoteButton from "../buttons/note";
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime';
+import Note from './note/note'
+
+
 dayjs.extend(RelativeTime);
+
 
 /////////////////////////////////////////
 
@@ -39,7 +41,7 @@ const Task = ({
 
   /////////////////////////////////////////
 
-  const barRef = useRef();
+  const barRef = useRef()
 
   /////////////////////////////////////////
 
@@ -50,20 +52,20 @@ const Task = ({
     calculateRemainingPercentage,
     changeQuantity,
     updateNote
-  } = useTask();
+  } = useTask()
 
   /////////////////////////////////////////
 
-  const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted);
-  const [isActive, setIsActive] = useState(isChecked);
-  const [percentage, setPercentage] = useState(percentageRemaining);
-  const { gradientColours, isOverDue } = useTaskService(percentage, isChecked);
+  const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted)
+  const [isActive, setIsActive] = useState(isChecked)
+  const [percentage, setPercentage] = useState(percentageRemaining)
+  const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
 
   /////////////////////////////////////////
 
   useEffect(() => {
 
-    if (percentage >= 101 || !dateToBeCompleted || taskCompletedTime) { return "" };
+    if (percentage >= 101 || !dateToBeCompleted || taskCompletedTime) { return "" }
 
     const intervalId = setInterval(() => {
       setPercentage(percentageRemaining);
@@ -189,21 +191,13 @@ const Task = ({
           isOverDue={isOverDue}
         />
 
-      </Container >
+      </Container>
 
-      {
-        note &&
-        <NoteContainer>
-
-          <NoteText
-            // contentEditable
-            onBlur={e =>
-              updateNote(id, e.target.textContent)
-            }>
-            {note}
-          </NoteText>
-
-        </NoteContainer>
+      {note &&
+        <Note
+          id={id}
+          note={note}
+        />
       }
 
     </>

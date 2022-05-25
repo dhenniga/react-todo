@@ -14,13 +14,7 @@ import "react-resizable/css/styles.css"
 
 ///////////////////////
 
-const AppHeader = ({ 
-    setColumnNum, 
-    setIsEditModeOn,
-    isEditModeOn
-}) => {
-
-    ///////////////////////
+const AppHeader = () => {
 
     const { isDarkTheme } = useConfig()
     const { toggleTheme } = useTask()
@@ -52,17 +46,6 @@ const AppHeader = ({
                 isDarkTheme={!!+isDarkTheme}
                 handleClick={() => toggleTheme(isDarkTheme)}
             />
-
-            <select
-                onChange={e => setColumnNum(e.target.value)}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-            </select>
-
-            <button onPointerDown={() => setIsEditModeOn(!isEditModeOn)}>
-                edit
-            </button>
 
         </Header>
     );

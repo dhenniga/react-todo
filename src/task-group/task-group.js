@@ -22,8 +22,7 @@ const Group = ({
   title,
   node,
   onSelectAll,
-  onSelectNone,
-  isEditModeOn
+  onSelectNone
 }) => {
 
   const {
@@ -46,17 +45,12 @@ const Group = ({
     setTimeUpdate(sort((a, b) => b.localeCompare(a), arr).shift())
   }, [node])
 
-  useEffect(() => {
-    containerRef && console.log(Math.round(containerRef.current.scrollHeight / 60))
-  }, [containerRef])
-
   return (
 
     <Container
       id='tester-container'
       ref={containerRef}
       isOpen={isOpen}
-      isEditModeOn={isEditModeOn}
       thingHeight={ref?.current?.clientHeight}>
 
       <Header
@@ -90,9 +84,7 @@ const Group = ({
             style={{
               fontSize: '8pt',
               color: 'rgba(120, 120, 120)',
-              transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
-              opacity: isEditModeOn ? 0 : 1
-
+              transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)'
             }}>
             Updated: <span style={{ fontWeight: 'bold' }}>{dayjs().to(dayjs(new Date(timeUpdate)))}</span>
           </span>}
@@ -114,7 +106,6 @@ const Group = ({
         }
 
         <DeleteGroupButton
-          isEditModeOn={isEditModeOn}
           isOpen={isOpen}
           onClick={() => deleteGroup(title)}>
           X

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const AppTitle = styled.label`
   font-size: 10pt;
@@ -36,10 +36,6 @@ export const AppBody = styled.div`
   background-color: rgba(${props => props.theme.mainBackground});
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: background-color;
-
-  ${props => props.isEditModeOn && css`
-    background-color: rgba(255,255,255,0.1) !important;
-  `}
 
   ::-webkit-scrollbar {
   width: 5px;

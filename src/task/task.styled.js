@@ -176,26 +176,3 @@ export const TimePassingBar = styled.div`
     display: none !important;
   `};
 `;
-
-export const NoteContainer = styled.div`
-  width: calc(100% - 55px);
-  padding: 15px;
-  background-color: rgba(${props => props.theme.task.taskNoteBGColor});
-  position:relative;
-  right: -25px;
-  margin-top: -5px;
-  margin-bottom: 10px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-`;
-
-export const NoteText = styled.div`
-  font-family: rw_regular;
-  font-size: 8.3pt;
-  color: rgba(${props => props.theme.task.taskNoteTextColor});
-  resize: none;
-  width: 100%;
-  background-color: transparent;
-  outline: 0;
-  border: 0;
-`;

@@ -4,8 +4,7 @@ export const Container = styled.div`
   text-align: left;
   padding: 10px 15px;
   position: relative;
-  /* background-color: rgba(${props => props.theme.taskGroup.groupBGColor}); */
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(${props => props.theme.taskGroup.groupBGColor});
   border-radius: 5px;
   /* height: calc(100% - 10px); */
   /* height: max-content; */
@@ -34,15 +33,6 @@ export const Container = styled.div`
   ${props => !props.isOpen && css`
     /* height: 30px !important; */
   `}
-
-  ${props => props.isEditModeOn && css`
-    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.1);
-    background-color: rgba(255,255,255,0.1) !important;
-  `}
-
-  
-
-
 `;
 
 export const Chevron = styled.div`
@@ -117,10 +107,6 @@ export const DeleteGroupButton = styled.button`
   height: 18px;
   cursor: pointer;
   transition: opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-
-  ${props => props.isEditModeOn && css`
-    opacity: 0 !important;
-  `  }
 `
 
 export const TaskGroupFooter = styled.div`

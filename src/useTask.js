@@ -53,14 +53,6 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const saveGridLayout = gridLayout => {
-    return axios.post(baseUrl + `save-grid-layout.php`,
-      qs.stringify({ gridLayout })
-    )
-  }
-
-  /////////////////////////////
-
   const deleteGroup = taskGroup =>
     axios.post(baseUrl + `delete-group.php`,
       qs.stringify({ taskGroup })
@@ -72,7 +64,6 @@ const useTask = () => {
     axios.post(baseUrl + `delete-task.php`,
       qs.stringify({ id })
     )
-
 
   /////////////////////////////
 
@@ -90,20 +81,6 @@ const useTask = () => {
 
   /////////////////////////////
 
-  // const toggleTask = (id, state) =>
-  //   api.patch(
-  //     `/tasks/${id}`,
-  //     {
-  //       isChecked: !state,
-  //       taskCompletedTime: !state
-  //         ? new Data()
-  //         : ""
-  //     })
-  //     .then(getTasks().then(updateTasks));
-
-
-  /////////////////////////////
-
   const changeQuantity = (id, value) =>
     axios.post(baseUrl + `change-quantity.php`,
       qs.stringify({ id, value })
@@ -117,15 +94,6 @@ const useTask = () => {
     )
 
   /////////////////////////////
-
-  // const renameGroup = (node, value) => {
-  //   map(item =>
-  //     api.patch(
-  //       `/tasks/${item.id}`,
-  //       { group: value })
-  //   )(node);
-  //   getTasks().then(updateTasks);
-  // }
 
   const renameGroup = (node, value) => {
     map(item =>
@@ -190,8 +158,6 @@ const useTask = () => {
   /////////////////////////////
 
   return {
-    // getTasks,
-    // getConfig,
     createTask,
     createTaskGroup,
     deleteTask,
@@ -207,8 +173,7 @@ const useTask = () => {
     updateDateToBeCompleted,
     changeQuantity,
     updateNote,
-    toggleTheme,
-    saveGridLayout
+    toggleTheme
   }
 
 }

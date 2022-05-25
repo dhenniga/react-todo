@@ -63,13 +63,11 @@ class DB_Functions
 
         if ($stmt->execute()) {
             $stmt->bind_result(
-                $isDarkTheme,
-                $gridLayout
+                $isDarkTheme
             );
             $rows = array();
             while ($r = mysqli_stmt_fetch($stmt)) {
                 $config['isDarkTheme'] = $isDarkTheme;
-                $config['gridLayout'] = $gridLayout;
             }
             $stmt->close();
         }
@@ -89,21 +87,7 @@ class DB_Functions
         $stmt->close();
     }
 
-    ////////////////////////
-
-    public function saveGridLayout($gridLayout)
-    {
-        $stmt = $this->conn->prepare('UPDATE config SET gridLayout = ?');
-        $stmt->bind_param(
-            's',
-            $gridLayout
-        );
-        $result = $stmt->execute();
-        $stmt->close();
-    }
-
-
-    ////////////////////////
+        ////////////////////////
 
     public function createTask(
         $id,
