@@ -20,10 +20,10 @@ const App = () => {
   useEffect(() => setThemeState(isDarkTheme), [isDarkTheme])
 
   const handleThemeChange = () => {
-    const blob = !themeState
-    console.log(blob)
-    setThemeState(blob)
-    toggleTheme(blob)
+    const state = !themeState
+    console.log(state)
+    setThemeState(state)
+    toggleTheme(state)
   }
 
   return <ThemeProvider theme={themeState ? dark : light}>

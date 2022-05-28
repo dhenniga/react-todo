@@ -140,7 +140,7 @@ const useTask = () => {
   const tasksRemainingCount = node =>
     reduce((a, item) =>
       a + !item.isChecked,
-      0)(values(node?.taskGroup));
+      0)(values(node))
 
   /////////////////////////////
 
