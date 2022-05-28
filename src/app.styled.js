@@ -20,15 +20,16 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-  width: calc(100% - 40px);
+  width: calc(100% - 20px);
   height: fit-content;
-  padding: 20px;
+  padding: 10px;
   background-color: black;
   color: white;
   z-index: 2;
 `;
 
 export const AppBody = styled.div`
+  border-radius: 10px;
   overflow-y: overlay;
   min-width: 350px;
   width: 100%;

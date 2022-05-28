@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useTask from "../useTask";
 import {
   Container,
@@ -21,9 +21,9 @@ import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import Note from './note/note'
 
+/////////////////////////////////////////
 
 dayjs.extend(RelativeTime);
-
 
 /////////////////////////////////////////
 
@@ -57,9 +57,14 @@ const Task = ({
   /////////////////////////////////////////
 
   const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted)
-  const [isActive, setIsActive] = useState(isChecked)
   const [percentage, setPercentage] = useState(percentageRemaining)
   const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
+
+  const [checkState, setCheckState] = useState(isChecked)
+
+  /////////////////////////////////////////
+
+  useEffect(() => setCheckState(isChecked), [isChecked])
 
   /////////////////////////////////////////
 
@@ -87,30 +92,28 @@ const Task = ({
 
   /////////////////////////////////////////
 
-  useEffect(() => {
-    setIsActive(isChecked)
-  }, [isChecked])
-
   return (
 
     <>
 
       <Container
+        id={id}
         isOverDue={isOverDue}
-        checked={isChecked}>
+        checked={checkState}>
 
         <Checkbox
           type="checkbox"
-          checked={isChecked}
+          checked={checkState}
           onChange={() => {
-            setIsActive(!isChecked);
-            toggleTask(id, isChecked ? 0 : 1)
+            const toggledTaskState = !checkState
+            setCheckState(toggledTaskState)
+            toggleTask(id, toggledTaskState)
           }}
         />
 
         <Input
           type="text"
-          checked={isChecked}
+          checked={checkState}
           isOverDue={isOverDue}
           onBlur={event => renameTask(id, event.target.value)}
           defaultValue={text}
@@ -145,7 +148,7 @@ const Task = ({
           {
             quantity &&
             <QuantityContainer
-              checked={isActive}
+              checked={checkState}
               isOverDue={isOverDue}>
               {quantity}
             </QuantityContainer>
@@ -153,7 +156,7 @@ const Task = ({
 
         </DisplayContainer>
 
-        {!isActive &&
+        {!checkState &&
           <SettingsContainer>
 
             <input style={{
@@ -177,16 +180,19 @@ const Task = ({
             />
 
             <DeleteButton
-              handleClick={() => deleteTask(id)}
+              handleClick={() => {
+                document.getElementById(id).style.opacity = "0"
+                deleteTask(id)
+              }}
               isOverDue={isOverDue}
             />
-
+-
           </SettingsContainer>
         }
 
         <TimePassingBar
           ref={barRef}
-          checked={isActive}
+          checked={checkState}
           percentage={percentage}
           isOverDue={isOverDue}
         />

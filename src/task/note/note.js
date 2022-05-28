@@ -9,26 +9,29 @@ dayjs.extend(RelativeTime)
 
 const Note = ({ id, note }) => {
 
-  const { updateNote } = useTask()  
+  const { updateNote } = useTask()
   const [value, setValue] = useState(note)
   const noteTextRef = useRef()
   const onChange = e => setValue(e.target.value)
   const onBlur = e => {
     updateNote(id, e.target.value).then(() => {
       console.log(note)
-      setValue(note)})
+      setValue(note)
+    })
   }
 
-  const updateNoteHeight = () => {
-    noteTextRef.current.style.height = "inherit"
-    noteTextRef.current.style.height = Math.max(
-      noteTextRef.current.scrollHeight,
-      20
-    ) + 'px'
-  }
+  // const updateNoteHeight = () => {
+  //   if (noteTextRef !== null) {
+  //     noteTextRef.current.style.height = "inherit"
+  //     noteTextRef.current.style.height = Math.max(
+  //       noteTextRef.current.scrollHeight,
+  //       20
+  //     ) + 'px'
+  //   }
+  // }
 
-  useLayoutEffect(updateNoteHeight, [value])
-  useEffect(() => window.onresize = updateNoteHeight)
+  // useLayoutEffect(updateNoteHeight, [value])
+  // useEffect(() => window.onresize = updateNoteHeight)
 
   return <NoteContainer>
 

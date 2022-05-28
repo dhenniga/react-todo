@@ -22,7 +22,8 @@ const Group = ({
   title,
   node,
   onSelectAll,
-  onSelectNone
+  onSelectNone,
+  isExpanded
 }) => {
 
   const {
@@ -30,12 +31,13 @@ const Group = ({
     tasksRemainingCount,
     allSelected,
     renameGroup,
-    deleteGroup
+    deleteGroup,
+    toggleExpanded
   } = useTask();
 
   const [checked, setChecked] = useState(allSelected(node))
-  const [isOpen, setIsOpen] = useState(true)
   const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
+  const [expandLocalState, setExpandLocalState] = useState(isExpanded)
   const ref = useRef()
   const containerRef = useRef()
 
@@ -45,20 +47,26 @@ const Group = ({
     setTimeUpdate(sort((a, b) => b.localeCompare(a), arr).shift())
   }, [node])
 
+  useEffect(() => setExpandLocalState(isExpanded), [isExpanded])
+
   return (
 
     <Container
       id='tester-container'
       ref={containerRef}
-      isOpen={isOpen}
+      isExpanded={expandLocalState}
       thingHeight={ref?.current?.clientHeight}>
 
       <Header
-        isOpen={isOpen}>
+        isExpanded={expandLocalState}>
 
         <Chevron
-          isOpen={isOpen}
-          onClick={() => setIsOpen(!isOpen)}>
+          isExpanded={expandLocalState}
+          onClick={() => {
+            const toggledExpandState = !expandLocalState
+            setExpandLocalState(toggledExpandState)
+            toggleExpanded(rootKey, toggledExpandState)
+            }}>
           <svg
             width="16"
             height="8">
@@ -67,7 +75,7 @@ const Group = ({
         </Chevron>
 
         <div style={{
-          display: isOpen ? "block" : "grid",
+          display: expandLocalState ? "block" : "grid",
           gridTemplateRow: "1fr 1fr"
         }}>
           <Input
@@ -80,7 +88,7 @@ const Group = ({
               )}
           />
 
-          {!isOpen && <span
+          {!expandLocalState && <span
             style={{
               fontSize: '8pt',
               color: 'rgba(120, 120, 120)',
@@ -93,7 +101,7 @@ const Group = ({
 
 
 
-        {isOpen &&
+        {expandLocalState &&
           <ToggleSelectAll
             type="checkbox"
             checked={checked}
@@ -106,7 +114,6 @@ const Group = ({
         }
 
         <DeleteGroupButton
-          isOpen={isOpen}
           onClick={() => deleteGroup(title)}>
           X
         </DeleteGroupButton>
@@ -117,8 +124,8 @@ const Group = ({
         ref={ref}
         style={{
           transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
-          opacity: isOpen ? 1 : 0,
-          height: !isOpen && '0px',
+          opacity: expandLocalState ? 1 : 0,
+          height: !expandLocalState && '0px',
           overflow: 'visible'
         }}>
         {children}

@@ -12,8 +12,8 @@ export const Container = styled.div`
     /* height: calc(${props => props.thingHeight}px + 60px); */
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: padding-bottom height;
-  overflow: hidden scroll;
-  padding-bottom: ${props => props.isOpen ? 0 : 0}px;
+  overflow: hidden overlay;
+  padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
   box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor};
 
   ::-webkit-scrollbar {
@@ -30,8 +30,9 @@ export const Container = styled.div`
   background: rgba(${props => props.theme.accentColor}, 0.3);
 }
 
-  ${props => !props.isOpen && css`
+  ${props => !props.isExpanded && css`
     /* height: 30px !important; */
+    overflow: hidden !important;
   `}
 `;
 
@@ -46,7 +47,7 @@ export const Chevron = styled.div`
   transition: transform 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transform-origin: 8px 20px;
 
-  ${props => props.isOpen && css`
+  ${props => props.isExpanded && css`
     transform: rotate(-180deg);
   `}
 
@@ -80,7 +81,7 @@ export const Header = styled.div`
   grid-template-columns: 25px 1fr 22px;
   align-items: center;
 
-  ${props => props.isOpen && css`
+  ${props => props.isExpanded && css`
   border-bottom: 2px solid rgba(${props => props.theme.groupHeaderBorderBottomColor});
   grid-template-columns: 25px 1fr 23px 22px !important;
   `}

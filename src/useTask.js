@@ -46,9 +46,18 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const toggleTheme = state =>
+  const toggleTheme = state => {
+    console.log(state)
     axios.post(baseUrl + `toggle-theme.php`,
       qs.stringify({ isDarkTheme: state ? 0 : 1 })
+    )
+  }
+
+  /////////////////////////////
+
+  const toggleExpanded = (taskGroup, state) =>
+    axios.post(baseUrl + `toggle-expanded.php`,
+      qs.stringify({ taskGroup, isExpanded: state ? 1 : 0 })
     )
 
   /////////////////////////////
@@ -76,7 +85,7 @@ const useTask = () => {
 
   const toggleTask = (id, state) =>
     axios.post(baseUrl + `toggle-task.php`,
-      qs.stringify({ id, state })
+      qs.stringify({ id, state: state ? 1 : 0 })
     )
 
   /////////////////////////////
@@ -122,10 +131,18 @@ const useTask = () => {
 
   /////////////////////////////
 
+  const updateDateToBeCompleted = (id, date, type) => {
+    return (axios.post(baseUrl + `update-date-to-be-completed.php`,
+      qs.stringify({ id, date, type })
+    ))
+  }
+
+  /////////////////////////////
+
   const tasksRemainingCount = node =>
     reduce((a, item) =>
       a + !item.isChecked,
-      0)(values(node));
+      0)(values(node?.taskGroup));
 
   /////////////////////////////
 
@@ -149,14 +166,6 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const updateDateToBeCompleted = (id, date, type) => {
-    return (axios.post(`update-date-to-be-completed.php`,
-      qs.stringify({ id, date, type })
-    ))
-  }
-
-  /////////////////////////////
-
   return {
     createTask,
     createTaskGroup,
@@ -173,7 +182,8 @@ const useTask = () => {
     updateDateToBeCompleted,
     changeQuantity,
     updateNote,
-    toggleTheme
+    toggleTheme,
+    toggleExpanded
   }
 
 }

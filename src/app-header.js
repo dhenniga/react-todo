@@ -33,10 +33,10 @@ const AppHeader = () => {
                 // onClick={() => createTaskGroup()}>
                 onClick={() => {
                     const title = React.createElement(PreGroup, null, null)
-                    document.getElementById('marp').style.display = 'inline'
+                    document.getElementById('modal').style.display = 'grid'
                     ReactDOM.render(
                         title,
-                        document.getElementById('marp')
+                        document.getElementById('modal')
                     )
                 }}>
                 +

@@ -90,8 +90,8 @@ export const Container = styled.div`
   position: relative;
   grid-template-columns: 26px 1fr max-content;
   border-bottom: 1px solid rgba(${props => props.theme.task.taskBorderBottomcolor});
-  transition: 0.3s cubic-bezier(0,0,0,1);
-  transition-property: border-bottom-color, background-color, padding;
+  transition: 0.3s cubic-bezier(0.5,0.2,0,1);
+  transition-property: border-bottom-color, background-color, padding, opacity;
 
   &:hover {
     border-bottom-color: #656d78;

@@ -10,74 +10,63 @@ import useTask from "./useTask"
 
 const SomeFile = () => {
 
-    const {
-        selectAll,
-        selectNone,
-    } = useTask()
+  const { selectAll, selectNone } = useTask()
+  const { tasks } = useTasks()
 
-    const { tasks } = useTasks()
+  return <Container>
 
-    return <Container>
+    <AppHeader />
 
-        <AppHeader />
+    {tasks &&
+      <AppBody>
+        {
+          mapObjectToValues((node, rootKey) =>
 
-        {tasks &&
+            <TaskGroup
+              rootKey={rootKey}
+              title={rootKey}
+              node={node}
+              onSelectAll={selectAll}
+              onSelectNone={selectNone}
+              isExpanded={!!+Object.values(node)[0].isExpanded}>
 
-            <AppBody>
+              {
+                mapObjectToValues(({
+                  id,
+                  text,
+                  isChecked,
+                  dateCreated,
+                  dateToBeCompleted,
+                  taskCompletedTime,
+                  quantity,
+                  note,
+                  timeDisplayType
+                }, key) =>
+                  <Task
+                    key={key}
+                    id={id}
+                    text={text}
+                    isChecked={!!+isChecked}
+                    dateCreated={dateCreated}
+                    dateToBeCompleted={dateToBeCompleted}
+                    taskCompletedTime={taskCompletedTime}
+                    quantity={quantity}
+                    note={note}
+                    timeDisplayType={timeDisplayType}
 
-                {/* whats' this */}
-                <div id='marp' style={{ display: 'none' }}></div>
+                  />
+                )(node)
+              }
 
-                {
-                    mapObjectToValues((node, rootKey) =>
+            </TaskGroup>
 
-                        <TaskGroup
-                            rootKey={rootKey}
-                            title={rootKey}
-                            node={node}
-                            onSelectAll={selectAll}
-                            onSelectNone={selectNone}>
-
-                            {
-                                mapObjectToValues(({
-                                    id,
-                                    text,
-                                    isChecked,
-                                    dateCreated,
-                                    dateToBeCompleted,
-                                    taskCompletedTime,
-                                    quantity,
-                                    note,
-                                    timeDisplayType
-                                }, key) =>
-
-                                    <Task
-                                        key={key}
-                                        id={id}
-                                        text={text}
-                                        isChecked={!!+isChecked}
-                                        dateCreated={dateCreated}
-                                        dateToBeCompleted={dateToBeCompleted}
-                                        taskCompletedTime={taskCompletedTime}
-                                        quantity={quantity}
-                                        note={note}
-                                        timeDisplayType={timeDisplayType}
-                                    />
-
-                                )(node)
-                            }
-
-                        </TaskGroup>
-
-                    )(tasks)
-
-                }
-
-            </AppBody>
-
+          )(tasks)
         }
 
-    </Container>
+      </AppBody>
+    }
+
+  </Container>
 }
 
 export default SomeFile

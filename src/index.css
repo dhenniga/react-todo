@@ -1,3 +1,8 @@
+html {
+  max-width: 450px;
+  margin: 0px auto;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,4 +20,22 @@ code {
 
 #root {
 background-color: rgb(17, 24, 30);
+}
+
+#modal {
+  display: none;
+  background-color: rgba(0,0,0,0.8);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  transition: all 0.5s cubic-bezier(0.5, 0.2, 0, 1);
+  overflow: hidden;
+  align-items: center;
+  justify-items: center;
+  z-index: 200;
+  max-width: 450px;
+  
 }

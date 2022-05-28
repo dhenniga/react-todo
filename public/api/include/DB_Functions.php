@@ -33,7 +33,8 @@ class DB_Functions
                 $note,
                 $isChecked,
                 $timeDisplayType,
-                $lastUpdated
+                $lastUpdated,
+                $isExpanded
             );
             $rows = array();
             while ($r = mysqli_stmt_fetch($stmt)) {
@@ -48,6 +49,7 @@ class DB_Functions
                 $task['isChecked'] = $isChecked;
                 $task['timeDisplayType'] = $timeDisplayType;
                 $task['lastUpdated'] = $lastUpdated;
+                $task['isExpanded'] = $isExpanded;
                 $rows[] = $task;
             }
             $stmt->close();
@@ -87,7 +89,21 @@ class DB_Functions
         $stmt->close();
     }
 
-        ////////////////////////
+    ////////////////////////
+
+    public function toggleExpanded($taskGroup, $isExpanded)
+    {
+        $stmt = $this->conn->prepare('UPDATE tasks SET isExpanded = ? WHERE taskGroup = ?');
+        $stmt->bind_param(
+            'ss',
+            $isExpanded,
+            $taskGroup
+        );
+        $result = $stmt->execute();
+        $stmt->close();
+    }
+
+    ////////////////////////
 
     public function createTask(
         $id,

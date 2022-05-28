@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react'
+import React, { useRef, useLayoutEffect, useState } from 'react'
 import {
   Chevron,
   ChevronPath,
@@ -8,7 +8,6 @@ import {
 } from "./task-group.styled";
 import useTask from "../useTask";
 import styled from 'styled-components'
-import { useEffect } from 'react/cjs/react.development';
 
 export const Container = styled.div`
   text-align: left;
@@ -32,53 +31,48 @@ const PreGroup = () => {
     createTaskGroup,
   } = useTask();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     console.log(ref.current)
     ref.current.focus()
   }, [])
 
-  return (
+  return <Container id='demo'>
 
-    <Container id='demo'>
+    <Header>
 
-      <Header>
+      <Chevron>
+        <svg
+          width="16"
+          height="8">
+          <ChevronPath d="M16 0h-4.283L8 3.717 4.283 0H0l8 8z" />
+        </svg>
+      </Chevron>
 
-        <Chevron>
-          <svg
-            width="16"
-            height="8">
-            <ChevronPath d="M16 0h-4.283L8 3.717 4.283 0H0l8 8z" />
-          </svg>
-        </Chevron>
+      <div style={{
+        display: "grid",
+        gridTemplateRow: "1fr 1fr"
+      }}>
+        <Input
+          ref={ref}
+          style={{ color: 'white' }}
+          placeholder="Enter Group Name..."
+          onFocus={() => console.log('focused')}
+          onBlur={event => {
+            const value = event.target.value
+            value !== '' && createTaskGroup(value)
+            // var myobj = document.getElementById("demo");
+            // myobj.remove();
+            document.getElementById('modal').style.display = 'none'
+          }}
+        />
+      </div>
 
-        <div style={{
-          display: "grid",
-          gridTemplateRow: "1fr 1fr"
-        }}>
-          <Input
-            ref={ref}
-            style={{ color: 'white' }}
-            placeholder="Enter Group Name..."
-            onFocus={() => console.log('focused')}
-            onBlur={event => {
-              const value = event.target.value
-              value !== '' && createTaskGroup(event.target.value)
-              var myobj = document.getElementById("demo");
-              myobj.remove();
-              document.getElementById('marp').style.display = 'none'
-            }
+    </Header>
 
-            }
-          />
+  </Container>
 
-        </div>
 
-      </Header>
 
-    </Container>
+}
 
-  );
-
-};
-
-export default PreGroup;
+export default PreGroup
