@@ -60,10 +60,9 @@ const Task = ({
   const [percentage, setPercentage] = useState(percentageRemaining)
   const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
 
-  const [checkState, setCheckState] = useState(isChecked)
-
   /////////////////////////////////////////
 
+  const [checkState, setCheckState] = useState(isChecked)
   useEffect(() => setCheckState(isChecked), [isChecked])
 
   /////////////////////////////////////////
@@ -186,7 +185,7 @@ const Task = ({
               }}
               isOverDue={isOverDue}
             />
--
+            -
           </SettingsContainer>
         }
 

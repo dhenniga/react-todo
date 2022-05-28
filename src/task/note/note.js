@@ -1,4 +1,9 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  // useEffect, 
+  // useLayoutEffect 
+} from "react";
 import useTask from "../../useTask";
 import { NoteContainer, NoteText } from "./note.styled";
 import dayjs from "dayjs";

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "./App.css"
 import { ThemeProvider } from "styled-components"
 import light from "./themes/light.theme"
@@ -7,16 +7,28 @@ import { useConfig } from './hooks/useTaskHook'
 import 'react-grid-layout/css/styles.css'
 import "react-resizable/css/styles.css"
 import SomeFile from "./SomeFile"
+import useTask from "./useTask"
 
 ///
 
 const App = () => {
 
   const { isDarkTheme } = useConfig()
+  const { toggleTheme } = useTask()
 
-  return <ThemeProvider theme={!!+isDarkTheme ? light : dark}>
+  const [themeState, setThemeState] = useState(isDarkTheme)
+  useEffect(() => setThemeState(isDarkTheme), [isDarkTheme])
 
-    <SomeFile />
+  const handleThemeChange = () => {
+    const blob = !themeState
+    console.log(blob)
+    setThemeState(blob)
+    toggleTheme(blob)
+  }
+
+  return <ThemeProvider theme={themeState ? dark : light}>
+
+    <SomeFile handleThemeChange={handleThemeChange} />
 
   </ThemeProvider>
 

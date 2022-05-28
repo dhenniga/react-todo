@@ -4,7 +4,6 @@ import {
     Header,
     AppTitle
 } from "./app.styled"
-import useTask from "./useTask"
 import ToggleThemeButton from "./buttons/toggle-theme"
 import { useConfig } from './hooks/useTaskHook'
 import PreGroup from './task-group/pre-task-group'
@@ -14,10 +13,9 @@ import "react-resizable/css/styles.css"
 
 ///////////////////////
 
-const AppHeader = () => {
+const AppHeader = ({ handleThemeChange }) => {
 
     const { isDarkTheme } = useConfig()
-    const { toggleTheme } = useTask()
 
     ///////////////////////
 
@@ -44,7 +42,7 @@ const AppHeader = () => {
 
             <ToggleThemeButton
                 isDarkTheme={!!+isDarkTheme}
-                handleClick={() => toggleTheme(isDarkTheme)}
+                handleClick={handleThemeChange}
             />
 
         </Header>

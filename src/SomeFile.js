@@ -8,14 +8,14 @@ import TaskGroup from "./task-group/task-group"
 import useTask from "./useTask"
 
 
-const SomeFile = () => {
+const SomeFile = ({ handleThemeChange }) => {
 
   const { selectAll, selectNone } = useTask()
   const { tasks } = useTasks()
 
   return <Container>
 
-    <AppHeader />
+    <AppHeader handleThemeChange={handleThemeChange} />
 
     {tasks &&
       <AppBody>

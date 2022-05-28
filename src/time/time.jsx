@@ -36,7 +36,7 @@ const Time = ({
           // onClick={() => setIsOpen(false)}
           >
 
-          {/* <button
+          <button
             onPointerUp={() => {
               setIsOpen(false);
               updateDateToBeCompleted(
@@ -48,9 +48,9 @@ const Time = ({
             }
             style={{ backgroundColor: 'black', color: 'white', padding: 10 }}>
             at
-          </button> */}
+          </button>
 
-          {/* <Calendar 
+          <Calendar 
             onChange={date => {
             setIsOpen(false);
             console.log(date.toISOString())
@@ -59,7 +59,7 @@ const Time = ({
               dayjs(date).toString(),
               'on'
             );
-          }}/> */}
+          }}/>
 
           <div style={{ backgroundColor: 'black', color: 'white' }}>
             in
@@ -81,7 +81,7 @@ const Time = ({
           }
           </div>
 
-          {/* <p style={{ backgroundColor: 'black', color: 'white' }}>on</p> */}
+           <p style={{ backgroundColor: 'black', color: 'white' }}>on</p> 
 
         </TimeContainerBackground>
       }

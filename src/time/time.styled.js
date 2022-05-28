@@ -8,6 +8,7 @@ export const TimeContainerBackground = styled.div`
   top: 0;
   left: 0;
   z-index: 3000;
+  overflow:scroll;
 `;
 
 export const TimeContainer = styled.div`

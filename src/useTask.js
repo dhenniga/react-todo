@@ -46,12 +46,10 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const toggleTheme = state => {
-    console.log(state)
+  const toggleTheme = state =>
     axios.post(baseUrl + `toggle-theme.php`,
-      qs.stringify({ isDarkTheme: state ? 0 : 1 })
+      qs.stringify({ isDarkTheme: state ? 1 : 0 })
     )
-  }
 
   /////////////////////////////
 
