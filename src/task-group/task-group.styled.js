@@ -4,7 +4,7 @@ export const Container = styled.div`
   text-align: left;
   padding: 10px 15px;
   position: relative;
-  background-color: rgba(${props => props.theme.taskGroup.groupBGColor});
+  /* background-color: rgba(${props => props.theme.taskGroup.groupBGColor}); */
   border-radius: 5px;
   /* height: calc(100% - 10px); */
   /* height: max-content; */
@@ -14,7 +14,8 @@ export const Container = styled.div`
   transition-property: padding-bottom height;
   overflow: hidden overlay;
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
-  box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor};
+  /* box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor}; */
+  margin-bottom: 5px;
 
   ::-webkit-scrollbar {
   width: 5px;
