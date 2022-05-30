@@ -66,7 +66,7 @@ const Group = ({
             const toggledExpandState = !expandLocalState
             setExpandLocalState(toggledExpandState)
             toggleExpanded(rootKey, toggledExpandState)
-            }}>
+          }}>
           <svg
             width="16"
             height="8">

@@ -185,7 +185,7 @@ const Task = ({
               }}
               isOverDue={isOverDue}
             />
-            -
+
           </SettingsContainer>
         }
 

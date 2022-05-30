@@ -23,6 +23,7 @@ const SomeFile = ({ handleThemeChange }) => {
           mapObjectToValues((node, rootKey) =>
 
             <TaskGroup
+              key={rootKey}
               rootKey={rootKey}
               title={rootKey}
               node={node}

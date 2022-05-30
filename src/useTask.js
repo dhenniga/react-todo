@@ -1,9 +1,9 @@
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
-import { map, reduce, values, keys } from "ramda";
-import qs from 'qs';
+import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
+import { map, reduce, values, keys } from 'ramda'
+import qs from 'qs'
 
-const baseUrl = "https://www.fluidmotion.ie/taskboard/api/"
+const baseUrl = 'https://www.fluidmotion.ie/taskboard/api/'
 
 const useTask = () => {
 
@@ -13,13 +13,13 @@ const useTask = () => {
     axios.post(baseUrl + `create-task.php`,
       qs.stringify({
         id: uuidv4(),
-        taskText: "",
+        taskText: '',
         taskGroup: rootKey,
         dateCreated: new Date(),
-        dateToBeCompleted: "",
-        taskCompletedTime: "",
-        quantity: "",
-        note: "",
+        dateToBeCompleted: '',
+        taskCompletedTime: '',
+        quantity: '',
+        note: '',
         isChecked: false
       })
     )
@@ -30,13 +30,13 @@ const useTask = () => {
     axios.post(baseUrl + `create-task-group.php`,
       qs.stringify({
         id: uuidv4(),
-        taskText: "",
+        taskText: '',
         taskGroup: title,
         dateCreated: new Date(),
-        dateToBeCompleted: "",
-        taskCompletedTime: "",
-        quantity: "",
-        note: "",
+        dateToBeCompleted: '',
+        taskCompletedTime: '',
+        quantity: '',
+        note: '',
         isChecked: false
       },
         {
