@@ -1,35 +1,31 @@
 import styled from "styled-components";
 
 export const AppTitle = styled.label`
-  font-size: 10pt;
+  font-size: 10px;
   text-transform: uppercase;
-  font-family: rw_bold;
+  font-family: rw_regular;
   font-weight: 600;
-  letter-spacing: 2px;
-  line-height: 26px;
+  letter-spacing: 1px;
+  line-height: 46px;
+  padding-left: 15px;
+  color: rgb(${props => props.theme.accentColor});
 `;
 
 export const Container = styled.div`
    background-color: rgba(${props => props.theme.background});
-  /* display: grid;
-  grid-template-rows: max-content 1fr; */
-  /* height: 100vh; */
-  /* overflow: hidden; */
-  /* max-width: 600px; */
-  /* margin: 0px auto; */
 `;
 
 export const Header = styled.div`
-  width: calc(100% - 20px);
+  width: 100%;
   height: fit-content;
-  padding: 10px;
+  height: 46px;
   background-color: black;
   color: white;
   z-index: 2;
+  border-bottom: inset 1px rgb(${props => props.theme.headerBorderColor});
 `;
 
 export const AppBody = styled.div`
-  border-radius: 10px;
   overflow-y: overlay;
   min-width: 350px;
   width: 100%;
@@ -73,21 +69,23 @@ export const ItemTotal = styled.div`
 ////////////////////
 
 export const AddGroupButton = styled.button`
-  background-color: #434a54;
+font-family: rw_regular;
+  background-color: transparent;
+  height: 46px;
+  width: 46px;
   float: right;
-  font-size: 20pt;
-  font-weight: 600;
-  line-height: 16px;
+  font-size: 33pt;
+  line-height: 46px;
+  font-weight: 400;
   color: white;
-  border: 0;
-  /* margin: 15px; */
-  padding:  5px 10px; 
-  border-radius: 5px;
+  border: 0px;
+  padding: 0px; 
   cursor: pointer;
   outline: none;
-  transition: ${props => props.theme.fastEasing};
+  transition: background-color ${props => props.theme.fastEasing};
+  border-left: solid 1px rgb(${props => props.theme.headerBorderColor});
 
   &:hover {
-    transform: scale3d(1.1, 1.1, 1.1);
+    background-color: rgb(${props => props.theme.accentColor});
   }
 `;

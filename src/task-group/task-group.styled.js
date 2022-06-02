@@ -2,20 +2,14 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
-  padding: 10px 15px;
   position: relative;
-  /* background-color: rgba(${props => props.theme.taskGroup.groupBGColor}); */
-  border-radius: 5px;
-  /* height: calc(100% - 10px); */
-  /* height: max-content; */
-
-    /* height: calc(${props => props.thingHeight}px + 60px); */
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: padding-bottom height;
   overflow: hidden overlay;
+  display: grid;
+  align-items: center;
+  padding: 0px 15px;
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
-  /* box-shadow: ${props => props.theme.taskGroup.groupBoxBorderColor}; */
-  margin-bottom: 5px;
 
   ::-webkit-scrollbar {
   width: 5px;
@@ -31,8 +25,14 @@ export const Container = styled.div`
   background: rgba(${props => props.theme.accentColor}, 0.3);
 }
 
+${props => props.isExpanded && css`
+border-radius: 10px;
+background-color: rgba(128,128,128,0.2);
+margin-bottom: 15px;
+  `}
+
   ${props => !props.isExpanded && css`
-    /* height: 30px !important; */
+    height: 58px !important;
     overflow: hidden !important;
   `}
 `;
@@ -40,14 +40,16 @@ export const Container = styled.div`
 export const Chevron = styled.div`
   padding: 0;
   margin: 0;
-  width: 25px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   display: grid;
   justify-content: start;
   align-items: center;
-  transition: transform 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-  transform-origin: 8px 20px;
+`;
 
+export const ChevronSVG = styled.svg`
+  transition: transform 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+  transform-origin: 50% 50%;
   ${props => props.isExpanded && css`
     transform: rotate(-180deg);
   `}
@@ -59,7 +61,7 @@ export const ChevronPath = styled.path`
 `;
 
 export const Input = styled.input`
-  font-family: ${props => props.theme.Light};
+  font-family: ${props => props.theme.rc_regular};
   letter-spacing: 0.2px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -70,8 +72,8 @@ export const Input = styled.input`
   background-color: transparent;
   border: none;
   outline: 0px;
-  font-size: 12pt;
-  font-weight: 600;
+  font-size: 10pt;
+  font-weight: 300;
   color: rgba(${props => props.theme.groupHeaderTextColor});
 `;
 
@@ -79,12 +81,15 @@ export const Header = styled.div`
   border-bottom: 2px solid rgba(0,0,0,0);
   display: grid;
   transition: border-bottom 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-  grid-template-columns: 25px 1fr 22px;
+  grid-template-columns: 20px 1fr;
   align-items: center;
+  min-height: 58px;
 
   ${props => props.isExpanded && css`
   border-bottom: 2px solid rgba(${props => props.theme.groupHeaderBorderBottomColor});
-  grid-template-columns: 25px 1fr 23px 22px !important;
+  grid-template-columns: 20px 1fr 23px 22px !important;
+  margin-top:20px;
+  min-height: 38px;
   `}
 
 `;
@@ -116,7 +121,7 @@ export const TaskGroupFooter = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
-  border-bottom: 3px solid black;
+  /* border-bottom: 3px solid black; */
 `;
 
 export const AddTask = styled.button`

@@ -127,8 +127,8 @@ export const Container = styled.div`
 export const Input = styled.input`
   text-align: left;
   color: rgba(${props => props.isOverDue ? "255,255,255,1" : props.theme.task.taskInputTextColor});
-  font-family: ${props => props.theme.rwRegular};
-  font-weight: 600;
+  font-family: ${props => props.theme.rcRegular};
+  font-weight: 400;
   font-size: 9pt;
   background-color: transparent;
   border: 0px;

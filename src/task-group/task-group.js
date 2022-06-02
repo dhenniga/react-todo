@@ -3,6 +3,7 @@ import {
   Container,
   Chevron,
   ChevronPath,
+  ChevronSVG,
   Input,
   Header,
   ToggleSelectAll,
@@ -38,7 +39,7 @@ const Group = ({
   const [checked, setChecked] = useState(allSelected(node))
   const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
   const [expandLocalState, setExpandLocalState] = useState(isExpanded)
-  const ref = useRef()
+  // const ref = useRef()
   const containerRef = useRef()
 
   useEffect(() => {
@@ -54,29 +55,32 @@ const Group = ({
     <Container
       id='tester-container'
       ref={containerRef}
-      isExpanded={expandLocalState}
-      thingHeight={ref?.current?.clientHeight}>
+      isExpanded={expandLocalState}>
 
       <Header
+        className='header'
         isExpanded={expandLocalState}>
 
         <Chevron
-          isExpanded={expandLocalState}
           onClick={() => {
             const toggledExpandState = !expandLocalState
             setExpandLocalState(toggledExpandState)
             toggleExpanded(rootKey, toggledExpandState)
           }}>
-          <svg
-            width="16"
-            height="8">
-            <ChevronPath d="M16 0h-4.283L8 3.717 4.283 0H0l8 8z" />
-          </svg>
+          <ChevronSVG
+            isExpanded={expandLocalState}
+            width="9"
+            height="9"
+            viewBox="0 0 2.381 2.381">
+            <ChevronPath
+              d="M1.19.476a.239.238 0 0 0-.168.07l-.953.953a.239.238 0 0 0 .168.406h1.906a.239.238 0 0 0 .17-.407L1.358.546a.239.238 0 0 0-.169-.07z"
+            />
+          </ChevronSVG>
         </Chevron>
 
         <div style={{
           display: expandLocalState ? "block" : "grid",
-          gridTemplateRow: "1fr 1fr"
+          gridTemplateColumns: "1fr 1fr"
         }}>
           <Input
             defaultValue={title}
@@ -90,11 +94,16 @@ const Group = ({
 
           {!expandLocalState && <span
             style={{
-              fontSize: '8pt',
+              fontSize: '10px',
+              textAlign: "right",
+              lineHeight: '25px',
               color: 'rgba(120, 120, 120)',
               transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)'
             }}>
-            Updated: <span style={{ fontWeight: 'bold' }}>{dayjs().to(dayjs(new Date(timeUpdate)))}</span>
+            <span style={{
+              fontWeight: 'bold',
+              height: '25px'
+            }}>{dayjs().to(dayjs(new Date(timeUpdate)))}</span>
           </span>}
 
         </div>
@@ -113,38 +122,40 @@ const Group = ({
             }} />
         }
 
-        <DeleteGroupButton
-          onClick={() => deleteGroup(title)}>
-          X
-        </DeleteGroupButton>
+        {expandLocalState &&
+          <DeleteGroupButton
+            onClick={() => deleteGroup(title)}>
+            X
+          </DeleteGroupButton>}
 
       </Header>
 
-      <div
+      {/* <div
         ref={ref}
         style={{
           transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
           opacity: expandLocalState ? 1 : 0,
           height: !expandLocalState && '0px',
           overflow: 'visible'
-        }}>
-        {children}
+        }}> */}
 
-        <TaskGroupFooter>
+      {children}
 
-          <AddTask
-            disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-            onClick={() => createTask(rootKey)}>
-            +
-          </AddTask>
+      <TaskGroupFooter>
 
-          <ItemsRemaining>
-            {tasksRemainingCount(node)} items left
-          </ItemsRemaining>
+        <AddTask
+          disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+          onClick={() => createTask(rootKey)}>
+          +
+        </AddTask>
 
-        </TaskGroupFooter>
+        <ItemsRemaining>
+          {tasksRemainingCount(node)} items left
+        </ItemsRemaining>
 
-      </div>
+      </TaskGroupFooter>
+
+      {/* </div> */}
 
     </Container>
 

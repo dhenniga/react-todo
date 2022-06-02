@@ -21,6 +21,11 @@ export default {
   // Bebas font
   bnRegular: "bn_regular",
 
+  // Roboto Condensed
+  rc_light: "rc_light",
+  rc_regular: "rc_regular",
+  rc_bold: "rc_bold",
+
   // Easing
   slowEasing: "0.5s cubic-bezier(0.66, 0, 0, 1)",
   mediumEasing: "0.3s cubic-bezier(0, 0, 0, 1)",

@@ -13,8 +13,9 @@ export const NoteContainer = styled.div`
 `;
 
 export const NoteText = styled.textarea`
-  font-family: rw_regular;
-  font-size: 8.3pt;
+  font-family: rc_regular;
+  font-weight: 300;
+  font-size: 11px;
   color: rgba(${props => props.theme.task.taskNoteTextColor});
   resize: none;
   width: 100%;

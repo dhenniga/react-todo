@@ -1,11 +1,12 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 
-  mainBackground: "17, 24, 30, 1",
+  mainBackground: "0, 0, 0, 1",
   inputColor: "101, 109, 120, 1",
   containerBorderBottom: "0, 0, 0, 0.1",
   buttonIconColor: "white",
   accentColor: "255,0,100",
+  headerBorderColor: "31, 35, 39",
 
   // Roboto Slab fonts
   rsThin: "rs_thin",
@@ -23,6 +24,11 @@ export default {
 
   // Bebas font
   bnRegular: "bn_regular",
+
+  // Roboto Condensed
+  rc_light: "rc_light",
+  rc_regular: "rc_regular",
+  rc_bold: "rc_bold",
 
   // Easing
   slowEasing: "0.5s cubic-bezier(0.66, 0, 0, 1)",

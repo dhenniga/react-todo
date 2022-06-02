@@ -24,8 +24,10 @@ const AppHeader = ({ handleThemeChange }) => {
         <Header>
 
             <AppTitle>
-                A&amp;D Tasks
+                {/* A&amp;D Tasks */}
+                TaskBoard
             </AppTitle>
+
 
             <AddGroupButton
                 // onClick={() => createTaskGroup()}>

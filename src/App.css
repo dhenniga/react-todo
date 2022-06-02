@@ -59,8 +59,23 @@ html {
   src: url(./fonts/raleway/black.ttf);
 }
 
+@font-face {
+  font-family: rc_regular;
+  src: url(./fonts/roboto_condensed/RobotoCondensed-Regular.ttf);
+}
+
+@font-face {
+  font-family: rc_light;
+  src: url(./fonts/roboto_condensed/RobotoCondensed-Light.ttf);
+}
+
+@font-face {
+  font-family: rc_bold;
+  src: url(./fonts/roboto_condensed/RobotoCondensed-Bold.ttf);
+}
+
 * {
-  font-family: rw_regular;
+  font-family: rc_regular;
   font-weight: 100;
   letter-spacing: 0.2px;
 }
