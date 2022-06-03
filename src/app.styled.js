@@ -12,7 +12,9 @@ export const AppTitle = styled.label`
 `;
 
 export const Container = styled.div`
-   background-color: rgba(${props => props.theme.background});
+   /* background-color: rgba(${props => props.theme.background}); */
+   max-width: 450px;
+   margin: 0px auto;
 `;
 
 export const Header = styled.div`
@@ -27,10 +29,10 @@ export const Header = styled.div`
 
 export const AppBody = styled.div`
   overflow-y: overlay;
-  min-width: 350px;
+  min-width: 300px;
   width: 100%;
   height: calc(100vh - 70px);
-  background-color: rgba(${props => props.theme.mainBackground});
+  /* background-color: rgba(${props => props.theme.mainBackground}); */
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: background-color;
 

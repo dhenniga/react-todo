@@ -4,13 +4,15 @@ export const Container = styled.div`
   text-align: left;
   position: relative;
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-  transition-property: padding-bottom height;
+  transition-property: padding-bottom height margin;
   overflow: hidden overlay;
   display: grid;
   align-items: center;
   padding: 0px 15px;
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
   border-bottom: solid 1px rgba(128, 128, 128, 0.2);
+
+  height:${props => props.containerHeight}px;
 
   ::-webkit-scrollbar {
   width: 5px;
@@ -81,7 +83,8 @@ export const Input = styled.input`
 export const Header = styled.div`
   border-bottom: 2px solid rgba(0,0,0,0);
   display: grid;
-  transition: border-bottom 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+  transition: all 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+
   grid-template-columns: 20px 1fr;
   align-items: center;
   min-height: 58px;

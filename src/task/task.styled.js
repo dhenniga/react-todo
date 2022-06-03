@@ -119,7 +119,7 @@ export const Container = styled.div`
   padding: 0px 15px;
   width: calc(100% - 30px) !important;
   border-radius: 5px;
-  box-shadow: 0px 0px 30px 0px rgba(${props => props.theme.task.taskOverDueGlowColor});
+  /* box-shadow: 0px 0px 30px 0px rgba(${props => props.theme.task.taskOverDueGlowColor}); */
   z-index: 100;
   `}
 `;

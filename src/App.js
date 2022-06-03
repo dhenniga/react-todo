@@ -28,7 +28,19 @@ const App = () => {
 
   return <ThemeProvider theme={themeState ? dark : light}>
 
+    <div style={{
+      display: "block",
+      width: "100vw",
+      margin: "0px auto",
+      height: "100vh",
+      backgroundColor: themeState ? 'black' : '#f3f7fa',
+      transition: 'background-color 0.3s cubic-bezier(0.5, 0.2, 0, 1)'
+
+    }}>
+
     <SomeFile handleThemeChange={handleThemeChange} />
+
+    </div>
 
   </ThemeProvider>
 

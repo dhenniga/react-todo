@@ -39,6 +39,7 @@ const Group = ({
   const [checked, setChecked] = useState(allSelected(node))
   const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
   const [expandLocalState, setExpandLocalState] = useState(isExpanded)
+  const [containerHeight, setContainerHeight] = useState(isExpanded)
   // const ref = useRef()
   const containerRef = useRef()
 
@@ -50,12 +51,15 @@ const Group = ({
 
   useEffect(() => setExpandLocalState(isExpanded), [isExpanded])
 
+  useEffect(() => setContainerHeight(containerRef.current.scrollHeight), [])
+
   return (
 
     <Container
       id='tester-container'
       ref={containerRef}
-      isExpanded={expandLocalState}>
+      isExpanded={expandLocalState}
+      containerHeight={containerHeight}>
 
       <Header
         className='header'
