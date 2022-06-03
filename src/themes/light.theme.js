@@ -3,6 +3,8 @@ export default {
 
   mainBackground: "243, 247, 250, 1",
   buttonIconColor: "black",
+  expandedGroupBackgroundColor: "255,255,255,1",
+  accentColor: "255,0,100",
 
   // Roboto Slab fonts
   rsThin: "rs_thin",

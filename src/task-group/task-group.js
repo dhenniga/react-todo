@@ -80,7 +80,7 @@ const Group = ({
 
         <div style={{
           display: expandLocalState ? "block" : "grid",
-          gridTemplateColumns: "1fr 1fr"
+          gridTemplateColumns: "1fr max-content"
         }}>
           <Input
             defaultValue={title}

@@ -3,6 +3,7 @@ export default {
 
   mainBackground: "0, 0, 0, 1",
   inputColor: "101, 109, 120, 1",
+  expandedGroupBackgroundColor: "101, 109, 120, 0.16",
   containerBorderBottom: "0, 0, 0, 0.1",
   buttonIconColor: "white",
   accentColor: "255,0,100",

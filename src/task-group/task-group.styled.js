@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 0px 15px;
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
+  border-bottom: solid 1px rgba(128, 128, 128, 0.2);
 
   ::-webkit-scrollbar {
   width: 5px;
@@ -27,7 +28,7 @@ export const Container = styled.div`
 
 ${props => props.isExpanded && css`
 border-radius: 10px;
-background-color: rgba(128,128,128,0.2);
+background-color: rgba(${props => props.theme.expandedGroupBackgroundColor});
 margin-bottom: 15px;
   `}
 

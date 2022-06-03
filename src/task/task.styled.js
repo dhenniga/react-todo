@@ -24,9 +24,9 @@ export const AddSubTask = styled.div`
 `;
 
 export const TimeText = styled.div`
-  font-size: 8pt;
+  font-size: 10px;
   font-weight: 400;
-  font-family: sans-serif;
+  font-family: rc_regular;
   letter-spacing: 0px;
   color: #656d78;
   margin-right: 5px;
