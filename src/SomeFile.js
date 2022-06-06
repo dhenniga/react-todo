@@ -41,7 +41,8 @@ const SomeFile = ({ handleThemeChange }) => {
                   taskCompletedTime,
                   quantity,
                   note,
-                  timeDisplayType
+                  timeDisplayType,
+                  status
                 }, key) =>
                   <Task
                     key={key}
@@ -54,7 +55,7 @@ const SomeFile = ({ handleThemeChange }) => {
                     quantity={quantity}
                     note={note}
                     timeDisplayType={timeDisplayType}
-
+                    status={status}
                   />
                 )(node)
               }

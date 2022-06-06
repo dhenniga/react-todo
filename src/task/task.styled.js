@@ -23,20 +23,13 @@ export const AddSubTask = styled.div`
   }
 `;
 
-export const TimeText = styled.div`
-  font-size: 10px;
-  font-weight: 400;
-  font-family: rc_regular;
-  letter-spacing: 0px;
-  color: #656d78;
-  margin-right: 5px;
-  transition: 0.3s cubic-bezier(0,0,0,1);
-  transition-property: color;
-
-
-  ${props => props.isOverDue && css`
-    color: white !important;
-  `}
+export const SettingsContainer = styled.div`
+  display: none;
+  grid-template-columns: max-content max-content max-content max-content;
+  align-items: center;
+  overflow: hidden;
+  width: 0px;
+  margin-left: 20px;
 `;
 
 export const TimeContainer = styled.div`
@@ -45,13 +38,9 @@ export const TimeContainer = styled.div`
   align-items: center;
 `;
 
-export const SettingsContainer = styled.div`
-  display: none;
-  grid-template-columns: max-content max-content max-content max-content;
-  align-items: center;
-  overflow: hidden;
-  width: 0px;
-  margin-left: 20px;
+export const DisplayContainer = styled.div`
+  display: grid;
+  grid-template-columns: ${props => props.quantity ? "max-content" : ""} ${props => props.status ? "max-content" : ""} ${props => props.dateToBeCompleted ? "max-content" : ""};
 `;
 
 export const QuantityContainer = styled.div`
@@ -75,16 +64,10 @@ export const QuantityContainer = styled.div`
   `}
 `;
 
-export const DisplayContainer = styled.div`
-  display: grid;
-  grid-template-columns: ${props => props.quantity ? "max-content" : ""} ${props => props.dateToBeCompleted ? "max-content" : ""};
-`;
-
 export const Container = styled.div`
-  min-height: 39px;
+  min-height: 45px;
   width: 100%;
   padding: 0px;
-  margin: 5px 0px;
   display: grid;
   align-content: center;
   position: relative;
@@ -98,7 +81,7 @@ export const Container = styled.div`
     ${SettingsContainer} {
       display: grid;
       width: fit-content !important;
-      grid-template-columns: 1fr max-content max-content max-content !important;
+      grid-template-columns: 1fr max-content max-content max-content max-content !important;
     }
 
     ${TimeContainer} {

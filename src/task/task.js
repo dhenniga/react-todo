@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
+
+// Hook
 import useTask from "../useTask";
+
+//  Styled Components
 import {
   Container,
   Checkbox,
   Input,
-  SettingsContainer,
-  TimeContainer,
-  TimeText,
-  TimePassingBar,
-  QuantityContainer,
-  DisplayContainer
+  TimePassingBar
 } from "./task.styled";
-import { isEmpty } from "ramda";
-import Time from "../time/time";
-import DeleteButton from "../buttons/delete";
+
+// Utils
 import useTaskService from "./task.service";
-import WatchIcon from "../buttons/watch-icon";
-import NoteButton from "../buttons/note";
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime';
+
+// Components
 import Note from './note/note'
+import SettingsToolbar from "./settings-toolbar/settings-toolbar"
+import HoverToolbar from './hover-toolbar/hover-toolbar'
 
 /////////////////////////////////////////
 
@@ -36,7 +36,8 @@ const Task = ({
   taskCompletedTime,
   quantity,
   note,
-  timeDisplayType
+  timeDisplayType,
+  status
 }) => {
 
   /////////////////////////////////////////
@@ -47,11 +48,8 @@ const Task = ({
 
   const {
     toggleTask,
-    deleteTask,
     renameTask,
-    calculateRemainingPercentage,
-    changeQuantity,
-    updateNote
+    calculateRemainingPercentage
   } = useTask()
 
   /////////////////////////////////////////
@@ -91,123 +89,69 @@ const Task = ({
 
   /////////////////////////////////////////
 
-  return (
+  return <>
 
-    <>
+    <Container
+      id={id}
+      isOverDue={isOverDue}
+      checked={checkState}>
 
-      <Container
-        id={id}
+      <Checkbox
+        type="checkbox"
+        checked={checkState}
+        onChange={() => {
+          const toggledTaskState = !checkState
+          setCheckState(toggledTaskState)
+          toggleTask(id, toggledTaskState)
+        }}
+      />
+
+      <Input
+        type="text"
+        checked={checkState}
         isOverDue={isOverDue}
-        checked={checkState}>
+        onBlur={event => renameTask(id, event.target.value)}
+        defaultValue={text}
+        onChange={() => { }}
+        placeholder="Enter task name..."
+      />
 
-        <Checkbox
-          type="checkbox"
-          checked={checkState}
-          onChange={() => {
-            const toggledTaskState = !checkState
-            setCheckState(toggledTaskState)
-            toggleTask(id, toggledTaskState)
-          }}
-        />
+      <HoverToolbar
+        quantity={quantity}
+        dateToBeCompleted={dateToBeCompleted}
+        status={status}
+        isOverDue={isOverDue}
+        timeDisplayType={timeDisplayType}
+        checkState={checkState}
+      />
 
-        <Input
-          type="text"
-          checked={checkState}
-          isOverDue={isOverDue}
-          onBlur={event => renameTask(id, event.target.value)}
-          defaultValue={text}
-          onChange={() => { }}
-          placeholder="Enter task name..."
-        />
-
-        <DisplayContainer
-          quantity={quantity}
-          dateToBeCompleted={dateToBeCompleted}>
-
-          {
-            dateToBeCompleted &&
-            <TimeContainer>
-
-              <TimeText
-                isOverDue={isOverDue}>
-                {timeDisplayType === 'on' && dayjs(dateToBeCompleted).format('MMMM D, YYYY')}
-                {timeDisplayType === 'in' && dayjs().to(dayjs(dateToBeCompleted))}
-                {!timeDisplayType && 'broken'}
-                {timeDisplayType === 'at' && dayjs(dateToBeCompleted).format('HH:mm')}
-              </TimeText>
-
-              <WatchIcon
-                timeDisplayType={timeDisplayType}
-                isOverDue={isOverDue}
-              />
-
-            </TimeContainer>
-          }
-
-          {
-            quantity &&
-            <QuantityContainer
-              checked={checkState}
-              isOverDue={isOverDue}>
-              {quantity}
-            </QuantityContainer>
-          }
-
-        </DisplayContainer>
-
-        {!checkState &&
-          <SettingsContainer>
-
-            <input style={{
-              fontFamily: "sans-serif",
-              width: "25px",
-              margin: "0px 5px"
-            }}
-              min="1"
-              type="number"
-              defaultValue={quantity}
-              onChange={e => changeQuantity(id, e.target.value)} />
-
-            <Time
-              id={id}
-              isOverDue={isOverDue}
-            />
-
-            <NoteButton
-              handleClick={() => isEmpty(note) && updateNote(id, ' ')}
-              isOverDue={isOverDue}
-            />
-
-            <DeleteButton
-              handleClick={() => {
-                document.getElementById(id).style.opacity = "0"
-                deleteTask(id)
-              }}
-              isOverDue={isOverDue}
-            />
-
-          </SettingsContainer>
-        }
-
-        <TimePassingBar
-          ref={barRef}
-          checked={checkState}
-          percentage={percentage}
-          isOverDue={isOverDue}
-        />
-
-      </Container>
-
-      {note &&
-        <Note
+      {!checkState &&
+        <SettingsToolbar
           id={id}
+          status={status}
+          quantity={quantity}
+          isOverDue={isOverDue}
           note={note}
         />
       }
 
-    </>
+      <TimePassingBar
+        ref={barRef}
+        checked={checkState}
+        percentage={percentage}
+        isOverDue={isOverDue}
+      />
 
-  );
+    </Container>
+
+    {note &&
+      <Note
+        id={id}
+        note={note}
+      />
+    }
+
+  </>
 
 };
 

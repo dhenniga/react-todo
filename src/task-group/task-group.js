@@ -51,7 +51,7 @@ const Group = ({
 
   useEffect(() => setExpandLocalState(isExpanded), [isExpanded])
 
-  useEffect(() => setContainerHeight(containerRef.current.scrollHeight), [])
+  useEffect(() => setContainerHeight(containerRef.current.scrollHeight))
 
   return (
 

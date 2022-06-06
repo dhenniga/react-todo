@@ -21,7 +21,6 @@ const App = () => {
 
   const handleThemeChange = () => {
     const state = !themeState
-    console.log(state)
     setThemeState(state)
     toggleTheme(state)
   }
@@ -38,7 +37,7 @@ const App = () => {
 
     }}>
 
-    <SomeFile handleThemeChange={handleThemeChange} />
+      <SomeFile handleThemeChange={handleThemeChange} />
 
     </div>
 

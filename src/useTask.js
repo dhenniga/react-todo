@@ -102,6 +102,13 @@ const useTask = () => {
 
   /////////////////////////////
 
+  const updateStatus = (id, value) =>
+    axios.post(baseUrl + `update-status.php`,
+      qs.stringify({ id, value })
+    )
+
+  /////////////////////////////
+
   const renameGroup = (node, value) => {
     map(item =>
       axios.post(baseUrl + `rename-group.php`,
@@ -180,6 +187,7 @@ const useTask = () => {
     updateDateToBeCompleted,
     changeQuantity,
     updateNote,
+    updateStatus,
     toggleTheme,
     toggleExpanded
   }

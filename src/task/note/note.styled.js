@@ -6,7 +6,6 @@ export const NoteContainer = styled.div`
   background-color: rgba(${props => props.theme.task.taskNoteBGColor});
   position:relative;
   right: -25px;
-  margin-top: -5px;
   margin-bottom: 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;

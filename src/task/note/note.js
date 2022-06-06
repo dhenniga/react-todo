@@ -1,8 +1,8 @@
 import React, {
   useRef,
   useState,
-  // useEffect, 
-  // useLayoutEffect 
+  // useEffect,
+  // useLayoutEffect
 } from "react";
 import useTask from "../../useTask";
 import { NoteContainer, NoteText } from "./note.styled";
