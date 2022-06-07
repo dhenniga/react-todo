@@ -20,6 +20,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 import Note from './note/note'
 import SettingsToolbar from "./settings-toolbar/settings-toolbar"
 import HoverToolbar from './hover-toolbar/hover-toolbar'
+import TimePassing from './time-passing-bar'
 
 /////////////////////////////////////////
 
@@ -135,11 +136,11 @@ const Task = ({
         />
       }
 
-      <TimePassingBar
-        ref={barRef}
+      <TimePassing
+        dateCreated={dateCreated}
+        dateToBeCompleted={dateToBeCompleted}
+        taskCompletedTime={taskCompletedTime}
         checked={checkState}
-        percentage={percentage}
-        isOverDue={isOverDue}
       />
 
     </Container>
