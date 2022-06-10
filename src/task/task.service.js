@@ -1,6 +1,6 @@
 const useTaskService = (percentage, isChecked) => {
 
-  const gradientColours = ({ barRef, percentage }) => {
+  const gradientColours = barRef => {
     let res;
     const colors = [
       "transparent",

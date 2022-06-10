@@ -16,12 +16,19 @@ export const TimeText = styled.div`
   `}
 `;
 
-export const StatusText = styled.div`
-  padding: 3px 8px;
-  border-radius: 5px;
-  margin: 0px 10px;
-  font-family: rc_regular;
-  font-size: 9px;
-  background-color: rgba(${props => props.theme.accentColor}, 0.4);
-  color: white;
+export const StatusContainer = styled.div`
+  margin: 0px 8px;
+`
+
+export const ProgressRotatingSVG = styled.svg`
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+animation: rotate 1.5s linear infinite;
+`
+
+export const ProgressRotatingPath = styled.path`
+  fill: rgb(${props => props.theme.accentColor});
 `
