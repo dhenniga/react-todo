@@ -32,7 +32,6 @@ const PreGroup = () => {
   } = useTask();
 
   useLayoutEffect(() => {
-    console.log(ref.current)
     ref.current.focus()
   }, [])
 
@@ -55,6 +54,11 @@ const PreGroup = () => {
         <Input
           ref={ref}
           style={{ color: 'white' }}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              e.target.blur()
+            }
+          }}
           placeholder="Enter Group Name..."
           onFocus={() => console.log('focused')}
           onBlur={event => {

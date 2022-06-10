@@ -5,7 +5,8 @@ export const Container = styled.div`
   position: relative;
   transition: 0.3s cubic-bezier(0.5, 0.2, 0, 1);
   transition-property: padding-bottom height margin;
-  overflow: hidden overlay;
+  /* overflow: hidden overlay; */
+  overflow: auto;
   display: grid;
   align-items: center;
   padding: 0px 15px;

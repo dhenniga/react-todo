@@ -49,7 +49,8 @@ const Task = ({
   const {
     toggleTask,
     renameTask,
-    calculateRemainingPercentage
+    calculateRemainingPercentage,
+    updateStatus
   } = useTask()
 
   /////////////////////////////////////////
@@ -103,6 +104,7 @@ const Task = ({
           const toggledTaskState = !checkState
           setCheckState(toggledTaskState)
           toggleTask(id, toggledTaskState)
+          updateStatus(id, undefined)
         }}
       />
 
@@ -113,6 +115,11 @@ const Task = ({
         onBlur={event => renameTask(id, event.target.value)}
         defaultValue={text}
         onChange={() => { }}
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            e.target.blur()
+          }
+        }}
         placeholder="Enter task name..."
       />
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   Container,
   Chevron,
@@ -40,7 +40,6 @@ const Group = ({
   const [timeUpdate, setTimeUpdate] = useState(node?.lastUpdate)
   const [expandLocalState, setExpandLocalState] = useState(isExpanded)
   const [containerHeight, setContainerHeight] = useState(isExpanded)
-  // const ref = useRef()
   const containerRef = useRef()
 
   useEffect(() => {
@@ -52,6 +51,16 @@ const Group = ({
   useEffect(() => setExpandLocalState(isExpanded), [isExpanded])
 
   useEffect(() => setContainerHeight(containerRef.current.scrollHeight))
+
+  const handleIframeMessage = event => console.log(event)
+
+
+  useEffect(() => {
+    containerRef.current.addEventListener('scroll', handleIframeMessage, false)
+    return () => {
+      containerRef.current.removeEventListener('scroll', handleIframeMessage, false)
+    }
+  })
 
   return (
 
@@ -89,6 +98,11 @@ const Group = ({
           <Input
             defaultValue={title}
             placeholder="Enter Group Name..."
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                e.target.blur()
+              }
+            }}
             onBlur={event =>
               renameGroup(
                 node,
@@ -134,15 +148,6 @@ const Group = ({
 
       </Header>
 
-      {/* <div
-        ref={ref}
-        style={{
-          transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)',
-          opacity: expandLocalState ? 1 : 0,
-          height: !expandLocalState && '0px',
-          overflow: 'visible'
-        }}> */}
-
       {children}
 
       <TaskGroupFooter>
@@ -158,8 +163,6 @@ const Group = ({
         </ItemsRemaining>
 
       </TaskGroupFooter>
-
-      {/* </div> */}
 
     </Container>
 
