@@ -7,19 +7,18 @@ import useTask from "../useTask";
 import {
   Container,
   Checkbox,
-  Input,
-  TimePassingBar
-} from "./task.styled";
+  Input
+} from "../task/task.styled";
 
 // Utils
-import useTaskService from "./task.service";
+import useTaskService from "../task/task.service";
 import dayjs from "dayjs";
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
 // Components
-import Note from './note/note'
-import SettingsToolbar from "./settings-toolbar/settings-toolbar"
-import HoverToolbar from './hover-toolbar/hover-toolbar'
+import Note from '../task/note/note'
+import SettingsToolbar from "../task/settings-toolbar/settings-toolbar"
+import HoverToolbar from '../task/hover-toolbar/hover-toolbar'
 
 /////////////////////////////////////////
 
@@ -50,8 +49,7 @@ const Task = ({
     toggleTask,
     renameTask,
     calculateRemainingPercentage,
-    updateStatus,
-    addToArchive
+    updateStatus
   } = useTask()
 
   /////////////////////////////////////////
@@ -124,16 +122,16 @@ const Task = ({
         placeholder="Enter task name..."
       />
 
-      <HoverToolbar
+      {/* <HoverToolbar
         quantity={quantity}
         dateToBeCompleted={dateToBeCompleted}
         status={status}
         isOverDue={isOverDue}
         timeDisplayType={timeDisplayType}
         checkState={checkState}
-      />
+      /> */}
 
-      {!checkState &&
+      {/* {!checkState &&
         <SettingsToolbar
           id={id}
           status={status}
@@ -141,16 +139,7 @@ const Task = ({
           isOverDue={isOverDue}
           note={note}
         />
-      }
-
-      <TimePassingBar
-        ref={barRef}
-        checked={checkState}
-        percentage={percentage}
-        isOverDue={isOverDue}
-      />
-
-      {/* <button onClick={() => addToArchive(id)}>Arch</button> */}
+      } */}
 
     </Container>
 

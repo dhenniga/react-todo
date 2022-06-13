@@ -19,13 +19,23 @@ export const useConfig = () => {
   return { ...data }
 }
 
-export const useTasks = () => {
+export const useActiveTasks = () => {
   const { data, error } = useSWR(
-    rootUrl + `get-tasks.php`,
+    rootUrl + `get-active-tasks.php`,
     fetcher,
     { refreshInterval: 1000 }
   )
   if (error) return console.log(error)
-  const tasks = data && converter(data)
-  return { tasks }
+  const activeTasks = data && converter(data)
+  return { activeTasks }
+}
+
+export const useArchivedTasks = () => {
+  const { data, error } = useSWR(
+    rootUrl + `get-archived-tasks.php`,
+    fetcher
+  )
+  if (error) return console.log(error)
+  const archivedTasks = data && converter(data)
+  return { archivedTasks }
 }

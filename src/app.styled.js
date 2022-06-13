@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
-export const AppTitle = styled.label`
-  font-size: 10px;
+export const AppTitle = styled.div`
+  font-size: 11px;
   text-transform: uppercase;
-  font-family: rw_regular;
-  font-weight: 600;
+  font-family: rw_bold;
+  font-weight: 100;
   letter-spacing: 1px;
   line-height: 46px;
   padding-left: 15px;
   color: rgb(${props => props.theme.accentColor});
+  display: inline-grid;
+  height: 100%;
+  align-items: center;
+  padding: 0px 15px;
 `;
 
 export const Container = styled.div`

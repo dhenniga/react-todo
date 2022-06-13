@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, AppBody } from "./app.styled"
 import AppHeader from './app-header'
 import { mapObjectToValues } from "./app.service"
-import { useTasks } from './hooks/useTaskHook'
+import { useActiveTasks, useArchivedTasks } from './hooks/useTaskHook'
 import Task from "./task/task"
+import ArchivedTask from './archived-task/archived-task'
 import TaskGroup from "./task-group/task-group"
 import useTask from "./useTask"
 
@@ -11,13 +12,22 @@ import useTask from "./useTask"
 const SomeFile = ({ handleThemeChange }) => {
 
   const { selectAll, selectNone } = useTask()
-  const { tasks } = useTasks()
+  const { activeTasks } = useActiveTasks()
+  const { archivedTasks } = useArchivedTasks()
+  const [blob, setBlob] = useState(false)
+  const tasks = blob ? archivedTasks : activeTasks
+
+  // console.log(blob);
 
   return <Container>
 
-    <AppHeader handleThemeChange={handleThemeChange} />
+    <AppHeader
+      blob={blob}
+      setBlob={setBlob}
+      handleThemeChange={handleThemeChange}
+    />
 
-    {tasks &&
+    {activeTasks &&
       <AppBody>
         {
           mapObjectToValues((node, rootKey) =>
@@ -44,7 +54,7 @@ const SomeFile = ({ handleThemeChange }) => {
                   timeDisplayType,
                   status
                 }, key) =>
-                  <Task
+                  <ArchivedTask
                     key={key}
                     id={id}
                     text={text}
@@ -62,7 +72,7 @@ const SomeFile = ({ handleThemeChange }) => {
 
             </TaskGroup>
 
-          )(tasks)
+          )(activeTasks)
         }
 
       </AppBody>

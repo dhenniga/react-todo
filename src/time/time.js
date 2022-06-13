@@ -28,13 +28,13 @@ const Time = ({
       <TimeButton
         isOverDue={isOverDue}
         handleClick={() => setIsOpen(!isOpen)}
-         />
+      />
 
       {
         isOpen &&
         <TimeContainerBackground
-          // onClick={() => setIsOpen(false)}
-          >
+        // onClick={() => setIsOpen(false)}
+        >
 
           <button
             onPointerUp={() => {
@@ -50,38 +50,37 @@ const Time = ({
             at
           </button>
 
-          <Calendar 
+          <Calendar
             onChange={date => {
-            setIsOpen(false);
-            console.log(date.toISOString())
-            updateDateToBeCompleted(
-              id,
-              dayjs(date).toString(),
-              'on'
-            );
-          }}/>
+              setIsOpen(false)
+              updateDateToBeCompleted(
+                id,
+                dayjs(date).toString(),
+                'on'
+              );
+            }} />
 
           <div style={{ backgroundColor: 'black', color: 'white' }}>
             in
             {
-            map(({ text, time, range }) =>
-              <TimeContainer
-                onClick={() => {
-                  setIsOpen(false);
-                  updateDateToBeCompleted(
-                    id,
-                    dayjs().add(time, range).toString(),
-                    'in'
-                  );
-                }}>
-                {text}
-              </TimeContainer>
-            )(timeConfig)
+              map(({ text, time, range }) =>
+                <TimeContainer
+                  onClick={() => {
+                    setIsOpen(false);
+                    updateDateToBeCompleted(
+                      id,
+                      dayjs().add(time, range).toString(),
+                      'in'
+                    );
+                  }}>
+                  {text}
+                </TimeContainer>
+              )(timeConfig)
 
-          }
+            }
           </div>
 
-           <p style={{ backgroundColor: 'black', color: 'white' }}>on</p> 
+          <p style={{ backgroundColor: 'black', color: 'white' }}>on</p>
 
         </TimeContainerBackground>
       }

@@ -15,8 +15,8 @@ class DB_Functions {
 
     ////////////////////////
 
-    public function getTasks() {
-        $stmt = $this->conn->prepare( 'SELECT * from tasks' );
+    public function getActiveTasks() {
+        $stmt = $this->conn->prepare( 'SELECT * from tasks WHERE isArchived = 0' );
         if ( $stmt->execute() ) {
             $stmt->bind_result(
                 $id,
@@ -31,7 +31,8 @@ class DB_Functions {
                 $timeDisplayType,
                 $lastUpdated,
                 $isExpanded,
-                $status
+                $status,
+                $isArchived
             );
             $rows = array();
             while ( $r = mysqli_stmt_fetch( $stmt ) ) {
@@ -48,6 +49,51 @@ class DB_Functions {
                 $task[ 'lastUpdated' ] = $lastUpdated;
                 $task[ 'isExpanded' ] = $isExpanded;
                 $task[ 'status' ] = $status;
+                $task[ 'isArchived' ] = $isArchived;
+                $rows[] = $task;
+            }
+            $stmt->close();
+        }
+        print json_encode( $rows );
+    }
+
+    ////////////////////////
+
+    public function getArchivedTasks() {
+        $stmt = $this->conn->prepare( 'SELECT * from tasks WHERE isArchived = 1' );
+        if ( $stmt->execute() ) {
+            $stmt->bind_result(
+                $id,
+                $text,
+                $group,
+                $dateCreated,
+                $dateToBeCompleted,
+                $taskCompletedTime,
+                $quantity,
+                $note,
+                $isChecked,
+                $timeDisplayType,
+                $lastUpdated,
+                $isExpanded,
+                $status,
+                $isArchived
+            );
+            $rows = array();
+            while ( $r = mysqli_stmt_fetch( $stmt ) ) {
+                $task[ 'id' ] = $id;
+                $task[ 'text' ] = $text;
+                $task[ 'group' ] = $group;
+                $task[ 'dateCreated' ] = $dateCreated;
+                $task[ 'dateToBeCompleted' ] = $dateToBeCompleted;
+                $task[ 'taskCompletedTime' ] = $taskCompletedTime;
+                $task[ 'quantity' ] = $quantity;
+                $task[ 'note' ] = $note;
+                $task[ 'isChecked' ] = $isChecked;
+                $task[ 'timeDisplayType' ] = $timeDisplayType;
+                $task[ 'lastUpdated' ] = $lastUpdated;
+                $task[ 'isExpanded' ] = $isExpanded;
+                $task[ 'status' ] = $status;
+                $task[ 'isArchived' ] = $isArchived;
                 $rows[] = $task;
             }
             $stmt->close();
@@ -87,6 +133,18 @@ class DB_Functions {
 
     ////////////////////////
 
+    public function addToArchive( $id ) {
+        $stmt = $this->conn->prepare( 'UPDATE tasks SET isArchived = 1 WHERE id = ?' );
+        $stmt->bind_param(
+            's',
+            $id
+        );
+        $result = $stmt->execute();
+        $stmt->close();
+    }
+
+    ////////////////////////
+
     public function toggleExpanded( $taskGroup, $isExpanded ) {
         $stmt = $this->conn->prepare( 'UPDATE tasks SET isExpanded = ? WHERE taskGroup = ?' );
         $stmt->bind_param(
@@ -102,27 +160,15 @@ class DB_Functions {
 
     public function createTask(
         $id,
-        $taskText,
         $taskGroup,
-        $dateCreated,
-        $dateToBeCompleted,
-        $taskCompletedTime,
-        $quantity,
-        $note,
-        $isChecked
+        $dateCreated
     ) {
-        $stmt = $this->conn->prepare( 'INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted,taskCompletedTime, quantity, note, isChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)' );
+        $stmt = $this->conn->prepare( 'INSERT INTO tasks (id, taskGroup, dateCreated) VALUES (?, ?, ?)' );
         $stmt->bind_param(
-            'sssssssss',
+            'sss',
             $id,
-            $taskText,
             $taskGroup,
-            $dateCreated,
-            $dateToBeCompleted,
-            $taskCompletedTime,
-            $quantity,
-            $note,
-            $isChecked
+            $dateCreated
         );
         $result = $stmt->execute();
         $stmt->close();
@@ -132,27 +178,15 @@ class DB_Functions {
 
     public function createTaskGroup(
         $id,
-        $taskText,
         $taskGroup,
-        $dateCreated,
-        $dateToBeCompleted,
-        $taskCompletedTime,
-        $quantity,
-        $note,
-        $isChecked
+        $dateCreated
     ) {
-        $stmt = $this->conn->prepare( 'INSERT INTO tasks (id, taskText, taskGroup, dateCreated, dateToBeCompleted, taskCompletedTime, quantity, note, isChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)' );
+        $stmt = $this->conn->prepare( 'INSERT INTO tasks (id, taskGroup, dateCreated) VALUES (?, ?, ?)' );
         $stmt->bind_param(
-            'sssssssss',
+            'sss',
             $id,
-            $taskText,
             $taskGroup,
-            $dateCreated,
-            $dateToBeCompleted,
-            $taskCompletedTime,
-            $quantity,
-            $note,
-            $isChecked
+            $dateCreated
         );
         $result = $stmt->execute();
         $stmt->close();

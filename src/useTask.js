@@ -13,14 +13,8 @@ const useTask = () => {
     axios.post(baseUrl + `create-task.php`,
       qs.stringify({
         id: uuidv4(),
-        taskText: '',
         taskGroup: rootKey,
-        dateCreated: new Date(),
-        dateToBeCompleted: '',
-        taskCompletedTime: '',
-        quantity: '',
-        note: '',
-        isChecked: false
+        dateCreated: new Date()
       })
     )
 
@@ -30,14 +24,8 @@ const useTask = () => {
     axios.post(baseUrl + `create-task-group.php`,
       qs.stringify({
         id: uuidv4(),
-        taskText: '',
         taskGroup: title,
-        dateCreated: new Date(),
-        dateToBeCompleted: '',
-        taskCompletedTime: '',
-        quantity: '',
-        note: '',
-        isChecked: false
+        dateCreated: new Date()
       },
         {
           parseArrays: false
@@ -52,6 +40,15 @@ const useTask = () => {
     )
 
   /////////////////////////////
+
+  const addToArchive = id =>
+    axios.post(baseUrl + `add-to-archive.php`,
+      qs.stringify({ id })
+    )
+
+  /////////////////////////////
+
+
 
   const toggleExpanded = (taskGroup, state) =>
     axios.post(baseUrl + `toggle-expanded.php`,
@@ -189,7 +186,8 @@ const useTask = () => {
     updateNote,
     updateStatus,
     toggleTheme,
-    toggleExpanded
+    toggleExpanded,
+    addToArchive
   }
 
 }

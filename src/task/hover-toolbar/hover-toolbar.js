@@ -50,7 +50,6 @@ const HoverToolbar = ({
             isOverDue={isOverDue}>
             {timeDisplayType === 'on' && dayjs(dateToBeCompleted).format('MMMM D, YYYY')}
             {timeDisplayType === 'in' && dayjs().to(dayjs(dateToBeCompleted))}
-            {!timeDisplayType && 'broken'}
             {timeDisplayType === 'at' && dayjs(dateToBeCompleted).format('HH:mm')}
           </TimeText>
 

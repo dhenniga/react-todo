@@ -14,15 +14,16 @@ import {
 
 ///
 
-export const mapObjectToValues = obj => 
-compose(
-  values,
-  mapObjIndexed(obj)
-)
+export const mapObjectToValues = obj =>
+  compose(
+    values,
+    mapObjIndexed(obj)
+  )
 
 ///
 
 export const converter = data => {
+
   let configArray = [];
 
   const res = reduce((acc, curr) => {
