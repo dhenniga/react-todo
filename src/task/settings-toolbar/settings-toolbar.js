@@ -1,14 +1,16 @@
-import React from 'react';
+import React from 'react'
 import { SettingsContainer } from '../task.styled'
-import { isEmpty } from "ramda";
+import { isEmpty } from "ramda"
 
 // Hook
-import useTask from "../../useTask";
+import useTask from "../../useTask"
 
 // Components
-import Time from "../../time/time";
-import DeleteButton from "../../buttons/delete";
-import NoteButton from "../../buttons/note";
+import Time from "../../time/time"
+import DeleteButton from "../../buttons/delete"
+import NoteButton from "../../buttons/note"
+import QuantityButton from '../../buttons/quantity'
+import StatusButton from '../../buttons/status'
 
 const SettingsToolbar = ({
   id,
@@ -27,21 +29,15 @@ const SettingsToolbar = ({
 
   return <SettingsContainer>
 
-    <button
-      style={{ fontSize: '8px' }}
-      onClick={() => updateStatus(id, status ? undefined : 'In Progress...')}>
-      {status ? 'Clear' : 'Start'}
-    </button>
+    <StatusButton
+      status={status}
+      handleClick={() => updateStatus(id, status ? undefined : 'In Progress...')}
+    />
 
-    <input style={{
-      fontFamily: "sans-serif",
-      width: "25px",
-      margin: "0px 5px"
-    }}
-      min="1"
-      type="number"
-      defaultValue={quantity}
-      onChange={e => changeQuantity(id, e.target.value)} />
+    <QuantityButton
+      quantity={quantity}
+      handleChange={e => changeQuantity(id, e.target.value)}
+    />
 
     <Time
       id={id}
@@ -49,19 +45,16 @@ const SettingsToolbar = ({
     />
 
     <NoteButton
-      handleClick={() => isEmpty(note) && updateNote(id, ' ')}
       isOverDue={isOverDue}
+      handleClick={() => isEmpty(note) && updateNote(id, ' ')}
     />
 
     <DeleteButton
-      handleClick={() => {
-        document.getElementById(id).style.opacity = "0"
-        deleteTask(id)
-      }}
       isOverDue={isOverDue}
+      handleClick={() => deleteTask(id)}
     />
 
-  </SettingsContainer>
+  </SettingsContainer >
 
 }
 

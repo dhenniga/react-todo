@@ -1,8 +1,8 @@
 import React, {
   useRef,
   useState,
-  // useEffect,
-  // useLayoutEffect
+  useEffect,
+  useLayoutEffect
 } from "react";
 import useTask from "../../useTask";
 import { NoteContainer, NoteText } from "./note.styled";
@@ -25,18 +25,18 @@ const Note = ({ id, note }) => {
     })
   }
 
-  // const updateNoteHeight = () => {
-  //   if (noteTextRef !== null) {
-  //     noteTextRef.current.style.height = "inherit"
-  //     noteTextRef.current.style.height = Math.max(
-  //       noteTextRef.current.scrollHeight,
-  //       20
-  //     ) + 'px'
-  //   }
-  // }
+  const updateNoteHeight = () => {
+    if (noteTextRef !== null) {
+      noteTextRef.current.style.height = "inherit"
+      noteTextRef.current.style.height = Math.max(
+        noteTextRef.current.scrollHeight,
+        20
+      ) + 'px'
+    }
+  }
 
-  // useLayoutEffect(updateNoteHeight, [value])
-  // useEffect(() => window.onresize = updateNoteHeight)
+  useLayoutEffect(updateNoteHeight, [value])
+  useEffect(() => window.onresize = updateNoteHeight)
 
   return <NoteContainer>
 

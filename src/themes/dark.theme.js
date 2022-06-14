@@ -45,7 +45,7 @@ export default {
     taskBorderBottomcolor: "255,255,255, 0.1",
     taskInputTextColor: "255, 255, 255, 1",
     taskNoteBGColor: "243, 247, 250, 0.05",
-    taskNoteTextColor: "255,255,255,1",
+    taskNoteTextColor: "255,255,255,0.7",
     taskOverDueColor: "255,0,100",
     taskOverDueGlowColor: "255,0,100, 0.3",
     taskQuantityText: "255,255,255",

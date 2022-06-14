@@ -4,7 +4,7 @@ export default {
   mainBackground: "243, 247, 250, 1",
   buttonIconColor: "black",
   expandedGroupBackgroundColor: "255,255,255,1",
-  accentColor: "255,0,100",
+  accentColor: "0, 152, 255",
 
   // Roboto Slab fonts
   rsThin: "rs_thin",
@@ -43,7 +43,7 @@ export default {
     taskInputTextColor: "101, 109, 120, 1",
     taskNoteBGColor: "243, 247, 250, 1",
     taskNoteTextColor: "0,0,0,0.7",
-    taskOverDueColor: "255,0,0",
+    taskOverDueColor: "0, 152, 255",
     taskOverDueGlowColor: "0,0,0,0",
     taskQuantityText: "255,255,255",
     taskQuantityTextBackground: "0,0,0"

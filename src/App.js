@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react"
-import "./App.css"
-import { ThemeProvider } from "styled-components"
-import light from "./themes/light.theme"
-import dark from "./themes/dark.theme"
+import React, { useState, useEffect } from 'react'
+import './App.css'
+import { ThemeProvider } from 'styled-components'
+import light from './themes/light.theme'
+import dark from './themes/dark.theme'
 import { useConfig } from './hooks/useTaskHook'
 import 'react-grid-layout/css/styles.css'
-import "react-resizable/css/styles.css"
-import SomeFile from "./SomeFile"
-import useTask from "./useTask"
+import 'react-resizable/css/styles.css'
+import SomeFile from './SomeFile'
+import useTask from './useTask'
+import { AppContainer } from './app.styled'
+
 
 ///
 
@@ -27,22 +29,15 @@ const App = () => {
 
   return <ThemeProvider theme={themeState ? dark : light}>
 
-    <div style={{
-      display: "block",
-      width: "100vw",
-      margin: "0px auto",
-      height: "100vh",
-      backgroundColor: themeState ? 'black' : '#f3f7fa',
-      transition: 'background-color 0.3s cubic-bezier(0.5, 0.2, 0, 1)'
-
-    }}>
+    <AppContainer
+      themeState={themeState}>
 
       <SomeFile handleThemeChange={handleThemeChange} />
 
-    </div>
+    </AppContainer>
 
   </ThemeProvider>
 
 }
 
-export default App;
+export default App

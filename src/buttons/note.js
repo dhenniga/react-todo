@@ -1,32 +1,15 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-
-const Button = styled.button`
-  border: none;
-  width: 16px;
-  height: 16px;
-  margin: 0px;
-  margin: 0px 5px;
-  outline: 0px;
-  padding: 0px;
-  cursor: pointer;
-  opacity: 1;
-  background-color: transparent;
-  transition: 0.3s cubic-bezier(0,0,0,1);
-  transition-property: opacity, transform;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
+import BaseButton from "./base-button";
 
 const NoteButton = ({ isOverDue, handleClick }) => {
 
   const marp = useTheme().buttonIconColor;
 
   return (
-    <Button
-      onClick={handleClick}>
+
+    <BaseButton
+      handleClick={handleClick}>
 
       <svg
         height="16"
@@ -37,7 +20,8 @@ const NoteButton = ({ isOverDue, handleClick }) => {
         />
       </svg>
 
-    </Button>
+    </BaseButton>
+
   )
 }
 

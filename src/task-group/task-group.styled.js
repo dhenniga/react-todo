@@ -13,7 +13,8 @@ export const Container = styled.div`
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
   border-bottom: solid 1px rgba(128, 128, 128, 0.2);
 
-  height:${props => props.containerHeight}px;
+  /* height:${props => props.containerHeight}px; */
+  height: auto;
 
   ::-webkit-scrollbar {
   width: 5px;
@@ -92,7 +93,7 @@ export const Header = styled.div`
 
   ${props => props.isExpanded && css`
   border-bottom: 2px solid rgba(${props => props.theme.groupHeaderBorderBottomColor});
-  grid-template-columns: 20px 1fr 23px 22px !important;
+  grid-template-columns: 20px 1fr max-content !important;
   margin-top:20px;
   min-height: 38px;
   `}

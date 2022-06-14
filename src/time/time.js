@@ -27,7 +27,9 @@ const Time = ({
 
       <TimeButton
         isOverDue={isOverDue}
-        handleClick={() => setIsOpen(!isOpen)}
+        handleClick={() => {
+          setIsOpen(!isOpen)
+        }}
       />
 
       {

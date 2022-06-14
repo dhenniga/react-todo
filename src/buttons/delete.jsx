@@ -1,28 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-
-const Button = styled.button`
-  border: none;
-  width: 16px;
-  height: 16px;
-  margin: 0px;
-  margin-left: 5px;
-  outline: 0px;
-  padding: 0px;
-  cursor: pointer;
-  opacity: 1;
-  background-color: transparent;
-  transition: 0.3s cubic-bezier(0,0,0,1);
-  transition-property: opacity, transform;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
+import React from "react"
+import BaseButton from './base-button'
 
 const DeleteButton = ({ isOverDue, handleClick }) =>
-  <Button
-    onClick={handleClick}>
+  <BaseButton
+    handleClick={handleClick}>
     <svg
       width="16"
       height="16">
@@ -31,6 +12,6 @@ const DeleteButton = ({ isOverDue, handleClick }) =>
         fill={isOverDue ? "white" : "red"}
       />
     </svg>
-  </Button>
+  </BaseButton>
 
 export default DeleteButton

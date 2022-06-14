@@ -16,6 +16,8 @@ import { values, reduce } from "ramda"
 import useTask from "../useTask";
 import { map, sort } from 'ramda'
 import dayjs from "dayjs";
+import DeleteButton from '../buttons/delete'
+import BaseButton from "../buttons/base-button";
 
 const Group = ({
   rootKey,
@@ -52,15 +54,13 @@ const Group = ({
 
   useEffect(() => setContainerHeight(containerRef.current.scrollHeight))
 
-  const handleIframeMessage = event => console.log(event)
-
-
-  useEffect(() => {
-    containerRef.current.addEventListener('scroll', handleIframeMessage, false)
-    return () => {
-      containerRef.current.removeEventListener('scroll', handleIframeMessage, false)
-    }
-  })
+  // const handleIframeMessage = event => console.log(event)
+  // useEffect(() => {
+  //   containerRef.current.addEventListener('scroll', handleIframeMessage, false)
+  //   return () => {
+  //     containerRef.current.removeEventListener('scroll', handleIframeMessage, false)
+  //   }
+  // })
 
   return (
 
@@ -126,25 +126,39 @@ const Group = ({
 
         </div>
 
+        <div
+          style={{
+            display: 'grid',
+            height: '100%',
+            gridTemplateColumns: 'max-content max-content',
+            justifyItems: 'center',
+            alignItems: 'center'
+          }}>
 
+          {expandLocalState &&
+            <BaseButton>
+              <ToggleSelectAll
+                type="checkbox"
+                checked={checked}
+                onChange={() => {
+                  setChecked(!checked);
+                  checked
+                    ? onSelectNone(title)
+                    : onSelectAll(title)
+                }} />
+            </BaseButton>
+          }
 
-        {expandLocalState &&
-          <ToggleSelectAll
-            type="checkbox"
-            checked={checked}
-            onChange={() => {
-              setChecked(!checked);
-              checked
-                ? onSelectNone(title)
-                : onSelectAll(title)
-            }} />
-        }
+          {expandLocalState &&
 
-        {expandLocalState &&
-          <DeleteGroupButton
-            onClick={() => deleteGroup(title)}>
-            X
-          </DeleteGroupButton>}
+            <DeleteButton
+              isOverDue={false}
+              handleClick={() => deleteGroup(title)}
+            />
+
+          }
+
+        </div>
 
       </Header>
 
@@ -164,7 +178,7 @@ const Group = ({
 
       </TaskGroupFooter>
 
-    </Container>
+    </Container >
 
   );
 

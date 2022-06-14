@@ -54,7 +54,7 @@ const SomeFile = ({ handleThemeChange }) => {
                   timeDisplayType,
                   status
                 }, key) =>
-                  <ArchivedTask
+                  <Task
                     key={key}
                     id={id}
                     text={text}

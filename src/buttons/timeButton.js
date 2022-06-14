@@ -1,22 +1,6 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
-
-const Button = styled.button`
-  border: 0px;
-  background-color: transparent;
-  margin: 0px 5px;
-  padding: 0;
-  height: 16px;
-  width: 16px;
-  transition: 0.3s cubic-bezier(0,0,0,1);
-  transition-property: transform;
-  cursor: pointer;
-  outline: 0px;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
+import { useTheme } from "styled-components";
+import BaseButton from "./base-button";
 
 const TimeButton = ({ handleClick, isOverDue }) => {
 
@@ -24,8 +8,8 @@ const TimeButton = ({ handleClick, isOverDue }) => {
 
   return (
 
-    <Button
-      onClick={handleClick}>
+    <BaseButton
+      handleClick={handleClick}>
 
       <svg
         width="16"
@@ -36,7 +20,7 @@ const TimeButton = ({ handleClick, isOverDue }) => {
         />
       </svg>
 
-    </Button>
+    </BaseButton>
 
   )
 
