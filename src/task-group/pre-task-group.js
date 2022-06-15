@@ -1,8 +1,6 @@
 
-import React, { useRef, useLayoutEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import {
-  Chevron,
-  ChevronPath,
   Input,
   Header
 } from "./task-group.styled";
@@ -23,6 +21,17 @@ export const Container = styled.div`
   height: 30px !important;
 `;
 
+const Blob = styled.div`
+  border-bottom: 2px solid rgba(0,0,0,0);
+  display: grid;
+  transition: all 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+  grid-template-columns: 1fr;
+  align-items: center;
+  min-height: 58px;
+  backgroundColor: purple;
+  width: 200px;
+`
+
 const PreGroup = () => {
 
   const ref = useRef()
@@ -31,47 +40,34 @@ const PreGroup = () => {
     createTaskGroup,
   } = useTask();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     ref.current.focus()
   }, [])
 
   return <Container id='demo'>
 
-    <Header>
+    <Blob>
 
-      <Chevron>
-        <svg
-          width="16"
-          height="8">
-          <ChevronPath d="M16 0h-4.283L8 3.717 4.283 0H0l8 8z" />
-        </svg>
-      </Chevron>
+      <Input
+        ref={ref}
+        style={{ color: 'white' }}
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            e.target.blur()
+          }
+        }}
+        placeholder="Enter Group Name..."
+        onFocus={() => console.log('focused')}
+        onBlur={event => {
+          const value = event.target.value
+          value !== '' && createTaskGroup(value)
+          // var myobj = document.getElementById("demo");
+          // myobj.remove();
+          document.getElementById('modal').style.display = 'none'
+        }}
+      />
 
-      <div style={{
-        display: "grid",
-        gridTemplateRow: "1fr 1fr"
-      }}>
-        <Input
-          ref={ref}
-          style={{ color: 'white' }}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              e.target.blur()
-            }
-          }}
-          placeholder="Enter Group Name..."
-          onFocus={() => console.log('focused')}
-          onBlur={event => {
-            const value = event.target.value
-            value !== '' && createTaskGroup(value)
-            // var myobj = document.getElementById("demo");
-            // myobj.remove();
-            document.getElementById('modal').style.display = 'none'
-          }}
-        />
-      </div>
-
-    </Header>
+    </Blob>
 
   </Container>
 

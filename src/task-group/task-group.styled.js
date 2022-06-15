@@ -33,36 +33,13 @@ export const Container = styled.div`
 ${props => props.isExpanded && css`
 border-radius: 10px;
 background-color: rgba(${props => props.theme.expandedGroupBackgroundColor});
-margin-bottom: 15px;
+/* margin-bottom: 15px; */
   `}
 
   ${props => !props.isExpanded && css`
     height: 58px !important;
     overflow: hidden !important;
   `}
-`;
-
-export const Chevron = styled.div`
-  padding: 0;
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  display: grid;
-  justify-content: start;
-  align-items: center;
-`;
-
-export const ChevronSVG = styled.svg`
-  transition: transform 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-  transform-origin: 50% 50%;
-  ${props => props.isExpanded && css`
-    transform: rotate(-180deg);
-  `}
-
-`;
-
-export const ChevronPath = styled.path`
-  fill: rgba(${props => props.theme.accentColor});
 `;
 
 export const Input = styled.input`
@@ -86,14 +63,13 @@ export const Header = styled.div`
   border-bottom: 2px solid rgba(0,0,0,0);
   display: grid;
   transition: all 0.3s cubic-bezier(0.5, 0.2, 0, 1);
-
   grid-template-columns: 20px 1fr;
   align-items: center;
   min-height: 58px;
 
   ${props => props.isExpanded && css`
   border-bottom: 2px solid rgba(${props => props.theme.groupHeaderBorderBottomColor});
-  grid-template-columns: 20px 1fr max-content !important;
+  grid-template-columns: 20px 1fr max-content max-content !important;
   margin-top:20px;
   min-height: 38px;
   `}

@@ -1,23 +1,21 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Container,
-  Chevron,
-  ChevronPath,
-  ChevronSVG,
   Input,
   Header,
   ToggleSelectAll,
-  DeleteGroupButton,
+  // DeleteGroupButton,
   TaskGroupFooter,
   AddTask,
   ItemsRemaining
-} from "./task-group.styled";
-import { values, reduce } from "ramda"
-import useTask from "../useTask";
+} from './task-group.styled';
+import { values, reduce } from 'ramda'
+import useTask from '../useTask';
 import { map, sort } from 'ramda'
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 import DeleteButton from '../buttons/delete'
-import BaseButton from "../buttons/base-button";
+import BaseButton from '../buttons/base-button'
+import Chevron from '../buttons/chevron'
 
 const Group = ({
   rootKey,
@@ -51,16 +49,7 @@ const Group = ({
   }, [node])
 
   useEffect(() => setExpandLocalState(isExpanded), [isExpanded])
-
   useEffect(() => setContainerHeight(containerRef.current.scrollHeight))
-
-  // const handleIframeMessage = event => console.log(event)
-  // useEffect(() => {
-  //   containerRef.current.addEventListener('scroll', handleIframeMessage, false)
-  //   return () => {
-  //     containerRef.current.removeEventListener('scroll', handleIframeMessage, false)
-  //   }
-  // })
 
   return (
 
@@ -75,29 +64,21 @@ const Group = ({
         isExpanded={expandLocalState}>
 
         <Chevron
-          onClick={() => {
+          handleClick={() => {
             const toggledExpandState = !expandLocalState
             setExpandLocalState(toggledExpandState)
             toggleExpanded(rootKey, toggledExpandState)
-          }}>
-          <ChevronSVG
-            isExpanded={expandLocalState}
-            width="9"
-            height="9"
-            viewBox="0 0 2.381 2.381">
-            <ChevronPath
-              d="M1.19.476a.239.238 0 0 0-.168.07l-.953.953a.239.238 0 0 0 .168.406h1.906a.239.238 0 0 0 .17-.407L1.358.546a.239.238 0 0 0-.169-.07z"
-            />
-          </ChevronSVG>
-        </Chevron>
+          }}
+          expandLocalState={expandLocalState}
+        />
 
         <div style={{
-          display: expandLocalState ? "block" : "grid",
-          gridTemplateColumns: "1fr max-content"
+          display: expandLocalState ? 'block' : 'grid',
+          gridTemplateColumns: '1fr max-content'
         }}>
           <Input
             defaultValue={title}
-            placeholder="Enter Group Name..."
+            placeholder='Enter Group Name...'
             onKeyDown={e => {
               if (e.key === 'Enter') {
                 e.target.blur()
@@ -113,7 +94,7 @@ const Group = ({
           {!expandLocalState && <span
             style={{
               fontSize: '10px',
-              textAlign: "right",
+              textAlign: 'right',
               lineHeight: '25px',
               color: 'rgba(120, 120, 120)',
               transition: 'opacity 0.3s cubic-bezier(0.5, 0.2, 0, 1)'
@@ -126,19 +107,19 @@ const Group = ({
 
         </div>
 
-        <div
+        {/* <div
           style={{
-            display: 'grid',
+            display: expandLocalState ? 'grid' : 'none',
             height: '100%',
             gridTemplateColumns: 'max-content max-content',
             justifyItems: 'center',
             alignItems: 'center'
-          }}>
+          }}> */}
 
           {expandLocalState &&
             <BaseButton>
               <ToggleSelectAll
-                type="checkbox"
+                type='checkbox'
                 checked={checked}
                 onChange={() => {
                   setChecked(!checked);
@@ -158,7 +139,7 @@ const Group = ({
 
           }
 
-        </div>
+        {/* </div> */}
 
       </Header>
 
