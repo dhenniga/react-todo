@@ -51,7 +51,8 @@ const Task = ({
     renameTask,
     calculateRemainingPercentage,
     updateStatus,
-    addToArchive
+    addToArchive,
+    updateDateToBeCompleted
   } = useTask()
 
   /////////////////////////////////////////
@@ -106,6 +107,7 @@ const Task = ({
           setCheckState(toggledTaskState)
           toggleTask(id, toggledTaskState)
           updateStatus(id, undefined)
+          checkState === false && updateDateToBeCompleted(id)
         }}
       />
 

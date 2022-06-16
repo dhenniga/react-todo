@@ -13,8 +13,8 @@ export const Container = styled.div`
   padding-bottom: ${props => props.isExpanded ? 0 : 0}px;
   border-bottom: solid 1px rgba(128, 128, 128, 0.2);
 
-  /* height:${props => props.containerHeight}px; */
-  height: auto;
+  height:${props => props.containerHeight}px;
+  /* height: auto; */
 
   ::-webkit-scrollbar {
   width: 5px;

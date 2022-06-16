@@ -92,6 +92,13 @@ const useTask = () => {
 
   /////////////////////////////
 
+  const updateTaskCompletedTime = id =>
+  axios.post(baseUrl + `update-task-completed-time.php`,
+    qs.stringify({ id })
+  )
+
+/////////////////////////////
+
   const updateNote = (id, value) =>
     axios.post(baseUrl + `update-note.php`,
       qs.stringify({ id, value })
@@ -187,7 +194,8 @@ const useTask = () => {
     updateStatus,
     toggleTheme,
     toggleExpanded,
-    addToArchive
+    addToArchive,
+    updateTaskCompletedTime
   }
 
 }

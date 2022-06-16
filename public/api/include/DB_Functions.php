@@ -243,6 +243,18 @@ class DB_Functions {
         $stmt->close();
     }
 
+        ////////////////////////
+
+        public function updateTaskCompletedTime ( $id ) {
+            $stmt = $this->conn->prepare( 'UPDATE tasks SET taskCompletedTime = NOW(), lastUpdated = NOW() WHERE id = ?' );
+            $stmt->bind_param(
+                's',
+                $id
+            );
+            $result = $stmt->execute();
+            $stmt->close();
+        }
+
     ////////////////////////
 
     public function updateNote( $id, $value ) {

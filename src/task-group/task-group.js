@@ -68,6 +68,7 @@ const Group = ({
             const toggledExpandState = !expandLocalState
             setExpandLocalState(toggledExpandState)
             toggleExpanded(rootKey, toggledExpandState)
+            setContainerHeight(containerRef.current.scrollHeight)
           }}
           expandLocalState={expandLocalState}
         />
@@ -135,6 +136,7 @@ const Group = ({
             <DeleteButton
               isOverDue={false}
               handleClick={() => deleteGroup(title)}
+              
             />
 
           }
