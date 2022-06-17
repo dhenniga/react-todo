@@ -49,7 +49,8 @@ export default {
     taskOverDueColor: "255,0,100",
     taskOverDueGlowColor: "255,0,100, 0.3",
     taskQuantityText: "255,255,255",
-    taskQuantityTextBackground: "255, 0, 100"
+    taskQuantityTextBackground: "255, 0, 100",
+    taskCompletedTimeText: "170, 178, 189"
   },
 
   taskGroup: {

@@ -8,13 +8,15 @@ import {
   Container,
   Checkbox,
   Input,
-  TimePassingBar
+  TimePassingBar,
+  TaskCompletedText
 } from "./task.styled";
 
 // Utils
-import useTaskService from "./task.service";
-import dayjs from "dayjs";
-import RelativeTime from 'dayjs/plugin/relativeTime';
+import useTaskService from "./task.service"
+import dayjs from "dayjs"
+import RelativeTime from 'dayjs/plugin/relativeTime'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 
 // Components
 import Note from './note/note'
@@ -23,7 +25,8 @@ import HoverToolbar from './hover-toolbar/hover-toolbar'
 
 /////////////////////////////////////////
 
-dayjs.extend(RelativeTime);
+dayjs.extend(RelativeTime)
+dayjs.extend(advancedFormat)
 
 /////////////////////////////////////////
 
@@ -52,7 +55,7 @@ const Task = ({
     calculateRemainingPercentage,
     updateStatus,
     addToArchive,
-    updateDateToBeCompleted
+    updateTaskCompletedTime
   } = useTask()
 
   /////////////////////////////////////////
@@ -65,6 +68,11 @@ const Task = ({
 
   const [checkState, setCheckState] = useState(isChecked)
   useEffect(() => setCheckState(isChecked), [isChecked])
+
+  /////////////////////////////////////////
+
+  const [completedTime, setCompletedTime] = useState(taskCompletedTime)
+  useEffect(() => setCompletedTime(taskCompletedTime), [taskCompletedTime])
 
   /////////////////////////////////////////
 
@@ -97,17 +105,20 @@ const Task = ({
     <Container
       id={id}
       isOverDue={isOverDue}
-      checked={checkState}>
+      checked={checkState}
+      taskCompletedTime={taskCompletedTime}>
 
       <Checkbox
         type="checkbox"
         checked={checkState}
         onChange={() => {
           const toggledTaskState = !checkState
+          const completedTimeState = toggledTaskState ? new Date() : undefined
           setCheckState(toggledTaskState)
           toggleTask(id, toggledTaskState)
+          setCompletedTime(completedTimeState)
+          updateTaskCompletedTime(id, completedTimeState)
           updateStatus(id, undefined)
-          checkState === false && updateDateToBeCompleted(id)
         }}
       />
 
@@ -126,22 +137,23 @@ const Task = ({
         placeholder="Enter task name..."
       />
 
-      <HoverToolbar
+      {!completedTime && <HoverToolbar
         quantity={quantity}
         dateToBeCompleted={dateToBeCompleted}
         status={status}
         isOverDue={isOverDue}
         timeDisplayType={timeDisplayType}
         checkState={checkState}
-      />
+      />}
 
-      {!checkState &&
+      {!checkState && !completedTime &&
         <SettingsToolbar
           id={id}
           status={status}
           quantity={quantity}
           isOverDue={isOverDue}
           note={note}
+          taskCompletedTime={taskCompletedTime}
         />
       }
 
@@ -153,6 +165,12 @@ const Task = ({
       />
 
       {/* <button onClick={() => addToArchive(id)}>Arch</button> */}
+
+      {completedTime &&
+        <TaskCompletedText>
+          {dayjs(completedTime).format('hh:mma - D MMM')}
+        </TaskCompletedText>
+      }
 
     </Container>
 

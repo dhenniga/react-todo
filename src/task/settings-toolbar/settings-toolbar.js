@@ -17,7 +17,8 @@ const SettingsToolbar = ({
   status,
   quantity,
   isOverDue,
-  note
+  note,
+  taskCompletedTime
 }) => {
 
   const {

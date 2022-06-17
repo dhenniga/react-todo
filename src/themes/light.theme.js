@@ -46,7 +46,8 @@ export default {
     taskOverDueColor: "0, 152, 255",
     taskOverDueGlowColor: "0,0,0,0",
     taskQuantityText: "255,255,255",
-    taskQuantityTextBackground: "0,0,0"
+    taskQuantityTextBackground: "0,0,0",
+    taskCompletedTimeText: "101, 109, 120"
   },
   taskGroup: {
     chevronPathColor: "0,0,0,0.1",

@@ -92,9 +92,9 @@ const useTask = () => {
 
   /////////////////////////////
 
-  const updateTaskCompletedTime = id =>
+  const updateTaskCompletedTime = (id, date) =>
   axios.post(baseUrl + `update-task-completed-time.php`,
-    qs.stringify({ id })
+    qs.stringify({ id, date })
   )
 
 /////////////////////////////

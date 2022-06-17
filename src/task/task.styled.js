@@ -23,6 +23,19 @@ export const AddSubTask = styled.div`
   }
 `;
 
+export const TaskCompletedText = styled.div`
+  font-size: 10px;
+  font-family: rc_regular;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: rgb(${props => props.theme.task.taskCompletedTimeText});
+  background-color: rgba(${props => props.theme.accentColor}, 0.1);
+  padding: 5px 8px;
+  border-radius: 3px;
+  display: grid;
+  align-items: center;
+`
+
 export const SettingsContainer = styled.div`
   display: none;
   grid-template-columns: max-content max-content max-content max-content;
@@ -71,7 +84,7 @@ export const Container = styled.div`
   display: grid;
   align-content: center;
   position: relative;
-  grid-template-columns: 26px 1fr max-content;
+  grid-template-columns: 26px 1fr max-content ${props => props.taskCompletedTime && 'max-content'};
   border-bottom: 1px solid rgba(${props => props.theme.task.taskBorderBottomcolor});
   transition: 0.3s cubic-bezier(0.5,0.2,0,1);
   transition-property: border-bottom-color, background-color, padding, opacity;

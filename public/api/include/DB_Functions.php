@@ -245,10 +245,11 @@ class DB_Functions {
 
         ////////////////////////
 
-        public function updateTaskCompletedTime ( $id ) {
-            $stmt = $this->conn->prepare( 'UPDATE tasks SET taskCompletedTime = NOW(), lastUpdated = NOW() WHERE id = ?' );
+        public function updateTaskCompletedTime ( $id, $date ) {
+            $stmt = $this->conn->prepare( 'UPDATE tasks SET taskCompletedTime = ?, lastUpdated = NOW() WHERE id = ?' );
             $stmt->bind_param(
-                's',
+                'ss',
+                $date,
                 $id
             );
             $result = $stmt->execute();
