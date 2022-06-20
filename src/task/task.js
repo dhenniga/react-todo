@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createElement } from "react";
+import ReactDOM from 'react-dom'
 
 // Hook
 import useTask from "../useTask";
@@ -11,6 +12,7 @@ import {
   TimePassingBar,
   TaskCompletedText
 } from "./task.styled";
+import { useTheme } from 'styled-components'
 
 // Utils
 import useTaskService from "./task.service"
@@ -22,6 +24,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat'
 import Note from './note/note'
 import SettingsToolbar from "./settings-toolbar/settings-toolbar"
 import HoverToolbar from './hover-toolbar/hover-toolbar'
+import BaseDialog from '../dialogs/base-dialog'
 
 /////////////////////////////////////////
 
@@ -42,6 +45,8 @@ const Task = ({
   timeDisplayType,
   status
 }) => {
+
+  const accentColor = useTheme().accentColor
 
   /////////////////////////////////////////
 
@@ -114,11 +119,24 @@ const Task = ({
         onChange={() => {
           const toggledTaskState = !checkState
           const completedTimeState = toggledTaskState ? new Date() : undefined
-          setCheckState(toggledTaskState)
-          toggleTask(id, toggledTaskState)
-          setCompletedTime(completedTimeState)
-          updateTaskCompletedTime(id, completedTimeState)
-          updateStatus(id, undefined)
+          if (!checkState) {
+            setCheckState(toggledTaskState)
+            toggleTask(id, toggledTaskState)
+            setCompletedTime(completedTimeState)
+            updateTaskCompletedTime(id, completedTimeState)
+            updateStatus(id, undefined)
+          } else {
+            const modal = document.getElementById('modal')
+            modal.style.display = 'inline'
+            ReactDOM.render(
+              createElement(BaseDialog, {
+                text: 'Are you sure you want to reactive this task?',
+                confirmButtonText: 'Reactivate',
+                cancelButtonText: 'Cancel',
+                accentColor: accentColor
+              }, null),
+              modal)
+          }
         }}
       />
 
@@ -126,6 +144,7 @@ const Task = ({
         type="text"
         checked={checkState}
         isOverDue={isOverDue}
+        placeholder="Enter task name..."
         onBlur={event => renameTask(id, event.target.value)}
         defaultValue={text}
         onChange={() => { }}
@@ -134,7 +153,6 @@ const Task = ({
             e.target.blur()
           }
         }}
-        placeholder="Enter task name..."
       />
 
       {!completedTime && <HoverToolbar
@@ -168,7 +186,7 @@ const Task = ({
 
       {completedTime &&
         <TaskCompletedText>
-          {dayjs(completedTime).format('hh:mma - D MMM')}
+          {dayjs(completedTime).format('hh:mma - Do MMM')}
         </TaskCompletedText>
       }
 
