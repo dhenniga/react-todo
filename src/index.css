@@ -26,8 +26,9 @@ background-color: rgb(17, 24, 30);
 }
 
 #modal {
-  display: none;
-  background-color: rgba(0,0,0,0.8);
+  /* display: none; */
+  /* background-color: rgba(0,0,0,0.8); */
+  pointer-events: none;
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -40,5 +41,4 @@ background-color: rgb(17, 24, 30);
   justify-items: center;
   z-index: 200;
   max-width: 450px;
-  
 }

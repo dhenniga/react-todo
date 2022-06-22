@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, createElement } from "react";
-import ReactDOM from 'react-dom'
+import ReactDOM, { createPortal } from 'react-dom'
 
 // Hook
 import useTask from "../useTask";
+import Modal from '../dialogs/modal'
 
 //  Styled Components
 import {
@@ -51,6 +52,7 @@ const Task = ({
   /////////////////////////////////////////
 
   const barRef = useRef()
+  const modalRef = useRef()
 
   /////////////////////////////////////////
 
@@ -68,6 +70,7 @@ const Task = ({
   const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted)
   const [percentage, setPercentage] = useState(percentageRemaining)
   const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
+  const [hasModal, setHasModal] = useState(false)
 
   /////////////////////////////////////////
 
@@ -113,6 +116,16 @@ const Task = ({
       checked={checkState}
       taskCompletedTime={taskCompletedTime}>
 
+      {hasModal &&
+        <Modal
+          id={id}
+          text={text}
+          setHasModal={setHasModal}
+          setCheckState={setCheckState}
+          setCompletedTime={setCompletedTime}
+        />
+      }
+
       <Checkbox
         type="checkbox"
         checked={checkState}
@@ -126,16 +139,28 @@ const Task = ({
             updateTaskCompletedTime(id, completedTimeState)
             updateStatus(id, undefined)
           } else {
-            const modal = document.getElementById('modal')
-            modal.style.display = 'inline'
-            ReactDOM.render(
-              createElement(BaseDialog, {
-                text: 'Are you sure you want to reactive this task?',
-                confirmButtonText: 'Reactivate',
-                cancelButtonText: 'Cancel',
-                accentColor: accentColor
-              }, null),
-              modal)
+            setHasModal(true)
+
+            // modal.style.display = 'inline'
+            // ReactDOM.render(
+            //   createElement(BaseDialog, {
+            //     text: 'Are you sure you want to reactive this task?',
+            //     confirmButtonText: 'Reactivate',
+            //     cancelButtonText: 'Cancel',
+            //     accentColor: accentColor
+            //   }, null),
+            //   modal)
+
+            // <BaseDialog
+            //   text='Are you sure you want to reactive this task?'
+            //   confirmButtonText='Reactivate'
+            //   cancelButtonText='Cancel'
+            //   accentColor={accentColor}
+            // />
+
+
+
+
           }
         }}
       />

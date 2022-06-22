@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 export const Container = styled.div`
   width: 200px;
@@ -39,4 +39,16 @@ export const Button = styled.button`
   &:active {
     background-color: rgb(${props => props.accentColor}) !important;
   }
+  `
+
+  export const Outer = styled.div`
+    background-color: rgba(101, 109, 120, 0.5);
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 5s cubic-bezier(0.5, 0.2, 0, 1);
+
+    ${props => props.isVisible && css`
+      opacity: 1 !important;
+    `}
   `
