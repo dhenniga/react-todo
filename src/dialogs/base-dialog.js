@@ -5,7 +5,7 @@ import {
   Button,
   Outer
 } from './base-dialog.styled'
-import { render, createPortal } from "react-dom";
+import { createPortal } from "react-dom";
 
 
 

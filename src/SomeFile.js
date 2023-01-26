@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { Container, AppBody } from "./app.styled"
 import AppHeader from './app-header'
 import { mapObjectToValues } from "./app.service"
-import { useActiveTasks, useArchivedTasks } from './hooks/useTaskHook'
+import { 
+  useActiveTasks, 
+  // useArchivedTasks 
+} from './hooks/useTaskHook'
 import Task from "./task/task"
-import ArchivedTask from './archived-task/archived-task'
+// import ArchivedTask from './archived-task/archived-task'
 import TaskGroup from "./task-group/task-group"
 import useTask from "./useTask"
 
@@ -13,9 +16,9 @@ const SomeFile = ({ handleThemeChange }) => {
 
   const { selectAll, selectNone } = useTask()
   const { activeTasks } = useActiveTasks()
-  const { archivedTasks } = useArchivedTasks()
+  // const { archivedTasks } = useArchivedTasks()
   const [blob, setBlob] = useState(false)
-  const tasks = blob ? archivedTasks : activeTasks
+  // const tasks = blob ? archivedTasks : activeTasks
 
   // console.log(blob);
 

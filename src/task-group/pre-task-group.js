@@ -1,8 +1,7 @@
 
 import React, { useRef, useEffect } from 'react'
 import {
-  Input,
-  Header
+  Input
 } from "./task-group.styled";
 import useTask from "../useTask";
 import styled from 'styled-components'
@@ -28,7 +27,7 @@ const Blob = styled.div`
   grid-template-columns: 1fr;
   align-items: center;
   min-height: 58px;
-  backgroundColor: purple;
+  background-color: purple;
   width: 200px;
 `
 
@@ -61,8 +60,8 @@ const PreGroup = () => {
         onBlur={event => {
           const value = event.target.value
           value !== '' && createTaskGroup(value)
-          // var myobj = document.getElementById("demo");
-          // myobj.remove();
+          // let myObj = document.getElementById("demo");
+          // myObj.remove();
           document.getElementById('modal').style.display = 'none'
         }}
       />

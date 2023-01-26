@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, version } from 'react'
 import './App.css'
 import { ThemeProvider } from 'styled-components'
 import light from './themes/light.theme'
@@ -14,6 +14,10 @@ import { AppContainer } from './app.styled'
 ///
 
 const App = () => {
+  
+  useEffect(() => {
+    console.log(`React: ${version}`)
+  }, [])
 
   const { isDarkTheme } = useConfig()
   const { toggleTheme } = useTask()

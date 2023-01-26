@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useRef, createElement } from "react";
-import ReactDOM, { createPortal } from 'react-dom'
+import React, { 
+  useState, 
+  useEffect,
+   useRef, 
+  //  createElement 
+  } from "react";
+// import ReactDOM, { createPortal } from 'react-dom'
 
 // Hook
 import useTask from "../useTask";
@@ -13,7 +18,7 @@ import {
   TimePassingBar,
   TaskCompletedText
 } from "./task.styled";
-import { useTheme } from 'styled-components'
+// import { useTheme } from 'styled-components'
 
 // Utils
 import useTaskService from "./task.service"
@@ -25,7 +30,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat'
 import Note from './note/note'
 import SettingsToolbar from "./settings-toolbar/settings-toolbar"
 import HoverToolbar from './hover-toolbar/hover-toolbar'
-import BaseDialog from '../dialogs/base-dialog'
+// import BaseDialog from '../dialogs/base-dialog'
 
 /////////////////////////////////////////
 
@@ -47,12 +52,12 @@ const Task = ({
   status
 }) => {
 
-  const accentColor = useTheme().accentColor
+  // const accentColor = useTheme().accentColor
 
   /////////////////////////////////////////
 
   const barRef = useRef()
-  const modalRef = useRef()
+  // const modalRef = useRef()
 
   /////////////////////////////////////////
 
@@ -61,7 +66,7 @@ const Task = ({
     renameTask,
     calculateRemainingPercentage,
     updateStatus,
-    addToArchive,
+    // addToArchive,
     updateTaskCompletedTime
   } = useTask()
 
@@ -69,7 +74,7 @@ const Task = ({
 
   const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted)
   const [percentage, setPercentage] = useState(percentageRemaining)
-  const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
+  const { gradientColors, isOverDue } = useTaskService(percentage, isChecked)
   const [hasModal, setHasModal] = useState(false)
 
   /////////////////////////////////////////
@@ -90,7 +95,7 @@ const Task = ({
 
     const intervalId = setInterval(() => {
       setPercentage(percentageRemaining);
-      gradientColours(barRef, percentage);
+      gradientColors(barRef, percentage);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -99,7 +104,7 @@ const Task = ({
     calculateRemainingPercentage,
     dateCreated,
     dateToBeCompleted,
-    gradientColours,
+    gradientColors,
     isOverDue,
     percentage,
     percentageRemaining,

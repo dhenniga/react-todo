@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 import BaseButton from "./base-button";
 
 const NoteButton = ({ isOverDue, handleClick }) => {

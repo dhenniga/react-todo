@@ -17,8 +17,8 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 
 // Components
 import Note from '../task/note/note'
-import SettingsToolbar from "../task/settings-toolbar/settings-toolbar"
-import HoverToolbar from '../task/hover-toolbar/hover-toolbar'
+// import SettingsToolbar from "../task/settings-toolbar/settings-toolbar"
+// import HoverToolbar from '../task/hover-toolbar/hover-toolbar'
 
 /////////////////////////////////////////
 
@@ -56,7 +56,7 @@ const Task = ({
 
   const percentageRemaining = calculateRemainingPercentage(dateCreated, dateToBeCompleted)
   const [percentage, setPercentage] = useState(percentageRemaining)
-  const { gradientColours, isOverDue } = useTaskService(percentage, isChecked)
+  const { gradientColors, isOverDue } = useTaskService(percentage, isChecked)
 
   /////////////////////////////////////////
 
@@ -71,7 +71,7 @@ const Task = ({
 
     const intervalId = setInterval(() => {
       setPercentage(percentageRemaining);
-      gradientColours(barRef, percentage);
+      gradientColors(barRef, percentage);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -80,7 +80,7 @@ const Task = ({
     calculateRemainingPercentage,
     dateCreated,
     dateToBeCompleted,
-    gradientColours,
+    gradientColors,
     isOverDue,
     percentage,
     percentageRemaining,
