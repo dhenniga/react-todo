@@ -2,6 +2,10 @@ html {
   background-color: black;
 }
 
+iframe {
+  display: none !important;
+}
+
 @font-face {
   font-family: bn_regular;
   src: url(./fonts/bebas-neue/regular.ttf);

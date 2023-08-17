@@ -71,31 +71,10 @@ export const Container = styled.div`
   display: grid;
   align-content: center;
   position: relative;
-  grid-template-columns: 26px 1fr max-content;
+  grid-template-columns: 26px 1fr max-content ${props => props.taskCompletedTime && 'max-content'};
   border-bottom: 1px solid rgba(${props => props.theme.task.taskBorderBottomcolor});
   transition: 0.3s cubic-bezier(0.5,0.2,0,1);
   transition-property: border-bottom-color, background-color, padding, opacity;
-
-  &:hover {
-    border-bottom-color: #656d78;
-    ${SettingsContainer} {
-      display: grid;
-      width: fit-content !important;
-      grid-template-columns: 1fr max-content max-content max-content max-content !important;
-    }
-
-    ${TimeContainer} {
-      display: none;
-    }
-
-    ${DisplayContainer} {
-      display: none;
-    }
-
-    ${QuantityContainer} {
-      display: ${props => props.checked ? "inline" : "none"};
-    }
-  }
 
   ${props => props.isOverDue && css`
   background-color: rgb(${props => props.theme.task.taskOverDueColor}) !important;

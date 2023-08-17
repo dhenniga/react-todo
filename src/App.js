@@ -8,6 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 import SomeFile from './SomeFile'
 import useTask from './useTask'
+import { useActiveTasks, useArchivedTasks } from './hooks/useTaskHook'
 import { AppContainer } from './app.styled'
 
 
@@ -17,8 +18,11 @@ const App = () => {
 
   const { isDarkTheme } = useConfig()
   const { toggleTheme } = useTask()
+  const { activeTasks } = useActiveTasks()
+  const { archivedTasks } = useArchivedTasks()
 
   const [themeState, setThemeState] = useState(isDarkTheme)
+  const [isArchivedList, setIsArchivedList] = useState(false)
   useEffect(() => setThemeState(isDarkTheme), [isDarkTheme])
 
   const handleThemeChange = () => {
@@ -32,7 +36,12 @@ const App = () => {
     <AppContainer
       themeState={themeState}>
 
-      <SomeFile handleThemeChange={handleThemeChange} />
+      <SomeFile
+        activeTasks={activeTasks}
+        archivedTasks={archivedTasks}
+        setIsArchivedList={setIsArchivedList}
+        isArchivedList={isArchivedList}
+        handleThemeChange={handleThemeChange} />
 
     </AppContainer>
 

@@ -21,6 +21,7 @@ const Group = ({
   rootKey,
   children,
   title,
+  isArchivedList,
   node,
   onSelectAll,
   onSelectNone,
@@ -30,6 +31,7 @@ const Group = ({
   const {
     createTask,
     tasksRemainingCount,
+    addToArchive,
     allSelected,
     renameGroup,
     deleteGroup,
@@ -75,7 +77,7 @@ const Group = ({
 
         <div style={{
           display: expandLocalState ? 'block' : 'grid',
-          gridTemplateColumns: '1fr max-content'
+          gridTemplateColumns: `1fr max-content`
         }}>
           <Input
             defaultValue={title}
@@ -108,6 +110,9 @@ const Group = ({
 
         </div>
 
+        {!isArchivedList && isExpanded && <button onClick={() => addToArchive(rootKey)}>A</button>}
+
+
         {/* <div
           style={{
             display: expandLocalState ? 'grid' : 'none',
@@ -117,29 +122,29 @@ const Group = ({
             alignItems: 'center'
           }}> */}
 
-          {expandLocalState &&
-            <BaseButton>
-              <ToggleSelectAll
-                type='checkbox'
-                checked={checked}
-                onChange={() => {
-                  setChecked(!checked);
-                  checked
-                    ? onSelectNone(title)
-                    : onSelectAll(title)
-                }} />
-            </BaseButton>
-          }
+        {expandLocalState &&
+          <BaseButton>
+            <ToggleSelectAll
+              type='checkbox'
+              checked={checked}
+              onChange={() => {
+                setChecked(!checked);
+                checked
+                  ? onSelectNone(title)
+                  : onSelectAll(title)
+              }} />
+          </BaseButton>
+        }
 
-          {expandLocalState &&
+        {expandLocalState &&
 
-            <DeleteButton
-              isOverDue={false}
-              handleClick={() => deleteGroup(title)}
-              
-            />
+          <DeleteButton
+            isOverDue={false}
+            handleClick={() => !isArchivedList && deleteGroup(title)}
 
-          }
+          />
+
+        }
 
         {/* </div> */}
 
@@ -149,11 +154,13 @@ const Group = ({
 
       <TaskGroupFooter>
 
-        <AddTask
-          disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
-          onClick={() => createTask(rootKey)}>
-          +
-        </AddTask>
+        {
+          !isArchivedList && <AddTask
+            disabled={reduce((a, item) => a + !item.text, 0)(values(node))}
+            onClick={() => createTask(rootKey)}>
+            +
+          </AddTask>
+        }
 
         <ItemsRemaining>
           {tasksRemainingCount(node)} items left

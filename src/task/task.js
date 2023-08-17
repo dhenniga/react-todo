@@ -61,7 +61,6 @@ const Task = ({
     renameTask,
     calculateRemainingPercentage,
     updateStatus,
-    addToArchive,
     updateTaskCompletedTime
   } = useTask()
 
@@ -139,7 +138,7 @@ const Task = ({
             updateTaskCompletedTime(id, completedTimeState)
             updateStatus(id, undefined)
           } else {
-            setHasModal(true)
+            // setHasModal(true)
 
             // modal.style.display = 'inline'
             // ReactDOM.render(
@@ -206,8 +205,6 @@ const Task = ({
         percentage={percentage}
         isOverDue={isOverDue}
       />
-
-      {/* <button onClick={() => addToArchive(id)}>Arch</button> */}
 
       {completedTime &&
         <TaskCompletedText>

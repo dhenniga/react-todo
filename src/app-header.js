@@ -1,8 +1,8 @@
 import React from "react"
 import {
-    AddGroupButton,
-    Header,
-    AppTitle
+  AddGroupButton,
+  Header,
+  AppTitle
 } from "./app.styled"
 import ToggleThemeButton from "./buttons/toggle-theme"
 import { useConfig } from './hooks/useTaskHook'
@@ -13,40 +13,55 @@ import "react-resizable/css/styles.css"
 
 ///////////////////////
 
-const AppHeader = ({ handleThemeChange }) => {
+const AppHeader = ({ 
+  handleThemeChange, 
+  setIsArchivedList, 
+  isArchivedList
+ }) => {
 
-    const { isDarkTheme } = useConfig()
+  const { isDarkTheme } = useConfig()
 
-    ///////////////////////
+  ///////////////////////
 
-    return (
+  return (
 
-        <Header>
+    <Header>
 
-            <AppTitle>
-                TaskBoard
-            </AppTitle>
+      <AppTitle>
+        TaskBoard
+      </AppTitle>
 
-            <AddGroupButton
-                // onClick={() => createTaskGroup()}>
-                onClick={() => {
-                    const title = React.createElement(PreGroup, null, null)
-                    document.getElementById('modal').style.display = 'grid'
-                    ReactDOM.render(
-                        title,
-                        document.getElementById('modal')
-                    )
-                }}>
-                +
-            </AddGroupButton>
+      <AddGroupButton
+        // onClick={() => createTaskGroup()}>
+        onClick={() => {
+          const title = React.createElement(PreGroup, null, null)
+          document.getElementById('modal').style.display = 'grid'
+          ReactDOM.render(
+            title,
+            document.getElementById('modal')
+          )
+        }}>
+        +
+      </AddGroupButton>
 
-            <ToggleThemeButton
-                isDarkTheme={!!+isDarkTheme}
-                handleClick={handleThemeChange}
-            />
+      <ToggleThemeButton
+        isDarkTheme={!!+isDarkTheme}
+        handleClick={handleThemeChange}
+      />
 
-        </Header>
-    );
+      <button
+        style={{
+          zIndex: 2000,
+          backgroundColor: isArchivedList && 'red'
+        }}
+        onClick={() => {
+          setIsArchivedList(!isArchivedList)
+          console.log('click', isArchivedList)
+        }}
+      >AV</button>
+
+    </Header>
+  );
 
 };
 

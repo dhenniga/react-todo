@@ -1,33 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, AppBody } from "./app.styled"
 import AppHeader from './app-header'
 import { mapObjectToValues } from "./app.service"
-import { useActiveTasks, useArchivedTasks } from './hooks/useTaskHook'
 import Task from "./task/task"
-import ArchivedTask from './archived-task/archived-task'
+import ArchivedTask from "./archived-task/archived-task"
 import TaskGroup from "./task-group/task-group"
 import useTask from "./useTask"
 
-
-const SomeFile = ({ handleThemeChange }) => {
+const SomeFile = ({
+  handleThemeChange,
+  setIsArchivedList,
+  isArchivedList,
+  activeTasks,
+  archivedTasks
+}) => {
 
   const { selectAll, selectNone } = useTask()
-  const { activeTasks } = useActiveTasks()
-  const { archivedTasks } = useArchivedTasks()
-  const [blob, setBlob] = useState(false)
-  const tasks = blob ? archivedTasks : activeTasks
-
-  // console.log(blob);
+  const tasks = isArchivedList ? archivedTasks : activeTasks
 
   return <Container>
 
     <AppHeader
-      blob={blob}
-      setBlob={setBlob}
+      isArchivedList={isArchivedList}
+      setIsArchivedList={setIsArchivedList}
       handleThemeChange={handleThemeChange}
     />
 
-    {activeTasks &&
+    {tasks &&
       <AppBody>
         {
           mapObjectToValues((node, rootKey) =>
@@ -36,6 +35,7 @@ const SomeFile = ({ handleThemeChange }) => {
               key={rootKey}
               rootKey={rootKey}
               title={rootKey}
+              isArchivedList={isArchivedList}
               node={node}
               onSelectAll={selectAll}
               onSelectNone={selectNone}
@@ -53,26 +53,41 @@ const SomeFile = ({ handleThemeChange }) => {
                   note,
                   timeDisplayType,
                   status
-                }, key) =>
-                  <Task
-                    key={key}
-                    id={id}
-                    text={text}
-                    isChecked={!!+isChecked}
-                    dateCreated={dateCreated}
-                    dateToBeCompleted={dateToBeCompleted}
-                    taskCompletedTime={taskCompletedTime}
-                    quantity={quantity}
-                    note={note}
-                    timeDisplayType={timeDisplayType}
-                    status={status}
-                  />
+                }, key) => {
+                  return !isArchivedList
+                    ? <Task
+                      key={key}
+                      id={id}
+                      text={text}
+                      isChecked={!!+isChecked}
+                      dateCreated={dateCreated}
+                      dateToBeCompleted={dateToBeCompleted}
+                      taskCompletedTime={taskCompletedTime}
+                      quantity={quantity}
+                      note={note}
+                      timeDisplayType={timeDisplayType}
+                      status={status}
+                    />
+                    : <ArchivedTask
+                      key={key}
+                      id={id}
+                      text={text}
+                      isChecked={!!+isChecked}
+                      dateCreated={dateCreated}
+                      dateToBeCompleted={dateToBeCompleted}
+                      taskCompletedTime={taskCompletedTime}
+                      quantity={quantity}
+                      note={note}
+                      timeDisplayType={timeDisplayType}
+                      status={status}
+                    />
+                }
                 )(node)
               }
 
             </TaskGroup>
 
-          )(activeTasks)
+          )(tasks)
         }
 
       </AppBody>

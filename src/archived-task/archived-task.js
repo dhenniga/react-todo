@@ -8,7 +8,7 @@ import {
   Container,
   Checkbox,
   Input
-} from "../task/task.styled";
+} from "./archived-task.styled";
 
 // Utils
 import useTaskService from "../task/task.service";
@@ -17,7 +17,6 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 
 // Components
 import Note from '../task/note/note'
-import SettingsToolbar from "../task/settings-toolbar/settings-toolbar"
 import HoverToolbar from '../task/hover-toolbar/hover-toolbar'
 
 /////////////////////////////////////////
@@ -46,10 +45,7 @@ const Task = ({
   /////////////////////////////////////////
 
   const {
-    toggleTask,
-    renameTask,
-    calculateRemainingPercentage,
-    updateStatus
+    calculateRemainingPercentage
   } = useTask()
 
   /////////////////////////////////////////
@@ -94,52 +90,30 @@ const Task = ({
     <Container
       id={id}
       isOverDue={isOverDue}
-      checked={checkState}>
+      checked={checkState}
+      taskCompletedTime={taskCompletedTime}>
 
       <Checkbox
         type="checkbox"
         checked={checkState}
-        onChange={() => {
-          const toggledTaskState = !checkState
-          setCheckState(toggledTaskState)
-          toggleTask(id, toggledTaskState)
-          updateStatus(id, undefined)
-        }}
       />
 
       <Input
         type="text"
+        disabled
         checked={checkState}
         isOverDue={isOverDue}
-        onBlur={event => renameTask(id, event.target.value)}
         defaultValue={text}
-        onChange={() => { }}
-        onKeyDown={e => {
-          if (e.key === 'Enter') {
-            e.target.blur()
-          }
-        }}
-        placeholder="Enter task name..."
       />
 
-      {/* <HoverToolbar
+      <HoverToolbar
         quantity={quantity}
         dateToBeCompleted={dateToBeCompleted}
         status={status}
         isOverDue={isOverDue}
         timeDisplayType={timeDisplayType}
         checkState={checkState}
-      /> */}
-
-      {/* {!checkState &&
-        <SettingsToolbar
-          id={id}
-          status={status}
-          quantity={quantity}
-          isOverDue={isOverDue}
-          note={note}
-        />
-      } */}
+      />
 
     </Container>
 

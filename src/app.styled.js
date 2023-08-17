@@ -97,10 +97,11 @@ font-family: rw_regular;
 `;
 
 export const AppContainer = styled.div`
-  display: block;
+  position: absolute;
   width: 100vw;
   margin: 0px auto;
   height: 100vh;
   background-color: ${props => props.themeState ? 'black' : '#f3f7fa'};
-  transition: background-color 0.3s cubic-bezier(0.5, 0.2, 0, 1)
+  transition: background-color 0.3s cubic-bezier(0.5, 0.2, 0, 1);
+  z-index: -1;
 `

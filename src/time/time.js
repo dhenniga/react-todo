@@ -33,10 +33,7 @@ const Time = ({
       />
 
       {
-        isOpen &&
-        <TimeContainerBackground
-        // onClick={() => setIsOpen(false)}
-        >
+        isOpen && <TimeContainerBackground>
 
           <button
             onPointerUp={() => {
